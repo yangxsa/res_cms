@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="/common/header::header('首页')"></div>
+<body>
+<!-- Page Container -->
+<div class="page-container">
+    <!-- Page Sidebar -->
+    <div th:replace="/common/sidebar::sidebar"></div>
+    <!-- Page Content -->
+    <div class="page-content">
+        <!-- Page Header -->
+        <div th:replace="/common/page-header::page-header"></div>
+        <!-- Page Inner -->
+        <div class="page-inner">
+            <div class="page-title">
+                <h3 class="breadcrumb-header">系统菜单</h3>
+            </div>
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-white">
+                            <div class="panel-heading clearfix">
+                                <div class="pull-left">
+                                    <button type="button" class="btn btn-primary" onclick="add()">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>添加
+                                    </button>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive table table-bordered">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Table heading</th>
+                                            <th>Table heading</th>
+                                            <th>Table heading</th>
+                                            <th>Table heading</th>
+                                            <th>Table heading</th>
+                                            <th>Table heading</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                            <td>Table cell</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/common/footer::footer"></div>
+</body>
+</html>

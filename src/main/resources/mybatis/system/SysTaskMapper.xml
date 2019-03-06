@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaa.cms.dao.SysTaskDao" >
+  <resultMap id="BaseResultMap" type="com.yaa.cms.model.SysTask" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cron_expression" property="cronExpression" jdbcType="VARCHAR" />
+    <result column="method_name" property="methodName" jdbcType="VARCHAR" />
+    <result column="is_concurrent" property="isConcurrent" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="bean_class" property="beanClass" jdbcType="VARCHAR" />
+    <result column="job_status" property="jobStatus" jdbcType="VARCHAR" />
+    <result column="job_group" property="jobGroup" jdbcType="VARCHAR" />
+    <result column="spring_bean" property="springBean" jdbcType="VARCHAR" />
+    <result column="job_name" property="jobName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" />
+    <result column="create_time" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cron_expression, method_name, is_concurrent, description, bean_class, job_status, 
+    job_group, spring_bean, job_name, update_time, create_time
+  </sql>
+  <select id="selectTaskByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="saveSysTask" parameterType="com.yaa.cms.model.SysTask" >
+    insert into sys_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cronExpression != null" >
+        cron_expression,
+      </if>
+      <if test="methodName != null" >
+        method_name,
+      </if>
+      <if test="isConcurrent != null" >
+        is_concurrent,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="beanClass != null" >
+        bean_class,
+      </if>
+      <if test="jobStatus != null" >
+        job_status,
+      </if>
+      <if test="jobGroup != null" >
+        job_group,
+      </if>
+      <if test="springBean != null" >
+        spring_bean,
+      </if>
+      <if test="jobName != null" >
+        job_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cronExpression != null" >
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="isConcurrent != null" >
+        #{isConcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="beanClass != null" >
+        #{beanClass,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null" >
+        #{jobStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null" >
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="springBean != null" >
+        #{springBean,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null" >
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateTaskById" parameterType="com.yaa.cms.model.SysTask" >
+    update sys_task
+    <set >
+      <if test="cronExpression != null" >
+        cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        method_name = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="isConcurrent != null" >
+        is_concurrent = #{isConcurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="beanClass != null" >
+        bean_class = #{beanClass,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null" >
+        job_status = #{jobStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null" >
+        job_group = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="springBean != null" >
+        spring_bean = #{springBean,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null" >
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="list" resultType="com.yaa.cms.model.SysTask">
+    select * from sys_task
+    <where>
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="cronExpression != null and cronExpression != ''"> and cron_expression = #{cronExpression} </if>
+      <if test="methodName != null and methodName != ''"> and method_name = #{methodName} </if>
+      <if test="isConcurrent != null and isConcurrent != ''"> and is_concurrent = #{isConcurrent} </if>
+      <if test="description != null and description != ''"> and description = #{description} </if>
+      <if test="beanClass != null and beanClass != ''"> and bean_class = #{beanClass} </if>
+      <if test="jobStatus != null and jobStatus != ''"> and job_status = #{jobStatus} </if>
+      <if test="jobGroup != null and jobGroup != ''"> and job_group = #{jobGroup} </if>
+      <if test="springBean != null and springBean != ''"> and spring_bean = #{springBean} </if>
+      <if test="jobName != null and jobName != ''"> and job_name = #{jobName} </if>
+      <if test="updateTime != null and updateTime!=''">and update_time #{updateTime}</if>
+      <if test="createTime != null and createTime!=''">and create_time #{createTime}</if>
+    </where>
+    order by id desc
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="count" resultType="int">
+    select count(*) from sys_task
+    <where>
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="cronExpression != null and cronExpression != ''"> and cron_expression = #{cronExpression} </if>
+      <if test="methodName != null and methodName != ''"> and method_name = #{methodName} </if>
+      <if test="isConcurrent != null and isConcurrent != ''"> and is_concurrent = #{isConcurrent} </if>
+      <if test="description != null and description != ''"> and description = #{description} </if>
+      <if test="beanClass != null and beanClass != ''"> and bean_class = #{beanClass} </if>
+      <if test="jobStatus != null and jobStatus != ''"> and job_status = #{jobStatus} </if>
+      <if test="jobGroup != null and jobGroup != ''"> and job_group = #{jobGroup} </if>
+      <if test="springBean != null and springBean != ''"> and spring_bean = #{springBean} </if>
+      <if test="jobName != null and jobName != ''"> and job_name = #{jobName} </if>
+      <if test="updateTime != null and updateTime!=''">and update_time #{updateTime}</if>
+      <if test="createTime != null and createTime!=''">and create_time #{createTime}</if>
+    </where>
+  </select>
+
+  <delete id="removeTaskById">
+    delete from sys_task where id = #{value}
+  </delete>
+
+  <delete id="batchRemoveTask">
+    delete from sys_task where id in
+    <foreach item="id" collection="array" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+</mapper>

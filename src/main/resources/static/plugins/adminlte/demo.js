@@ -5,9 +5,73 @@
  * This file is for demo purposes only.
  */
 $(function () {
+
+    var TabDefault = {
+        slide: true
+    };
+
+    var TabSelector = {
+        sidebar: '.control-sidebar',
+        data   : '[data-toggle="control-sidebar"]',
+        open   : '.control-sidebar-open',
+        bg     : '.control-sidebar-bg',
+        wrapper: '.wrapper',
+        content: '.content-wrapper',
+        boxed  : '.layout-boxed'
+    };
+
+    var TabClassName = {
+        open : 'control-sidebar-open',
+        fixed: 'fixed'
+    };
+
+    var TabEvent = {
+        collapsed: 'collapsed.controlsidebar',
+        expanded : 'expanded.controlsidebar'
+    };
+
+    $(TabSelector.data).on("click",function (event) {
+        if (event) event.preventDefault();
+        _fixForBoxed($(TabSelector.bg));
+        if (!$(TabSelector.sidebar).is(TabSelector.open) && !$('body').is(TabSelector.open)) {
+            TabExpand();
+        } else {
+            TabCollapse();
+        }
+    })
+
+    function TabExpand () {
+        if (!TabDefault.slide) {
+            $('body').addClass(TabClassName.open);
+        } else {
+            $(TabSelector.sidebar).addClass(TabClassName.open);
+        }
+
+        $(this.element).trigger($.Event(TabEvent.expanded));
+    };
+
+    function TabCollapse () {
+        $('body, ' + TabSelector.sidebar).removeClass(TabClassName.open);
+        $(this.element).trigger($.Event(TabEvent.collapsed));
+    };
+
+    function TabFix() {
+        if ($('body').is(TabSelector.boxed)) {
+            _fixForBoxed($(TabSelector.bg));
+        }
+    }
+
+    function _fixForBoxed(bg) {
+        bg.css({
+            position: 'absolute',
+            height  : $(TabSelector.wrapper).height()
+        });
+    };
+
+
   'use strict'
-  console.log("s")
-  /**
+
+    /**
    * Get access to plugins
    */
   // $('[data-toggle="control-sidebar"]').controlSidebar()
@@ -344,13 +408,19 @@ $(function () {
 
   setup()
 
+
   // $('[data-toggle="tooltip"]').tooltip();
 
-    //页面最小高度
-
+  // //页面最小高度
   var Default = {
       slimscroll : true,
-      resetHeight: true
+      resetHeight: true,
+      animationSpeed : 500,
+      collapseTrigger: '[data-widget="collapse"]',
+      removeTrigger  : '[data-widget="remove"]',
+      collapseIcon   : 'fa-minus',
+      expandIcon     : 'fa-plus',
+      removeIcon     : 'fa-times'
   };
 
   var Selector = {
@@ -363,12 +433,26 @@ $(function () {
       controlSidebar: '.control-sidebar',
       fixed         : '.fixed',
       sidebarMenu   : '.sidebar-menu',
-      logo          : '.main-header .logo'
+      logo          : '.main-header .logo',
+      tree        : '.tree',
+      treeview    : '.treeview',
+      treeviewMenu: '.treeview-menu',
+      open        : '.menu-open, .active',
+      li          : 'li',
+      data        : '[data-widget="tree"]',
+      active      : '.active'
   };
 
   var ClassName = {
       fixed         : 'fixed',
-      holdTransition: 'hold-transition'
+      holdTransition: 'hold-transition',
+      open: 'menu-open',
+      tree: 'tree'
+  };
+
+  var Event = {
+      collapsed: 'collapsed.tree',
+      expanded : 'expanded.tree'
   };
 
   var bindedResize = false;
@@ -440,27 +524,27 @@ $(function () {
      }
   }
 
-    function fixSidebar() {
-        // Make sure the body tag has the .fixed class
-        if (!$('body').hasClass(ClassName.fixed)) {
-            if (typeof $.fn.slimScroll !== 'undefined') {
-                $(Selector.sidebar).slimScroll({destroy: true}).height('auto');
-            }
-            return;
-        }
-        // Enable slimscroll for fixed layout
-        if (this.options.slimscroll) {
-            if (typeof $.fn.slimScroll !== 'undefined') {
-                // Destroy if it exists
-                // $(Selector.sidebar).slimScroll({ destroy: true }).height('auto')
+  function fixSidebar() {
+      // Make sure the body tag has the .fixed class
+      if (!$('body').hasClass(ClassName.fixed)) {
+          if (typeof $.fn.slimScroll !== 'undefined') {
+              $(Selector.sidebar).slimScroll({destroy: true}).height('auto');
+          }
+          return;
+      }
+      // Enable slimscroll for fixed layout
+      if (this.options.slimscroll) {
+          if (typeof $.fn.slimScroll !== 'undefined') {
+              // Destroy if it exists
+              // $(Selector.sidebar).slimScroll({ destroy: true }).height('auto')
 
-                // Add slimscroll
-                $(Selector.sidebar).slimScroll({
-                    height: ($(window).height() - $(Selector.mainHeader).height()) + 'px'
-                });
-            }
-        }
-    };
+              // Add slimscroll
+              $(Selector.sidebar).slimScroll({
+                  height: ($(window).height() - $(Selector.mainHeader).height()) + 'px'
+              });
+          }
+      }
+  };
 
   //菜单栏收缩
   var $body = $("body");
@@ -475,35 +559,6 @@ $(function () {
   });
 
   //树状菜单
-  var Default = {
-      animationSpeed : 500,
-      collapseTrigger: '[data-widget="collapse"]',
-      removeTrigger  : '[data-widget="remove"]',
-      collapseIcon   : 'fa-minus',
-      expandIcon     : 'fa-plus',
-      removeIcon     : 'fa-times'
-  };
-
-  var Selector = {
-      tree        : '.tree',
-      treeview    : '.treeview',
-      treeviewMenu: '.treeview-menu',
-      open        : '.menu-open, .active',
-      li          : 'li',
-      data        : '[data-widget="tree"]',
-      active      : '.active'
-  };
-
-  var ClassName = {
-      open: 'menu-open',
-      tree: 'tree'
-  };
-
-  var Event = {
-      collapsed: 'collapsed.tree',
-      expanded : 'expanded.tree'
-  };
-
   $("[link]").on("click",function () {
       var link = $(this);
 

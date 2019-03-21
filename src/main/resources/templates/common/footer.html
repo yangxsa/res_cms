@@ -2,33 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
 <body>
 <!-- Javascripts -->
-<script th:src="@{/plugins/jquery/jquery-3.1.0.min.js}"></script>
-<script th:src="@{/plugins/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/plugins/instantclick/instantclick.min.js}"></script>
+<!--<script data-instant src="//lib.baomitu.com/admin-lte/2.4.10/js/adminlte.min.js"></script>-->
+<!--<script data-instant src="//lib.baomitu.com/admin-lte/2.4.10/js/demo.js"></script>-->
+<!--<script th:src="@{/plugins/adminlte/adminlte.min.js}"></script>-->
+<!--<script th:src="@{/plugins/adminlte/adminlte.js}"></script>-->
+<script th:src="@{/plugins/adminlte/demo.js}"></script>
+<script data-no-instant th:src="@{/plugins/bootstrap/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+<script th:src="@{/plugins/jquery-sparkline/jquery.sparkline.min.js}"></script>
+<!--<script th:src="@{/plugins/jvectormap/jquery-jvectormap.min.js}"></script>-->
+<!--<script th:src="@{/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>-->
 <script th:src="@{/plugins/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
-<script th:src="@{/plugins/uniform/jquery.uniform.standalone.js}"></script>
-<script th:src="@{/plugins/switchery/switchery.min.js}"></script>
-<script th:src="@{/plugins/d3/d3.min.js}"></script>
-<script th:src="@{/plugins/nvd3/nv.d3.min.js}"></script>
-<script th:src="@{/plugins/flot/jquery.flot.min.js}"></script>
-<script th:src="@{/plugins/flot/jquery.flot.time.min.js}"></script>
-<script th:src="@{/plugins/flot/jquery.flot.symbol.min.js}"></script>
-<script th:src="@{/plugins/flot/jquery.flot.resize.min.js}"></script>
-<script th:src="@{/plugins/flot/jquery.flot.tooltip.min.js}"></script>
-<script th:src="@{/plugins/flot/jquery.flot.pie.min.js}"></script>
-<!--<script th:src="@{/plugins/chartjs/chart.min.js}"></script>-->
-<script th:src="@{/js/ecaps.min.js}"></script>
-<script th:src="@{/js/dashboard.js}"></script>
-<script th:src="@{/js/instantclick.min.js}"></script>
-<script data-no-instant="">
+<script th:src="@{/plugins/chart/chart.js}"></script>
+<script th:src="@{/plugins/layer/layer.js}"></script>
+<script data-no-instant>
     /*<![CDATA[*/
     InstantClick.on('change', function (isInitialLoad) {
-        var blocks = document.querySelectorAll('pre code');
-        for (var i = 0; i < blocks.length; i++) {
-            hljs.highlightBlock(blocks[i]);
-        }
-        if (isInitialLoad === false) {
-            if (typeof ga !== 'undefined') ga('send', 'pageview', location.pathname + location.search);
-        }
+
     });
     InstantClick.init('mousedown');
     /*]]>*/

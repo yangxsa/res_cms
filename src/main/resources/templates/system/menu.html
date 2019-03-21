@@ -1,85 +1,233 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<div th:replace="/common/header::header('首页')"></div>
-<body>
-<!-- Page Container -->
-<div class="page-container">
-    <!-- Page Sidebar -->
-    <div th:replace="/common/sidebar::sidebar"></div>
-    <!-- Page Content -->
-    <div class="page-content">
-        <!-- Page Header -->
-        <div th:replace="/common/page-header::page-header"></div>
-        <!-- Page Inner -->
-        <div class="page-inner">
-            <div class="page-title">
-                <h3 class="breadcrumb-header">系统菜单</h3>
-            </div>
-            <div id="main-wrapper">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-white">
-                            <div class="panel-heading clearfix">
-                                <div class="pull-left">
-                                    <button type="button" class="btn btn-primary" onclick="add()">
-                                        <i class="fa fa-plus" aria-hidden="true"></i>添加
-                                    </button>
-                                    <p></p>
+<head th:replace="/common/header-meta::header-meta('首页')"></head>
+<body class="skin-black-light sidebar-mini">
+<div class="wrapper">
+    <header th:replace="/common/header-body::header-body"></header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside th:replace="/common/sidebar::sidebar"></aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 835px;">
+        <!--页面导航-->
+        <section class="content-header"><h1>
+            提币卖币
+            <small>列表</small>
+        </h1>
+            <!-- breadcrumb start -->
+            <!-- breadcrumb end -->
+        </section>
+        <!-- Main content -->
+        <section class="content"><div class="row"><div class="col-md-12">
+        </div></div>
+            <div class="row"><div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+
+                        <h3 class="box-title"></h3>
+
+                        <div class="pull-right">
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filter-modal"><i class="fa fa-filter"></i>&nbsp;&nbsp;筛选</button>
+                                <a href="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container" class="btn btn-sm btn-facebook"><i class="fa fa-undo"></i>&nbsp;&nbsp;重置</a>
+                            </div>
+
+                            <div class="modal fade" id="filter-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">筛选</h4>
+                                        </div>
+                                        <form action="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container" method="get" pjax-container="">
+                                            <div class="modal-body">
+                                                <div class="form">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>ID</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control id" placeholder="ID" name="id" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>内部订单号</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control order_no" placeholder="内部订单号" name="order_no" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>外部订单号</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control out_order_no" placeholder="外部订单号" name="out_order_no" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>商户备注</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control channel_remark" placeholder="商户备注" name="channel_remark" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>状态</label>
+                                                            <select class="form-control status select2-hidden-accessible" name="status" style="width: 100%;" tabindex="-1" aria-hidden="true"><option></option>
+                                                                <option value="1">待付款</option>
+                                                                <option value="2">审核已通过</option>
+                                                                <option value="9">承兑商已付款</option>
+                                                                <option value="15">商户确认收款</option>
+                                                                <option value="100">交易完成</option>
+                                                                <option value="-1">已关闭</option>
+                                                                <option value="-2">超时未处理</option>
+                                                                <option value="-3">已取消</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-status-a0-container"><span class="select2-selection__rendered" id="select2-status-a0-container"><span class="select2-selection__placeholder">选择</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>提现金额</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" placeholder="提现金额" name="amount[start]" value=""><span class="input-group-addon" style="border-left: 0; border-right: 0;">-</span>
+                                                                <input type="text" class="form-control" placeholder="提现金额" name="amount[end]" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>起止时间</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control" id="created_at_start" placeholder="起止时间" name="created_at[start]" value=""><span class="input-group-addon" style="border-left: 0; border-right: 0;">-</span>
+                                                                <input type="text" class="form-control" id="created_at_end" placeholder="起止时间" name="created_at[end]" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary submit">提交</button>
+                                                <button type="reset" class="btn btn-warning pull-left">重置</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <div class="table-responsive table table-bordered">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Table heading</th>
-                                            <th>Table heading</th>
-                                            <th>Table heading</th>
-                                            <th>Table heading</th>
-                                            <th>Table heading</th>
-                                            <th>Table heading</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i> 导出</a>
+                                <button type="button" class="btn btn-sm btn-twitter dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/admin/channel_payment?_pjax=%23pjax-container&amp;_export_=all" target="_blank">全部</a></li>
+                                    <li><a href="/admin/channel_payment?_pjax=%23pjax-container&amp;_export_=page%3A1" target="_blank">当前页</a></li>
+                                    <li><a href="/admin/channel_payment?_pjax=%23pjax-container&amp;_export_=selected%3A__rows__" target="_blank" class="export-selected">选择的行</a></li>
+                                </ul>
                             </div>
+                            &nbsp;&nbsp;
+
+
                         </div>
+
+                        <span>
+            <a class="btn btn-sm btn-primary grid-refresh"><i class="fa fa-refresh"></i> 刷新</a>
+        </span>
+
                     </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover"><tbody><tr>
+                            <th>ID<a class="fa fa-fw fa-sort" href="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container&amp;_sort%5Bcolumn%5D=id&amp;_sort%5Btype%5D=desc"></a>
+                            </th>
+                            <th>内部订单号</th>
+                            <th>收款人</th>
+                            <th>等值CNY</th>
+                            <th>出售USDT</th>
+                            <th>手续费</th>
+                            <th>币价</th>
+                            <th>收款卡号</th>
+                            <th>收币地址</th>
+                            <th>状态</th>
+                            <th>承兑商确认时间</th>
+                            <th>创建日期</th>
+                            <th>操作</th>
+                        </tr></tbody></table>
+                    </div>
+                    <div class="box-footer clearfix">
+                        从 <b></b> 到 <b></b> ，总共 <b>0</b> 条<ul class="pagination pagination-sm no-margin pull-right">
+                        <!-- Previous Page Link --><li class="page-item disabled"><span class="page-link">«</span></li>
+
+                        <!-- Pagination Elements -->
+                        <!-- "Three Dots" Separator -->
+
+                        <!-- Array Of Links -->
+                        <li class="page-item active"><span class="page-link">1</span></li>
+
+                        <!-- Next Page Link -->
+                        <li class="page-item disabled"><span class="page-link">»</span></li>
+                    </ul>
+                        <label class="control-label pull-right" style="margin-right: 10px; font-weight: 100;">
+
+                            <small>显示</small>&nbsp;
+                            <select class="input-sm grid-per-pager" name="per-page"><option value="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container&amp;per_page=10">10</option>
+                                <option value="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container&amp;per_page=20" selected="">20</option>
+                                <option value="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container&amp;per_page=30">30</option>
+                                <option value="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container&amp;per_page=50">50</option>
+                                <option value="http://we.panda-pay.co/admin/channel_payment?_pjax=%23pjax-container&amp;per_page=100">100</option></select>
+                            &nbsp;<small>条</small>
+                        </label>
+
+                    </div>
+                    <!-- /.box-body -->
                 </div>
+            </div></div>
+        </section>
+    </div>
+    <!-- 设置 -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!--右设置选项卡-->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <!--<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>-->
+            <!--<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
+        </ul>
+        <!-- 右设置选项卡内容 -->
+        <div class="tab-content">
+            <div class="tab-pane" id="control-sidebar-home-tab">
             </div>
         </div>
-    </div>
+    </aside>
+
+    <div class="control-sidebar-bg"></div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.4.0
+        </div>
+        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        reserved.
+    </footer>
 </div>
-<div th:replace="/common/footer::footer"></div>
 </body>
+<th:block th:replace="/common/footer::footer"></th:block>
 </html>

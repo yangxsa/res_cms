@@ -30,6 +30,52 @@ $(function () {
         expanded : 'expanded.controlsidebar'
     };
 
+    // //页面最小高度
+    var Default = {
+        slimscroll : true,
+        resetHeight: true,
+        animationSpeed : 500,
+        collapseTrigger: '[data-widget="collapse"]',
+        removeTrigger  : '[data-widget="remove"]',
+        collapseIcon   : 'fa-minus',
+        expandIcon     : 'fa-plus',
+        removeIcon     : 'fa-times'
+    };
+
+    var Selector = {
+        wrapper       : '.wrapper',
+        contentWrapper: '.content-wrapper',
+        layoutBoxed   : '.layout-boxed',
+        mainFooter    : '.main-footer',
+        mainHeader    : '.main-header',
+        sidebar       : '.sidebar',
+        controlSidebar: '.control-sidebar',
+        fixed         : '.fixed',
+        sidebarMenu   : '.sidebar-menu',
+        logo          : '.main-header .logo',
+        tree        : '.tree',
+        treeview    : '.treeview',
+        treeviewMenu: '.treeview-menu',
+        open        : '.menu-open, .active',
+        li          : 'li',
+        data        : '[data-widget="tree"]',
+        active      : '.active'
+    };
+
+    var ClassName = {
+        fixed         : 'fixed',
+        holdTransition: 'hold-transition',
+        open: 'menu-open',
+        tree: 'tree'
+    };
+
+    var Event = {
+        collapsed: 'collapsed.tree',
+        expanded : 'expanded.tree'
+    };
+
+    var bindedResize = false;
+
     $(TabSelector.data).on("click",function (event) {
         if (event) event.preventDefault();
         _fixForBoxed($(TabSelector.bg));
@@ -138,12 +184,49 @@ $(function () {
    */
   function changeLayout(cls) {
     $('body').toggleClass(cls)
-    $layout.fixSidebar()
+    fixSidebar();
     if ($('body').hasClass('fixed') && cls == 'fixed') {
       $pushMenu.expandOnHover()
       $layout.activate()
     }
     $controlSidebar.fix()
+  }
+
+  function expandOnHover() {
+        $(Selector.mainSidebar).hover(function () {
+            if ($('body').is(Selector.mini + Selector.collapsed)
+                && $(window).width() > Default.collapseScreenSize) {
+                expand();
+            }
+        }.bind(this), function () {
+            if ($('body').is(Selector.expanded)) {
+                collapse();
+            }
+        }.bind(this));
+    };
+
+  function activate () {
+      fix();
+      fixSidebar();
+
+      $('body').removeClass(ClassName.holdTransition);
+      if (Default.resetHeight) {
+          $('body, html, ' + Selector.wrapper).css({
+              'height': 'auto',
+              'min-height': '100%'
+          });
+      }
+      if (!bindedResize) {
+          $(window).resize(function () {
+              fix();
+              fixSidebar();
+              $(Selector.logo + ', ' + Selector.sidebar).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                  fix();
+                  fixSidebar();
+              }.bind(this));
+          }.bind(this));
+          bindedResize = true;
+      }
   }
 
   /**
@@ -410,53 +493,6 @@ $(function () {
 
 
   // $('[data-toggle="tooltip"]').tooltip();
-
-  // //页面最小高度
-  var Default = {
-      slimscroll : true,
-      resetHeight: true,
-      animationSpeed : 500,
-      collapseTrigger: '[data-widget="collapse"]',
-      removeTrigger  : '[data-widget="remove"]',
-      collapseIcon   : 'fa-minus',
-      expandIcon     : 'fa-plus',
-      removeIcon     : 'fa-times'
-  };
-
-  var Selector = {
-      wrapper       : '.wrapper',
-      contentWrapper: '.content-wrapper',
-      layoutBoxed   : '.layout-boxed',
-      mainFooter    : '.main-footer',
-      mainHeader    : '.main-header',
-      sidebar       : '.sidebar',
-      controlSidebar: '.control-sidebar',
-      fixed         : '.fixed',
-      sidebarMenu   : '.sidebar-menu',
-      logo          : '.main-header .logo',
-      tree        : '.tree',
-      treeview    : '.treeview',
-      treeviewMenu: '.treeview-menu',
-      open        : '.menu-open, .active',
-      li          : 'li',
-      data        : '[data-widget="tree"]',
-      active      : '.active'
-  };
-
-  var ClassName = {
-      fixed         : 'fixed',
-      holdTransition: 'hold-transition',
-      open: 'menu-open',
-      tree: 'tree'
-  };
-
-  var Event = {
-      collapsed: 'collapsed.tree',
-      expanded : 'expanded.tree'
-  };
-
-  var bindedResize = false;
-
   fix();
   fixSidebar();
 
@@ -533,7 +569,7 @@ $(function () {
           return;
       }
       // Enable slimscroll for fixed layout
-      if (this.options.slimscroll) {
+      if (Default.slimscroll) {
           if (typeof $.fn.slimScroll !== 'undefined') {
               // Destroy if it exists
               // $(Selector.sidebar).slimScroll({ destroy: true }).height('auto')

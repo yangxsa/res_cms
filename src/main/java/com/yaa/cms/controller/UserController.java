@@ -37,15 +37,12 @@ public class UserController extends BaseController {
 
     @GetMapping("")
     @RequiresPermissions("sys:user:user")
-    public String user(@RequestParam(value = "page",defaultValue = "1")int page,SysUser user,HttpServletRequest request) {
-        Map<String,Object> params = new HashMap<>();
-        if(StringUtils.isNotBlank(user.getName())){
-            params.put("name",user.getName());
-        }
-        int totalRecord = userService.countTotalUserRecord(params);
+    public String user(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request) {
+        Map<String,Object> param = buildParam(request);
+        int totalRecord = userService.countTotalUserRecord(param);
         int startIndex = PageUtil.getStartIndex(page);
         int endIndex = PageUtil.getEndIndex(page);
-        List<SysUser> list = userService.selectUserList(params,startIndex,endIndex);
+        List<SysUser> list = userService.selectUserList(param,startIndex,endIndex);
         this.setPageNavigation(page,totalRecord,request);
         request.setAttribute("list",list);
         return render(request,prefix + "/user");

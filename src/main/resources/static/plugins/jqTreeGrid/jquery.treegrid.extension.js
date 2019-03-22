@@ -251,8 +251,7 @@
         columns : [],
         toolbar: null,//顶部工具条
         height: 0,
-        expanderExpandedClass : 'glyphicon glyphicon-chevron-down',// 展开的按钮的图标
-        expanderCollapsedClass : 'glyphicon glyphicon-chevron-right'// 缩起的按钮的图标
-
+        expanderExpandedClass : 'fa fa-angle-down fa-lg',// 展开的按钮的图标
+        expanderCollapsedClass : 'fa fa-angle-right fa-lg'// 缩起的按钮的图标
     };
 })(jQuery);

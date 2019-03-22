@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="/common/header-meta::header-meta('首页')"></head>
+<head th:replace="/common/include::header-meta('首页')"></head>
 <body class="skin-black-light sidebar-mini">
 <div class="wrapper">
-    <header th:replace="/common/header-body::header-body"></header>
+    <header th:replace="/common/include::header-body"></header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside th:replace="/common/sidebar::sidebar"></aside>
+    <aside th:replace="/common/include::sidebar"></aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!--页面导航-->
         <section class="content-header"><h1>
-            提币卖币
+            系统菜单
             <small>列表</small>
         </h1>
             <!-- breadcrumb start -->
@@ -91,7 +91,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label>状态</label>
-                                                            <select class="form-control status select2-hidden-accessible" name="status" style="width: 100%;" tabindex="-1" aria-hidden="true"><option></option>
+                                                            <select class="form-control status select2-hidden-accessible" name="status" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                                 <option value="1">待付款</option>
                                                                 <option value="2">审核已通过</option>
                                                                 <option value="9">承兑商已付款</option>
@@ -99,7 +99,8 @@
                                                                 <option value="100">交易完成</option>
                                                                 <option value="-1">已关闭</option>
                                                                 <option value="-2">超时未处理</option>
-                                                                <option value="-3">已取消</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-status-a0-container"><span class="select2-selection__rendered" id="select2-status-a0-container"><span class="select2-selection__placeholder">选择</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                                <option value="-3">已取消</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -229,5 +230,5 @@
     </footer>
 </div>
 </body>
-<th:block th:replace="/common/footer::footer"></th:block>
+<th:block th:replace="/common/include::footer"></th:block>
 </html>

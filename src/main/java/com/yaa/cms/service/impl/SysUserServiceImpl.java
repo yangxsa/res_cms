@@ -38,7 +38,14 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public List<SysUser> selectUserList(Map<String, Object> params) {
+    public int countTotalUserRecord(Map<String, Object> params) {
+        return userDao.countUserRecords(params);
+    }
+
+    @Override
+    public List<SysUser> selectUserList(Map<String, Object> params,int startIndex,int endIndex) {
+        params.put("startIndex",startIndex);
+        params.put("endIndex",endIndex);
         List<SysUser> users = userDao.selectUserList(params);
         for (SysUser user : users) {
             List<Integer> roleIds = userRoleDao.selectRoleIdList(user.getId());

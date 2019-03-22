@@ -11,7 +11,9 @@ public interface SysUserService {
 
     SysUser selectUserByUsername(String username);
 
-    List<SysUser> selectUserList(Map<String, Object> params);
+    int countTotalUserRecord(Map<String,Object> params);
+
+    List<SysUser> selectUserList(Map<String, Object> params,int startIndex,int endIndex);
 
     int countUserRecords(Map<String, Object> params);
 

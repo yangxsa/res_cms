@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="/common/header-meta::header-meta('首页')"></head>
+<head th:replace="/common/include::header-meta('首页')"></head>
 <body class="skin-black-light sidebar-mini">
 <div class="wrapper">
-    <header th:replace="/common/header-body::header-body"></header>
+    <header th:replace="/common/include::header-body"></header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside th:replace="/common/sidebar::sidebar"></aside>
+    <aside th:replace="/common/include::sidebar"></aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!--页面导航-->
@@ -85,34 +85,29 @@
                     <h3>待确认入金单子</h3>
                     <div class="box">
                         <div class="box-header">
-
                             <h3 class="box-title"></h3>
-
-                            <div class="pull-right">
-
-
-
-                            </div>
-
+                            <div class="pull-right"></div>
                             <span>
-            <a class="btn btn-sm btn-primary grid-refresh"><i class="fa fa-refresh"></i> 刷新</a>
-        </span>
-
+                                <a class="btn btn-sm btn-primary grid-refresh"><i class="fa fa-refresh"></i> 刷新</a>
+                            </span>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover"><tbody><tr>
-                                <th>外部订单号</th>
-                                <th>姓名</th>
-                                <th>客户充值USDT</th>
-                                <th>等值CNY</th>
-                                <th>状态</th>
-                                <th>用户已确认转账时间</th>
-                                <th>操作</th>
-                            </tr></tbody></table>
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>外部订单号</th>
+                                    <th>姓名</th>
+                                    <th>客户充值USDT</th>
+                                    <th>等值CNY</th>
+                                    <th>状态</th>
+                                    <th>用户已确认转账时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </tbody>
+                            </table>
                         </div>
                         <div class="box-footer clearfix">
-
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -157,178 +152,22 @@
 
                 </div>
             </div>
-            <!--<div class="row">-->
-                <!--&lt;!&ndash; Left col &ndash;&gt;-->
-                <!--<div class="col-md-8">-->
-                    <!--&lt;!&ndash; TABLE: LATEST ORDERS &ndash;&gt;-->
-                    <!--<div class="box box-info">-->
-                        <!--<div class="box-header with-border">-->
-                            <!--<h3 class="box-title">Latest Orders</h3>-->
-
-                            <!--<div class="box-tools pull-right">-->
-                                <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>-->
-                                <!--</button>-->
-                                <!--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.box-header &ndash;&gt;-->
-                        <!--<div class="box-body">-->
-                            <!--<div class="table-responsive">-->
-                                <!--<table class="table no-margin">-->
-                                    <!--<thead>-->
-                                    <!--<tr>-->
-                                        <!--<th>Order ID</th>-->
-                                        <!--<th>Item</th>-->
-                                        <!--<th>Status</th>-->
-                                        <!--<th>Popularity</th>-->
-                                    <!--</tr>-->
-                                    <!--</thead>-->
-                                    <!--<tbody>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR9842</a></td>-->
-                                        <!--<td>Call of Duty IV</td>-->
-                                        <!--<td><span class="label label-success">Shipped</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR1848</a></td>-->
-                                        <!--<td>Samsung Smart TV</td>-->
-                                        <!--<td><span class="label label-warning">Pending</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR7429</a></td>-->
-                                        <!--<td>iPhone 6 Plus</td>-->
-                                        <!--<td><span class="label label-danger">Delivered</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR7429</a></td>-->
-                                        <!--<td>Samsung Smart TV</td>-->
-                                        <!--<td><span class="label label-info">Processing</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR1848</a></td>-->
-                                        <!--<td>Samsung Smart TV</td>-->
-                                        <!--<td><span class="label label-warning">Pending</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR7429</a></td>-->
-                                        <!--<td>iPhone 6 Plus</td>-->
-                                        <!--<td><span class="label label-danger">Delivered</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td><a href="pages/examples/invoice.html">OR9842</a></td>-->
-                                        <!--<td>Call of Duty IV</td>-->
-                                        <!--<td><span class="label label-success">Shipped</span></td>-->
-                                        <!--<td>-->
-                                            <!--<div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>-->
-                                        <!--</td>-->
-                                    <!--</tr>-->
-                                    <!--</tbody>-->
-                                <!--</table>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; /.table-responsive &ndash;&gt;-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.box-body &ndash;&gt;-->
-                        <!--<div class="box-footer clearfix">-->
-                            <!--<a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>-->
-                            <!--<a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.box-footer &ndash;&gt;-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.box &ndash;&gt;-->
-                <!--</div>-->
-                <!--&lt;!&ndash; /.col &ndash;&gt;-->
-
-                <!--<div class="col-md-4">-->
-                    <!--&lt;!&ndash; Info Boxes Style 2 &ndash;&gt;-->
-                    <!--<div class="info-box bg-yellow">-->
-                        <!--<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>-->
-
-                        <!--<div class="info-box-content">-->
-                            <!--<span class="info-box-text">Inventory</span>-->
-                            <!--<span class="info-box-number">5,200</span>-->
-
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar" style="width: 50%"></div>-->
-                            <!--</div>-->
-                            <!--<span class="progress-description">50% Increase in 30 Days</span>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.info-box-content &ndash;&gt;-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.info-box &ndash;&gt;-->
-                    <!--<div class="info-box bg-green">-->
-                        <!--<span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>-->
-
-                        <!--<div class="info-box-content">-->
-                            <!--<span class="info-box-text">Mentions</span>-->
-                            <!--<span class="info-box-number">92,050</span>-->
-
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar" style="width: 20%"></div>-->
-                            <!--</div>-->
-                            <!--<span class="progress-description">20% Increase in 30 Days</span>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /.info-box-content &ndash;&gt;-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.info-box &ndash;&gt;-->
-                    <!--<div class="info-box bg-red">-->
-                        <!--<span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>-->
-                        <!--<div class="info-box-content">-->
-                            <!--<span class="info-box-text">Downloads</span>-->
-                            <!--<span class="info-box-number">114,381</span>-->
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar" style="width: 70%"></div>-->
-                            <!--</div>-->
-                            <!--<span class="progress-description">70% Increase in 30 Days</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /.info-box &ndash;&gt;-->
-                    <!--<div class="info-box bg-aqua">-->
-                        <!--<span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>-->
-                        <!--<div class="info-box-content">-->
-                            <!--<span class="info-box-text">Direct Messages</span>-->
-                            <!--<span class="info-box-number">163,921</span>-->
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar" style="width: 40%"></div>-->
-                            <!--</div>-->
-                            <!--<span class="progress-description">40% Increase in 30 Days</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
         </section>
     </div>
     <!-- 设置 -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!--右设置选项卡-->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <!--<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>-->
-            <!--<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
-        </ul>
-        <!-- 右设置选项卡内容 -->
-        <div class="tab-content">
-            <div class="tab-pane" id="control-sidebar-home-tab">
-            </div>
-        </div>
-    </aside>
-    <div class="control-sidebar-bg"></div>
+    <!--<aside class="control-sidebar control-sidebar-dark">-->
+        <!--&lt;!&ndash;右设置选项卡&ndash;&gt;-->
+        <!--<ul class="nav nav-tabs nav-justified control-sidebar-tabs">-->
+            <!--&lt;!&ndash;<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>&ndash;&gt;-->
+        <!--</ul>-->
+        <!--&lt;!&ndash; 右设置选项卡内容 &ndash;&gt;-->
+        <!--<div class="tab-content">-->
+            <!--<div class="tab-pane" id="control-sidebar-home-tab">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</aside>-->
+    <!--<div class="control-sidebar-bg"></div>-->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.4.0
@@ -338,5 +177,5 @@
     </footer>
 </div>
 </body>
-<div th:replace="common/footer::footer" ></div>
+<th:block th:replace="common/include::footer" ></th:block>
 </html>

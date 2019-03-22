@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="box-footer clearfix" th:fragment="pageNav(pageInfo)" style="line-height: 2.5rem;">
+    从 <b><th:block th:text="${(pageInfo.currPage-1) * pageInfo.pageSize + 1}"/></b>
+    到 <b><th:block th:text="${pageInfo.currPage *  pageInfo.pageSize}"/></b> ，
+    共 <th:block th:text="${pageInfo.totalRecord}"/></b> 条
+    <ul class="pagination pagination-sm no-margin pull-right">
+        <li th:class="${pageInfo.hasTopIndex == false ?' disabled' : ''}">
+        <a href="?page=1">«</a>
+        </li>
+
+        <th:block th:each="navIndex :${pageInfo.navigatePageNums}">
+        <li th:class="${pageInfo.currPage==navIndex ? ' active':''}">
+        <a th:href="@{'?page='+${navIndex}}" th:text="${navIndex}">1</a>
+        </li>
+        </th:block>
+
+        <li th:class="${pageInfo.hasEndIndex == false ? ' disabled' : ''}">
+        <a th:href="@{'?page='+${pageInfo.totalPage}}">»</a>
+        </li>
+    </ul>
+    <label class="control-label pull-right" style="margin-right: 10px; font-weight: 100;">
+    显示&nbsp;<th:block th:text="${pageInfo.pageSize}"></th:block>&nbsp;条
+    </label>
+</div>
+</body>
+</html>

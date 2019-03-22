@@ -1,10 +1,12 @@
 package com.yaa.cms.controller;
 
+import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysRole;
 import com.yaa.cms.model.SysUser;
 import com.yaa.cms.service.SysRoleService;
 import com.yaa.cms.service.SysUserService;
 import com.yaa.cms.util.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +25,7 @@ import static com.yaa.cms.util.ShiroUtils.getUser;
 
 @Controller
 @RequestMapping(value = "/sys/user")
-public class UserController {
+public class UserController extends BaseController {
 
     private String prefix="system/user"  ;
 
@@ -33,20 +37,20 @@ public class UserController {
 
     @GetMapping("")
     @RequiresPermissions("sys:user:user")
-    public String user() {
-        return prefix + "/user";
+    public String user(@RequestParam(value = "page",defaultValue = "1")int page,SysUser user,HttpServletRequest request) {
+        Map<String,Object> params = new HashMap<>();
+        if(StringUtils.isNotBlank(user.getName())){
+            params.put("name",user.getName());
+        }
+        int totalRecord = userService.countTotalUserRecord(params);
+        int startIndex = PageUtil.getStartIndex(page);
+        int endIndex = PageUtil.getEndIndex(page);
+        List<SysUser> list = userService.selectUserList(params,startIndex,endIndex);
+        this.setPageNavigation(page,totalRecord,request);
+        request.setAttribute("list",list);
+        return render(request,prefix + "/user");
     }
 
-    @ResponseBody
-    @GetMapping(value = "/list")
-    PageUtils list(@RequestParam Map<String, Object> params) {
-        // 查询列表数据
-        Query query = new Query(params);
-        List<SysUser> sysUserList = userService.selectUserList(query);
-        int total = userService.countUserRecords(query);
-        PageUtils pageUtil = new PageUtils(sysUserList, total);
-        return pageUtil;
-    }
 
     @GetMapping("/add")
     @RequiresPermissions("sys:user:add")

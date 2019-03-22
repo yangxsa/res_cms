@@ -186,10 +186,10 @@ $(function () {
     $('body').toggleClass(cls)
     fixSidebar();
     if ($('body').hasClass('fixed') && cls == 'fixed') {
-      $pushMenu.expandOnHover()
-      $layout.activate()
+      expandOnHover()
+      activate()
     }
-    $controlSidebar.fix()
+    fix()
   }
 
   function expandOnHover() {
@@ -203,6 +203,7 @@ $(function () {
                 collapse();
             }
         }.bind(this));
+        // $pushMenu.expandOnHover()
     };
 
   function activate () {
@@ -289,7 +290,7 @@ $(function () {
 
     $('[data-enable="expandOnHover"]').on('click', function () {
       $(this).attr('disabled', true)
-      $pushMenu.expandOnHover()
+      expandOnHover()
       if (!$('body').hasClass('sidebar-collapse'))
         $('[data-layout="sidebar-collapse"]').click()
     })

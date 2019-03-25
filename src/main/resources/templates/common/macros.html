@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div class="box-footer clearfix" th:fragment="pageNav(pageInfo)" style="line-height: 2.5rem;">
-    从 <b><th:block th:text="${(pageInfo.currPage-1) * pageInfo.pageSize + 1}"/></b>
-    到 <b><th:block th:text="${pageInfo.currPage *  pageInfo.pageSize}"/></b> ，
-    共 <th:block th:text="${pageInfo.totalRecord}"/></b> 条
+    显示第 <b><th:block th:text="${(pageInfo.currPage-1) * pageInfo.pageSize + 1}"/></b>
+    到 <b><th:block th:text="${pageInfo.currPage *  pageInfo.pageSize}"/></b> 条记录 ，
+    总共 <b><th:block th:text="${pageInfo.totalRecord}"/></b> 条记录
     <ul class="pagination pagination-sm no-margin pull-right">
         <li th:class="${pageInfo.hasTopIndex == false ?' disabled' : ''}">
         <a href="?page=1">«</a>

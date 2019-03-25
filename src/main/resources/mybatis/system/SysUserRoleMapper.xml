@@ -77,4 +77,10 @@
   <delete id="removeByUserId">
     delete from sys_user_role where user_id=#{userId}
   </delete>
+
+  <select id="listRoleId" resultType="int">
+    select role_id from
+    sys_user_role where
+    user_id=#{userId}
+  </select>
 </mapper>

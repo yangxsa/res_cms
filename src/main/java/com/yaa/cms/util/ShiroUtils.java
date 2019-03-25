@@ -28,6 +28,10 @@ public class ShiroUtils {
         return getUser().getId();
     }
 
+    public static String getSalt() {
+        return getUser().getSalt();
+    }
+
     public static void logout() {
         getSubjct().logout();
     }

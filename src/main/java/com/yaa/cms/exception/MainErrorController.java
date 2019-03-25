@@ -2,10 +2,6 @@ package com.yaa.cms.exception;
 
 
 import com.yaa.cms.util.Result;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,19 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class ExceptionController implements ErrorController {
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
+public class MainErrorController implements ErrorController {
     private static final String ERROR_PATH = "/error";
-
-    @Autowired
-    ErrorAttributes errorAttributes;
 
     @RequestMapping(
             value = {ERROR_PATH},
             produces = {"text/html"}
     )
-
     public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
         int code = response.getStatus();
         if (404 == code) {

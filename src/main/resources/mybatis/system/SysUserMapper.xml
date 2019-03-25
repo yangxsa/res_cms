@@ -42,7 +42,7 @@
     </where>
     order by id desc
     <if test="offset != null and limit != null">
-      limit #{startIndex}, #{endIndex}
+      limit #{offset}, #{limit}
     </if>
   </select>
 

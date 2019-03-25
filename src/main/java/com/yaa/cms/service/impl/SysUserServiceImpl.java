@@ -43,9 +43,9 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public List<SysUser> selectUserList(Map<String, Object> params,int startIndex,int endIndex) {
-        params.put("startIndex",startIndex);
-        params.put("endIndex",endIndex);
+    public List<SysUser> selectUserList(Map<String, Object> params,int offset,int limit) {
+        params.put("offset",offset);
+        params.put("limit",limit);
         List<SysUser> users = userDao.selectUserList(params);
         for (SysUser user : users) {
             List<Integer> roleIds = userRoleDao.selectRoleIdList(user.getId());
@@ -73,7 +73,10 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public SysUser selectUserById(Integer id) {
-        return userDao.selectUserById(id);
+        List<Integer> roleIds = userRoleDao.listRoleId(id);
+        SysUser user = userDao.selectUserById(id);
+        user.setRoleIds(roleIds);
+        return user;
     }
 
     @Override

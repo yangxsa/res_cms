@@ -37,34 +37,33 @@ public class UserController extends BaseController {
 
     @GetMapping("")
     @RequiresPermissions("sys:user:user")
-    public String user(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request) {
-        Map<String,Object> param = buildParam(request);
+    public String user(@RequestParam(value = "page",defaultValue = "1")int page) {
+        Map<String,Object> param = buildParam();
         int totalRecord = userService.countTotalUserRecord(param);
-        int startIndex = PageUtil.getStartIndex(page);
-        int endIndex = PageUtil.getEndIndex(page);
-        List<SysUser> list = userService.selectUserList(param,startIndex,endIndex);
-        this.setPageNavigation(page,totalRecord,request);
+        int offset = PageUtil.getOffset(page);
+        List<SysUser> list = userService.selectUserList(param,offset,PageUtil.getLimit());
+        this.setPageNavigation(page,totalRecord);
         request.setAttribute("list",list);
-        return render(request,prefix + "/user");
+        return render(prefix + "/user");
     }
 
 
     @GetMapping("/add")
     @RequiresPermissions("sys:user:add")
-    String add(Model model) {
+    String add() {
         List<SysRole> roles = roleService.selectRoleList();
-        model.addAttribute("roles", roles);
-        return prefix + "/add";
+        request.setAttribute("roles", roles);
+        return render(prefix + "/add");
     }
 
     @GetMapping(value = "/edit/{id}")
     @RequiresPermissions("sys:user:edit")
-    public String edit(Model model, @PathVariable("id") Integer id) {
+    public String edit(Model model,@PathVariable("id") Integer id) {
         SysUser user = userService.selectUserById(id);
         model.addAttribute("user", user);
         List<SysRole> roles = roleService.selectRoleByUserID(id);
         model.addAttribute("roles", roles);
-        return prefix+"/edit";
+        return render(prefix+"/edit");
     }
 
     @ResponseBody

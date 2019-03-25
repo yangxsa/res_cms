@@ -26,8 +26,8 @@ public class MenuController extends BaseController{
 
     @GetMapping
     @RequiresPermissions("sys:menu:menu")
-    public String menu(HttpServletRequest request) {
-        return render(request,prefix + "/menu");
+    public String menu() {
+        return render(prefix + "/menu");
     }
 
     @ResponseBody

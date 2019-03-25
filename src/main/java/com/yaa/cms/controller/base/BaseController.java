@@ -20,16 +20,16 @@ public class BaseController {
 
 
     @Autowired
+    public HttpServletRequest request;
+    @Autowired
     private SysMenuService menuService;
-
 
     /**
      * 跳转页面
-     * @param request
      * @param viewName
      * @return
      */
-    protected String render(HttpServletRequest request,String viewName) {
+    protected String render(String viewName) {
         List<Tree<SysMenu>> menus = menuService.selectMenuTreeByID(ShiroUtils.getUserId(),request.getRequestURI());
         request.setAttribute("menus", menus);
         request.setAttribute("cmsName", ShiroUtils.getUser().getName());
@@ -47,9 +47,8 @@ public class BaseController {
      * 分页组件
      * @param page
      * @param totalSize
-     * @param request
      */
-    protected void setPageNavigation(int page, int totalSize,HttpServletRequest request) {
+    protected void setPageNavigation(int page, int totalSize) {
         PageUtil pageInfo = new PageUtil(page,totalSize);
         request.setAttribute("pageInfo",pageInfo);
     }
@@ -57,7 +56,7 @@ public class BaseController {
     /**
      * 组装参数
      */
-    protected Map<String,Object> buildParam(HttpServletRequest request){
+    protected Map<String,Object> buildParam(){
         Map<String,Object> params = new HashMap<>();
         Enumeration em = request.getParameterNames();
          while (em.hasMoreElements()) {

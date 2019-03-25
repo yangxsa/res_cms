@@ -18,4 +18,7 @@ public interface SysUserRoleDao {
 
     int removeByUserId(Integer userId);
 
+    List<Integer> listRoleId(Integer userId);
+
+
 }

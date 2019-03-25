@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<head xmlns:th="http://www.thymeleaf.org" th:fragment="header-meta(title)">
+<head th:fragment="header-meta(title)">
     <title th:text="${title}"></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<header class="main-header"  xmlns:th="http://www.thymeleaf.org" th:fragment="header-body">
+<header class="main-header"  th:fragment="header-body">
     <!-- Logo -->
     <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -126,7 +126,7 @@
     </nav>
 </header>
 
-<aside class="main-sidebar" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
+<aside class="main-sidebar" th:fragment="sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="height: auto;">
         <!-- Sidebar user panel -->
@@ -187,7 +187,15 @@
     </section>
 </aside>
 
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
+<footer class="main-footer" th:fragment="footer">
+    <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+</footer>
+
+<th:block th:fragment="js-fragment">
     <!-- Javascripts -->
     <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
     <script th:src="@{/plugins/instantclick/instantclick.min.js}"></script>
@@ -208,6 +216,6 @@
         InstantClick.init('mousedown');
         /*]]>*/
     </script>
-</div>
+</th:block>
 
 </html>

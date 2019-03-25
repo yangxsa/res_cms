@@ -154,28 +154,8 @@
             </div>
         </section>
     </div>
-    <!-- 设置 -->
-    <!--<aside class="control-sidebar control-sidebar-dark">-->
-        <!--&lt;!&ndash;右设置选项卡&ndash;&gt;-->
-        <!--<ul class="nav nav-tabs nav-justified control-sidebar-tabs">-->
-            <!--&lt;!&ndash;<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>&ndash;&gt;-->
-        <!--</ul>-->
-        <!--&lt;!&ndash; 右设置选项卡内容 &ndash;&gt;-->
-        <!--<div class="tab-content">-->
-            <!--<div class="tab-pane" id="control-sidebar-home-tab">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</aside>-->
-    <!--<div class="control-sidebar-bg"></div>-->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
-    </footer>
+    <footer th:replace="common/include::footer"></footer>
 </div>
 </body>
-<th:block th:replace="common/include::footer" ></th:block>
+<th:block th:replace="common/include::js-fragment" ></th:block>
 </html>

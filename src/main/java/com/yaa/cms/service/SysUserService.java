@@ -13,7 +13,7 @@ public interface SysUserService {
 
     int countTotalUserRecord(Map<String,Object> params);
 
-    List<SysUser> selectUserList(Map<String, Object> params,int startIndex,int endIndex);
+    List<SysUser> selectUserList(Map<String, Object> params,int offset,int limit);
 
     int countUserRecords(Map<String, Object> params);
 

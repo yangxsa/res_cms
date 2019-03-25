@@ -79,9 +79,9 @@
                         &nbsp;&nbsp;
                     </div>
                     <span>
-                        <button shiro:hasPermission="sys:user:add" type="button" class="btn btn-sm btn-success" onclick="add()">
+                        <a shiro:hasPermission="sys:user:add" type="button" class="btn btn-sm btn-success" href="/sys/user/add">
 							<i class="fa fa-plus" aria-hidden="true"></i>添加
-						</button>
+						</a>
                     </span>
 
                 </div>
@@ -106,11 +106,13 @@
                                 <td th:text="${user.roleNames}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td>
-                                    <!--<span class="label label-danger">禁用</span>-->
-                                    <span class="label label-primary">正常</span>
+                                    <span th:text="${user.status == 1 ? '正常':'禁用'}"
+                                          th:class="'label ' + ${user.status == 1 ? 'label-info':'label-danger'}">
+                                        禁用
+                                    </span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="#" title="编辑">
+                                    <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${user.id}}" title="编辑">
                                         <i class="fa fa-edit "></i>
                                     </a>
                                     <a class="btn btn-warning btn-sm" href="#" title="删除">
@@ -131,14 +133,8 @@
         </div></div>
     </section>
 </div>
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-</footer>
+<footer th:replace="common/include::footer"></footer>
 </div>
 </body>
-<th:block th:replace="/common/include::footer"></th:block>
+<th:block th:replace="common/include::js-fragment" ></th:block>
 </html>

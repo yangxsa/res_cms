@@ -27,7 +27,9 @@
                     <div class="pull-right">
                         <div class="btn-group pull-right" style="margin-right: 10px">
                             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filter-modal"><i class="fa fa-filter"></i>&nbsp;&nbsp;筛选</button>
-                            <button href="" class="btn btn-sm btn-facebook"><i class="fa fa-undo"></i>&nbsp;&nbsp;重置</button>
+                            <a id="refresh" th:href="@{/sys/user}" class="btn btn-sm btn-facebook">
+                                <i class="fa fa-undo"></i>&nbsp;&nbsp;刷新
+                            </a>
                         </div>
 
                         <div class="modal fade" id="filter-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -58,7 +60,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary submit">提交</button>
-                                            <button type="reset" class="btn btn-warning pull-left">重置</button>
+                                            <button type="reset" class="btn btn-warning pull-left">刷新</button>
                                         </div>
                                     </form>
                                 </div>
@@ -115,7 +117,7 @@
                                     <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${user.id}}" title="编辑">
                                         <i class="fa fa-edit "></i>
                                     </a>
-                                    <a class="btn btn-warning btn-sm" href="#" title="删除">
+                                    <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${user.id}+'\')'" title="删除">
                                         <i class="fa fa-remove"></i>
                                     </a>
                                     <a class="btn btn-success btn-sm" href="#" title="重置密码">
@@ -137,4 +139,26 @@
 </div>
 </body>
 <th:block th:replace="common/include::js-fragment" ></th:block>
+<script>
+    function remove(id) {
+        layer.confirm('确定要删除选中的记录？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                url:'/sys/user/remove',
+                data:{
+                    "id":id,
+                },
+                method:'POST',
+                success:function (data) {
+                    if(0 == data.code) {
+                        document.getElementById("refresh").click();
+                    }else{
+                        layer.msg(data.msg,{"icon":2});
+                    }
+                }
+            })
+        });
+    }
+</script>
 </html>

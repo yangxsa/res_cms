@@ -1,7 +1,9 @@
 package com.yaa.cms.controller;
 
+import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysRole;
 import com.yaa.cms.service.SysRoleService;
+import com.yaa.cms.util.PageUtil;
 import com.yaa.cms.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/sys/role")
-public class RoleController {
+public class RoleController extends BaseController {
 
     String prefix = "system/role";
 
@@ -21,10 +25,13 @@ public class RoleController {
     SysRoleService roleService;
 
 
-    @GetMapping()
+    @GetMapping("")
     @RequiresPermissions("sys:role:role")
-    public String role(){
-        return prefix + "/role";
+    public String list() {
+        Map<String,Object> param = buildParam();
+        List<SysRole> roles = roleService.selectRoleList(param);
+        request.setAttribute("roles",roles);
+        return render(prefix + "/role");
     }
 
     @GetMapping("/add")
@@ -33,13 +40,6 @@ public class RoleController {
         return prefix + "/add";
     }
 
-    @ResponseBody
-    @GetMapping("/list")
-    @RequiresPermissions("sys:role:role")
-    public List<SysRole> list() {
-        List<SysRole> roles = roleService.selectRoleList();
-        return roles;
-    }
 
     @GetMapping("/edit/{id}")
     @RequiresPermissions("sys:role:edit")

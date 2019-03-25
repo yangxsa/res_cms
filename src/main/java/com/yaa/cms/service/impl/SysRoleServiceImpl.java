@@ -9,10 +9,7 @@ import com.yaa.cms.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
@@ -25,8 +22,8 @@ public class SysRoleServiceImpl implements SysRoleService {
     private SysUserRoleDao userRoleDao;
 
     @Override
-    public List<SysRole> selectRoleList() {
-        return roleDao.selectRoleList(new HashMap<String,Object>(16));
+    public List<SysRole> selectRoleList(Map<String,Object> params) {
+        return roleDao.selectRoleList(params);
     }
 
     @Override

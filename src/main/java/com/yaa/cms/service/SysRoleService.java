@@ -4,10 +4,11 @@ package com.yaa.cms.service;
 import com.yaa.cms.model.SysRole;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysRoleService {
 
-   List<SysRole> selectRoleList();
+   List<SysRole> selectRoleList(Map<String,Object> params);
 
    SysRole selectRoleByID(Integer id);
 

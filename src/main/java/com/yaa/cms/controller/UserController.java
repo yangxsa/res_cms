@@ -51,7 +51,7 @@ public class UserController extends BaseController {
     @GetMapping("/add")
     @RequiresPermissions("sys:user:add")
     String add() {
-        List<SysRole> roles = roleService.selectRoleList();
+        List<SysRole> roles = roleService.selectRoleList(null);
         request.setAttribute("roles", roles);
         return render(prefix + "/add");
     }

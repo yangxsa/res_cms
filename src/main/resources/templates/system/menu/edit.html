@@ -80,4 +80,18 @@
 	</div>
 	<th:block th:replace="common/include::js-fragment" ></th:block>
 </body>
+<script>
+    $("#ico-btn").click(function(){
+        layer.open({
+            type: 2,
+            title:'图标列表',
+            content: '/public/FontIcoList.html',
+            area: ['480px', '90%'],
+            success: function(layero, index){
+                //var body = layer.getChildFrame('.ico-list', index);
+                //console.log(layero, index);
+            }
+        });
+    });
+</script>
 </html>

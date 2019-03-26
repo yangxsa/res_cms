@@ -81,9 +81,11 @@
                         &nbsp;&nbsp;
                     </div>
                     <span>
-                        <a shiro:hasPermission="sys:user:add" type="button" class="btn btn-sm btn-success" href="/sys/user/add">
-							<i class="fa fa-plus" aria-hidden="true"></i>添加
-						</a>
+                        <div shiro:hasPermission="sys:user:add">
+                            <a class="btn btn-sm btn-success" href="/sys/user/add">
+                                <i class="fa fa-plus" aria-hidden="true"></i>添加
+                            </a>
+                        </div>
                     </span>
 
                 </div>
@@ -114,15 +116,21 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${user.id}}" title="编辑">
-                                        <i class="fa fa-edit "></i>
-                                    </a>
-                                    <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${user.id}+'\')'" title="删除">
-                                        <i class="fa fa-remove"></i>
-                                    </a>
-                                    <a class="btn btn-success btn-sm" href="#" title="重置密码">
-                                        <i class="fa fa-key"></i>
-                                    </a>
+                                    <div th:hasPermission="sys:user:edit">
+                                        <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${user.id}}" title="编辑">
+                                            <i class="fa fa-edit "></i>
+                                        </a>
+                                    </div>
+                                    <div th:hasPermission="sys:user:remove">
+                                        <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${user.id}+'\')'" title="删除">
+                                            <i class="fa fa-remove"></i>
+                                        </a>
+                                    </div>
+                                    <div th:hasPermission="sys:user:resetPwd">
+                                        <a class="btn btn-success btn-sm" href="#" title="重置密码">
+                                            <i class="fa fa-key"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         </th:block>

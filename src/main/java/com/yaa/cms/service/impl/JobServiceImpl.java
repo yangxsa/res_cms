@@ -3,6 +3,7 @@ package com.yaa.cms.service.impl;
 import com.yaa.cms.common.Constant;
 import com.yaa.cms.dao.SysTaskDao;
 import com.yaa.cms.model.SysTask;
+import com.yaa.cms.quartz.utils.QuartzManager;
 import com.yaa.cms.service.JobService;
 import com.yaa.cms.util.ScheduleJobUtils;
 import com.yaa.cms.vo.ScheduleJob;
@@ -20,7 +21,7 @@ public class JobServiceImpl implements JobService {
     @Autowired
     private SysTaskDao taskDao;
     @Autowired
-//    private QuartzManager quartzManager;
+    private QuartzManager quartzManager;
 
     @Override
     public List<SysTask> list(Map<String, Object> map) {
@@ -51,7 +52,7 @@ public class JobServiceImpl implements JobService {
     public int removeTaskById(Integer id) {
         try {
             SysTask task = taskDao.selectTaskByID(id);
-//            quartzManager.deleteJob(ScheduleJobUtils.entityToData(task));
+            quartzManager.deleteJob(ScheduleJobUtils.entityToData(task));
             return taskDao.removeTaskById(id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +65,7 @@ public class JobServiceImpl implements JobService {
         for (Integer id : ids) {
             try {
                 SysTask scheduleJob = taskDao.selectTaskByID(id);
-//                quartzManager.deleteJob(ScheduleJobUtils.entityToData(scheduleJob));
+                quartzManager.deleteJob(ScheduleJobUtils.entityToData(scheduleJob));
             } catch (Exception e) {
                 e.printStackTrace();
                 return 0;
@@ -80,13 +81,13 @@ public class JobServiceImpl implements JobService {
             return;
         }
         if (Constant.STATUS_RUNNING_STOP.equals(cmd)) {
-//            quartzManager.deleteJob(ScheduleJobUtils.entityToData(scheduleJob));
+            quartzManager.deleteJob(ScheduleJobUtils.entityToData(scheduleJob));
             scheduleJob.setJobStatus(ScheduleJob.STATUS_NOT_RUNNING);
         } else {
             if (!Constant.STATUS_RUNNING_START.equals(cmd)) {
             } else {
                 scheduleJob.setJobStatus(ScheduleJob.STATUS_RUNNING);
-//                quartzManager.addJob(ScheduleJobUtils.entityToData(scheduleJob));
+                quartzManager.addJob(ScheduleJobUtils.entityToData(scheduleJob));
             }
         }
         taskDao.updateTaskById(scheduleJob);
@@ -99,7 +100,7 @@ public class JobServiceImpl implements JobService {
         for (SysTask scheduleJob : jobList) {
             if ("1".equals(scheduleJob.getJobStatus())) {
                 ScheduleJob job = ScheduleJobUtils.entityToData(scheduleJob);
-//                quartzManager.addJob(job);
+                quartzManager.addJob(job);
             }
 
         }

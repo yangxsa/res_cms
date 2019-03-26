@@ -1,6 +1,7 @@
 package com.yaa.cms.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.service.CodeService;
 import com.yaa.cms.util.GenUtils;
 import com.yaa.cms.util.Result;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/generator")
-public class CodeController {
+public class CodeController extends BaseController {
 
     String prefix = "system/generator";
     @Autowired
@@ -33,11 +34,11 @@ public class CodeController {
      * 数据表列表
      * @return
      */
-    @ResponseBody
-    @GetMapping(value = "/list")
-    List<Map<String, Object>> list() {
+    @GetMapping(value = "")
+    public String list() {
         List<Map<String, Object>> list = codeService.list();
-        return list;
+        request.setAttribute("codeList",list);
+        return render(prefix + "/list");
     }
 
     /**

@@ -72,7 +72,7 @@ public class LoginController extends BaseController {
 
     @GetMapping(value = "/index")
     public String index() {
-        return this.render("index");
+        return "index";
     }
 
     @GetMapping("/logout")

@@ -38,7 +38,7 @@ public class CodeController extends BaseController {
     public String list() {
         List<Map<String, Object>> list = codeService.list();
         request.setAttribute("codeList",list);
-        return render(prefix + "/list");
+        return prefix + "/list";
     }
 
     /**

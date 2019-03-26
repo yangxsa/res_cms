@@ -37,13 +37,13 @@ public class DictController extends BaseController {
 		List<Dict> dictList = dictService.list(param,offset,PageUtil.getLimit());
 		this.setPageNavigation(page,total);
 		request.setAttribute("dictList",dictList);
-		return render(prefix + "/dict");
+		return prefix + "/dict";
 	}
 
 	@GetMapping("/add")
 	@RequiresPermissions("sys:dict:add")
 	String add() {
-		return render(prefix + "/add");
+		return prefix + "/add";
 	}
 
 	@GetMapping("/edit/{id}")

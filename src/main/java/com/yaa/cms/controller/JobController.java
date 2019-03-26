@@ -36,12 +36,12 @@ public class JobController extends BaseController {
         List<SysTask> taskScheduleJobList = jobService.list(params);
         this.setPageNavigation(page,total);
         request.setAttribute("jobs",taskScheduleJobList);
-        return render(prefix + "/job");
+        return prefix + "/job";
     }
 
     @GetMapping("/add")
     String add() {
-        return render(prefix + "/add");
+        return prefix + "/add";
     }
 
 
@@ -55,7 +55,7 @@ public class JobController extends BaseController {
     String edit(@PathVariable("id") Integer id, Model model) {
         SysTask job = jobService.selectTaskByID(id);
         model.addAttribute("job", job);
-        return render(prefix + "/edit");
+        return prefix + "/edit";
     }
 
     /**

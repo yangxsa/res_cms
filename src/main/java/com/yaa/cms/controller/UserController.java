@@ -41,7 +41,7 @@ public class UserController extends BaseController {
         List<SysUser> list = userService.selectUserList(param,offset,PageUtil.getLimit());
         this.setPageNavigation(page,totalRecord);
         request.setAttribute("list",list);
-        return render(prefix + "/user");
+        return prefix + "/user";
     }
 
 
@@ -50,7 +50,7 @@ public class UserController extends BaseController {
     String add() {
         List<SysRole> roles = roleService.selectRoleList(null);
         request.setAttribute("roles", roles);
-        return render(prefix + "/add");
+        return prefix + "/add";
     }
 
     @GetMapping(value = "/edit/{id}")
@@ -60,7 +60,7 @@ public class UserController extends BaseController {
         model.addAttribute("user", user);
         List<SysRole> roles = roleService.selectRoleByUserID(id);
         model.addAttribute("roles", roles);
-        return render(prefix+"/edit");
+        return prefix+"/edit";
     }
 
     @ResponseBody
@@ -117,7 +117,7 @@ public class UserController extends BaseController {
         SysUser user = new SysUser();
         user.setId(id);
         model.addAttribute("user", user);
-        return render(prefix + "/reset_pwd");
+        return prefix + "/reset_pwd";
     }
 
     @ResponseBody

@@ -27,7 +27,7 @@ public class MenuController extends BaseController{
     @GetMapping
     @RequiresPermissions("sys:menu:menu")
     public String menu() {
-        return render(prefix + "/menu");
+        return prefix + "/menu";
     }
 
     @ResponseBody

@@ -116,21 +116,21 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <div th:hasPermission="sys:user:edit">
+                                    <!--<div th:hasPermission="sys:user:edit">-->
                                         <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${user.id}}" title="编辑">
                                             <i class="fa fa-edit "></i>
                                         </a>
-                                    </div>
-                                    <div th:hasPermission="sys:user:remove">
+                                    <!--</div>-->
+                                    <!--<div th:hasPermission="sys:user:remove">-->
                                         <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${user.id}+'\')'" title="删除">
                                             <i class="fa fa-remove"></i>
                                         </a>
-                                    </div>
-                                    <div th:hasPermission="sys:user:resetPwd">
-                                        <a class="btn btn-success btn-sm" href="#" title="重置密码">
+                                    <!--</div>-->
+                                    <!--<div th:hasPermission="sys:user:resetPwd">-->
+                                        <a class="btn btn-success btn-sm" th:href="@{'/sys/user/resetPwd/'+${user.id}}" title="重置密码">
                                             <i class="fa fa-key"></i>
                                         </a>
-                                    </div>
+                                    <!--</div>-->
                                 </td>
                             </tr>
                         </th:block>

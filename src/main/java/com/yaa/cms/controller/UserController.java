@@ -120,7 +120,7 @@ public class UserController extends BaseController {
         SysUser user = new SysUser();
         user.setId(id);
         model.addAttribute("user", user);
-        return prefix + "/reset_pwd";
+        return render(prefix + "/reset_pwd");
     }
 
     @ResponseBody

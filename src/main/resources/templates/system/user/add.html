@@ -129,11 +129,7 @@
             type : "POST",
             data : $('#saveUserFrom').serialize(),
             success:function (data) {
-                if (0 == data.code) {
-                    layer.msg(data.msg, {"icon": 1});
-                } else {
-                    layer.msg(data.msg, {"icon": 2});
-                }
+                layer.alert(data.msg, {skin: 'layui-layer-lan', closeBtn: 0});
             }
         });
     }

@@ -156,7 +156,7 @@
                     if(0 == data.code) {
                         document.getElementById("refresh").click();
                     }else{
-                        layer.msg(data.msg,{"icon":2});
+                        layer.alert(data.msg, {skin: 'layui-layer-lan', closeBtn: 0});
                     }
                 }
             })

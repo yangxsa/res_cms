@@ -37,7 +37,7 @@ public class RoleController extends BaseController {
     @GetMapping("/add")
     @RequiresPermissions("sys:role:add")
     public String add() {
-        return prefix + "/add";
+        return render(prefix + "/add");
     }
 
 
@@ -46,7 +46,7 @@ public class RoleController extends BaseController {
     public String edit(@PathVariable("id") Integer id, Model model) {
         SysRole role = roleService.selectRoleByID(id);
         model.addAttribute("role", role);
-        return prefix + "/edit";
+        return render(prefix + "/edit");
     }
 
     @ResponseBody

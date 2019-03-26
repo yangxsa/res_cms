@@ -33,7 +33,19 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public int saveRole(SysRole role) {
-        return roleDao.saveRole(role);
+        int r = roleDao.saveRole(role);
+        List<Integer> menuIds = role.getMenuIds();
+        List<SysRoleMenu> rms = new ArrayList<>();
+        for (Integer menuId : menuIds) {
+            SysRoleMenu rmDo = new SysRoleMenu();
+            rmDo.setRoleId(role.getId());
+            rmDo.setMenuId(menuId);
+            rms.add(rmDo);
+        }
+        if (rms.size() > 0) {
+            roleMenuDao.batchSaveRoleMenu(rms);
+        }
+        return r;
     }
 
     @Override

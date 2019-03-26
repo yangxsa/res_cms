@@ -11,6 +11,7 @@
 var Default = {
     slimscroll : true,
     resetHeight: true,
+    accordion:true,
     animationSpeed : 500,
     collapseTrigger: '[data-widget="collapse"]',
     removeTrigger  : '[data-widget="remove"]',

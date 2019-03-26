@@ -1,7 +1,9 @@
 package com.yaa.cms.controller;
 
+import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysTask;
 import com.yaa.cms.service.JobService;
+import com.yaa.cms.util.PageUtil;
 import com.yaa.cms.util.PageUtils;
 import com.yaa.cms.util.Query;
 import com.yaa.cms.util.Result;
@@ -15,38 +17,33 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/sys/job")
-public class JobController {
+public class JobController extends BaseController {
 
     @Autowired
     private JobService jobService;
 
     String prefix = "system/job";
 
-    @GetMapping()
-    String taskScheduleJob() {
-        return prefix + "/job";
+    /**
+     * 任务列表
+     * @return
+     */
+    @GetMapping("")
+    public String list(@RequestParam(value = "page",defaultValue = "1")int page) {
+        Map<String,Object> params = buildPageParam(page);
+        // 查询列表数据
+        int total = jobService.count(params);
+        List<SysTask> taskScheduleJobList = jobService.list(params);
+        this.setPageNavigation(page,total);
+        request.setAttribute("jobs",taskScheduleJobList);
+        return render(prefix + "/job");
     }
 
     @GetMapping("/add")
     String add() {
-        return prefix + "/add";
+        return render(prefix + "/add");
     }
 
-    /**
-     * 任务列表
-     * @param params
-     * @return
-     */
-    @ResponseBody
-    @GetMapping("/list")
-    public PageUtils list(@RequestParam Map<String, Object> params) {
-        // 查询列表数据
-        Query query = new Query(params);
-        List<SysTask> taskScheduleJobList = jobService.list(query);
-        int total = jobService.count(query);
-        PageUtils pageUtils = new PageUtils(taskScheduleJobList, total);
-        return pageUtils;
-    }
 
     /**
      * 编辑页面
@@ -58,7 +55,7 @@ public class JobController {
     String edit(@PathVariable("id") Integer id, Model model) {
         SysTask job = jobService.selectTaskByID(id);
         model.addAttribute("job", job);
-        return prefix + "/edit";
+        return render(prefix + "/edit");
     }
 
     /**

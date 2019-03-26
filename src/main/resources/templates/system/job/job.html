@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head th:replace="/common/include::header-meta('用户')"></head>
+<body class="skin-black-light sidebar-mini">
+<header th:replace="/common/include::header-body"></header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside th:replace="/common/include::sidebar"></aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="min-height: 835px;">
+    <!--页面导航-->
+    <section class="content-header"><h1>
+        任务管理
+        <small>列表</small>
+    </h1>
+        <!-- breadcrumb start -->
+        <!-- breadcrumb end -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+
+                        <h3 class="box-title"></h3>
+
+                        <div class="pull-right">
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filter-modal"><i class="fa fa-filter"></i>&nbsp;&nbsp;筛选</button>
+                                <a id="refresh" th:href="@{/sys/job}" class="btn btn-sm btn-facebook">
+                                    <i class="fa fa-undo"></i>&nbsp;&nbsp;刷新
+                                </a>
+                            </div>
+
+                            <div class="modal fade" id="filter-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">筛选</h4>
+                                        </div>
+                                        <form th:action="@{/sys/job}" method="get">
+                                            <div class="modal-body">
+                                                <div class="form">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label>任务名称</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control" placeholder="请输入任务名称" name="jobName" th:value="${jobName}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary submit">提交</button>
+                                                <button type="reset" class="btn btn-warning pull-left">重置</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i>导出</a>
+                                <button type="button" class="btn btn-sm btn-twitter dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="" target="_blank">全部</a></li>
+                                    <li><a href="" target="_blank">当前页</a></li>
+                                    <li><a href="" target="_blank" class="export-selected">选择的行</a></li>
+                                </ul>
+                            </div>
+                            &nbsp;&nbsp;
+                        </div>
+                        <span shiro:hasPermission="sys:user:add">
+                       <a class="btn btn-sm btn-success" href="/sys/job/add">
+                           <i class="fa fa-plus" aria-hidden="true"></i>添加
+                       </a>
+                    </span>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover text-center">
+                            <tbody>
+                            <tr>
+                                <th>编号</th>
+                                <th>任务名称</th>
+                                <th>任务分组</th>
+                                <th>任务类</th>
+                                <th>cron表达式</th>
+                                <th>停起操作</th>
+                                <th>操作</th>
+                            </tr>
+                            <th:block th:each="job :${jobs}">
+                                <tr>
+                                    <td th:text="${job.id}"></td>
+                                    <td th:text="${job.jobName}"></td>
+                                    <td th:text="${job.jobGroup}"></td>
+                                    <td th:text="${job.beanClass}"></td>
+                                    <td th:text="${job.cronExpression}"></td>
+                                    <td>
+                                        <th:block th:if="${job.jobStatus eq '0'}">
+                                            <a th:onclick="'changeStatus('+${job.id}+',0)'" href="javascript:void(0)" class="btn btn-success btn-xs">
+                                                <i class="fa fa-hourglass-start"></i>开启
+                                            </a>
+                                        </th:block>
+                                        <th:block th:if="${job.jobStatus eq '1'}">
+                                            <a  th:onclick="'changeStatus('+${job.id}+',1)'" href="javascript:void(0)" class="btn btn-danger btn-xs">
+                                                <i class="fa fa-hourglass-end"></i>关闭
+                                            </a>
+                                        </th:block>
+                                    </td>
+                                    <td>
+                                        <!--<th:block shiro:hasPermission="sys:job:edit">-->
+                                            <a class="btn btn-primary btn-sm" th:href="@{'/sys/job/edit/'+${job.id}}" title="编辑">
+                                                <i class="fa fa-edit "></i>
+                                            </a>
+                                        <!--</th:block>-->
+                                        <!--<th:block shiro:hasPermission="sys:job:remove">-->
+                                            <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${job.id}+'\')'" title="删除">
+                                                <i class="fa fa-remove"></i>
+                                            </a>
+                                        <!--</th:block>-->
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--page box footer-->
+                    <div th:replace="/common/macros::pageNav(${pageInfo})"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<footer th:replace="common/include::footer"></footer>
+</div>
+</body>
+<th:block th:replace="common/include::js-fragment" ></th:block>
+<script>
+    function remove(id) {
+        layer.confirm('确定要删除选中的记录？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                url:'/sys/job/remove',
+                data:{
+                    "id":id,
+                },
+                method:'POST',
+                success:function (data) {
+                    if(0 == data.code) {
+                        document.getElementById("refresh").click();
+                    }else{
+                        layer.msg(data.msg,{"icon":2});
+                    }
+                }
+            })
+        });
+    }
+
+    function changeStatus(id, status) {
+        var actCh;
+        var cmd;
+        if (status == 0) {
+            cmd = 'start';
+            actCh = "确认要开启任务吗？";
+        } else {
+            cmd = 'stop';
+            actCh = "确认要停止任务吗？";
+        }
+        layer.confirm(actCh, {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                url: "/sys/job/changeJobStatus",
+                type: "post",
+                data: {
+                    'id': id,
+                    'cmd': cmd
+                },
+                success: function (data) {
+                    if(data.code == 0){
+                        document.getElementById("refresh").click();
+                    }
+                    layer.alert(data.msg, {skin: 'layui-layer-lan', closeBtn: 0});
+                }
+            });
+        })
+    }
+</script>
+</html>

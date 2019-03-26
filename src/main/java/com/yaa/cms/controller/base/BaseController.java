@@ -70,5 +70,20 @@ public class BaseController {
         return params;
     }
 
+    /**
+     * 组装参数
+     * @param page
+     * @return
+     */
+    protected Map<String,Object> buildPageParam(int page){
+        Map<String,Object> params = this.buildParam();
+        if(page > 0){
+            int offset = PageUtil.getOffset(page);
+            params.put("offset",offset);
+            params.put("limit",PageUtil.getLimit());
+        }
+        return params;
+    }
+
 
 }

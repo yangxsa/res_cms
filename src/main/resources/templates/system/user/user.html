@@ -80,14 +80,11 @@
                         </div>
                         &nbsp;&nbsp;
                     </div>
-                    <span>
-                        <div shiro:hasPermission="sys:user:add">
-                            <a class="btn btn-sm btn-success" href="/sys/user/add">
-                                <i class="fa fa-plus" aria-hidden="true"></i>添加
-                            </a>
-                        </div>
+                    <span shiro:hasPermission="sys:user:add">
+                       <a class="btn btn-sm btn-success" href="/sys/user/add">
+                           <i class="fa fa-plus" aria-hidden="true"></i>添加
+                       </a>
                     </span>
-
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -116,21 +113,21 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <!--<div th:hasPermission="sys:user:edit">-->
+                                    <th:block shiro:hasPermission="sys:user:edit">
                                         <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${user.id}}" title="编辑">
                                             <i class="fa fa-edit "></i>
                                         </a>
-                                    <!--</div>-->
-                                    <!--<div th:hasPermission="sys:user:remove">-->
+                                    </th:block>
+                                    <th:block shiro:hasPermission="sys:user:remove">
                                         <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${user.id}+'\')'" title="删除">
                                             <i class="fa fa-remove"></i>
                                         </a>
-                                    <!--</div>-->
-                                    <!--<div th:hasPermission="sys:user:resetPwd">-->
+                                    </th:block>
+                                    <th:block th:hasPermission="sys:user:resetPwd">
                                         <a class="btn btn-success btn-sm" th:href="@{'/sys/user/resetPwd/'+${user.id}}" title="重置密码">
                                             <i class="fa fa-key"></i>
                                         </a>
-                                    <!--</div>-->
+                                    </th:block>
                                 </td>
                             </tr>
                         </th:block>
@@ -140,7 +137,8 @@
                 <!--page box footer-->
                 <div th:replace="/common/macros::pageNav(${pageInfo})"></div>
             </div>
-        </div></div>
+        </div>
+        </div>
     </section>
 </div>
 <footer th:replace="common/include::footer"></footer>

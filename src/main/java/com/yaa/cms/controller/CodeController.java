@@ -29,17 +29,12 @@ public class CodeController {
     private CodeService codeService;
 
 
-    @GetMapping()
-    String generator() {
-        return prefix + "/list";
-    }
-
     /**
      * 数据表列表
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     List<Map<String, Object>> list() {
         List<Map<String, Object>> list = codeService.list();
         return list;

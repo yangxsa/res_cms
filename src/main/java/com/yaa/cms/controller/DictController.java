@@ -1,7 +1,9 @@
 package com.yaa.cms.controller;
 
+import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.Dict;
 import com.yaa.cms.service.DictService;
+import com.yaa.cms.util.PageUtil;
 import com.yaa.cms.util.PageUtils;
 import com.yaa.cms.util.Query;
 import com.yaa.cms.util.Result;
@@ -18,7 +20,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/sys/dict")
-public class DictController {
+public class DictController extends BaseController {
 
 	@Autowired
 	private DictService dictService;
@@ -27,26 +29,21 @@ public class DictController {
 
 	@GetMapping()
 	@RequiresPermissions("sys:dict:dict")
-	String dict() {
-		return prefix + "/dict";
-	}
-
-	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("sys:dict:dict")
-	public PageUtils list(@RequestParam Map<String, Object> params) {
+	public String list(@RequestParam(value = "page",defaultValue = "1")int page) {
 		// 查询列表数据
-		Query query = new Query(params);
-		List<Dict> dictList = dictService.list(query);
-		int total = dictService.count(query);
-		PageUtils pageUtils = new PageUtils(dictList, total);
-		return pageUtils;
+		Map<String,Object> param = buildParam();
+		int total = dictService.count(param);
+		int offset = PageUtil.getOffset(page);
+		List<Dict> dictList = dictService.list(param,offset,PageUtil.getLimit());
+		this.setPageNavigation(page,total);
+		request.setAttribute("dictList",dictList);
+		return render(prefix + "/dict");
 	}
 
 	@GetMapping("/add")
 	@RequiresPermissions("sys:dict:add")
 	String add() {
-		return prefix + "/add";
+		return render(prefix + "/add");
 	}
 
 	@GetMapping("/edit/{id}")
@@ -120,13 +117,4 @@ public class DictController {
 		return prefix + "/add";
 	}
 
-	@ResponseBody
-	@GetMapping("/list/{type}")
-	public List<Dict> listByType(@PathVariable("type") String type) {
-		// 查询列表数据
-		Map<String, Object> map = new HashMap<>(16);
-		map.put("type", type);
-		List<Dict> dictList = dictService.list(map);
-		return dictList;
-	}
 }

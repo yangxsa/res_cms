@@ -1,95 +1,145 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="common/include :: header-meta('新增')"></head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head th:replace="/common/include::header-meta('系统菜单-新增')"></head>
+<body class="skin-black-light sidebar-mini">
+<header th:replace="/common/include::header-body"></header>
 <link rel="stylesheet" th:href="@{/plugins/ibox/style.css}">
-<body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<!-- Left side column. contains the logo and sidebar -->
+<aside th:replace="/common/include::sidebar"></aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="min-height: 835px;">
+	<!--页面导航-->
+	<section class="content-header"><h1>
+		系统菜单
+		<small>新增</small>
+	</h1>
+		<!-- breadcrumb start -->
+		<!-- breadcrumb end -->
+	</section>
+	<!-- Main content -->
+	<section class="content">
 		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-							<input id="parentId" name="parentId" type="hidden"
-								th:value="${pId}">
+			<div class="col-md-12">
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">创建</h3>
+						<div class="box-tools">
+							<div class="btn-group pull-right" style="margin-right: 10px">
+								<a href="/sys/menu" class="btn btn-sm btn-default">
+									<i class="fa fa-list"></i>&nbsp;列表
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+					<form class="form-horizontal" id="saveMenuFrom">
+						<input id="parentId" name="parentId" type="hidden" th:value="${pId}">
+						<div class="box-body">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">上级菜单：</label>
+								<label class="col-sm-2 control-label">
+									<em class="text-danger">* </em>上级菜单
+								</label>
 								<div class="col-sm-8">
-									<input id="" name="" class="form-control" type="text"
-										th:value="${pName}" readonly>
+									<input name="" th:value="${pName}" class="form-control" readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">菜单类型：</label>
+								<label class="col-sm-2 control-label">
+									<em class="text-danger">* </em>菜单类型
+								</label>
 								<div class="col-sm-8">
-									<label class="radio-inline"> <input type="radio"
-										name="type" value="0" /> 目录
-									</label> <label class="radio-inline"> <input type="radio"
-										name="type" value="1" /> 菜单
-									</label> <label class="radio-inline"> <input type="radio"
-										name="type" value="2" /> 按钮
+									<label class="radio-inline">
+										<input type="radio" name="type" value="0" />目录
+									</label>
+									<label class="radio-inline">
+										<input type="radio" name="type" value="1" /> 菜单
+									</label>
+									<label class="radio-inline">
+										<input type="radio" name="type" value="2" /> 按钮
 									</label>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">菜单名称：</label>
+								<label class="col-sm-2 control-label">
+									<em class="text-danger">* </em>菜单名称
+								</label>
 								<div class="col-sm-8">
-									<input id="name" name="name" class="form-control" type="text">
+									<input id="name" name="name" class="form-control" placeholder="请输入菜单名称">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">链接地址：</label>
+								<label class="col-sm-2 control-label">
+									<em class="text-danger">* </em>链接地址
+								</label>
 								<div class="col-sm-8">
-									<input id="url" name="url" class="form-control" type="text">
+									<input name="url" class="form-control" placeholder="请输入链接地址">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">权限标识：</label>
+								<label class="col-sm-2 control-label">
+									<em class="text-danger">* </em>权限标识:
+								</label>
 								<div class="col-sm-8">
-									<input id="perms" name="perms" class="form-control" type="text">
+									<input id="perms" name="perms" class="form-control" placeholder="请输入权限标志">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">排序号：</label>
+								<label class="col-sm-2 control-label">排序号：</label>
 								<div class="col-sm-8">
-									<input id="orderNum" name="orderNum" class="form-control"
-										type="text">
+									<input id="orderNum" name="orderNum" class="form-control" placeholder="请输入与排序号">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">图标：</label>
+								<label class="col-sm-2 control-label">图标：</label>
 								<div class="col-sm-6">
 									<input id="icon" name="icon" class="form-control" type="text"
-										placeholder="例如：fa fa-circle-o">
+										   placeholder="例如：fa fa-circle-o">
 								</div>
-								<input id="ico-btn" class="btn btn-warning" type="button" value="选择图标">
-							</div>
-
-
-							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
+								<div class="col-sm-2">
+									<input id="ico-btn" class="btn btn-warning" type="button" value="选择图标">
 								</div>
 							</div>
-						</form>
-					</div>
+						</div>
+						<!-- /.box-body -->
+						<div class="box-footer">
+							<div class="col-sm-10">
+								<input type="button" class="btn btn-info pull-right" onclick="save()" value="保存"/>
+							</div>
+						</div>
+						<!-- /.box-footer -->
+					</form>
 				</div>
 			</div>
 		</div>
-	</div>
-	<th:block th:replace="common/include::js-fragment" ></th:block>
+	</section>
+</div>
+<footer th:replace="common/include::footer"></footer>
+</div>
 </body>
+<th:block th:replace="common/include::js-fragment" ></th:block>
 <script>
     $("#ico-btn").click(function(){
         layer.open({
             type: 2,
             title:'图标列表',
             content: '/public/FontIcoList.html',
-            area: ['480px', '90%'],
+            area: ['380px', '60%'],
             success: function(layero, index){
                 //var body = layer.getChildFrame('.ico-list', index);
                 //console.log(layero, index);
             }
         });
     });
+    function save(){
+        $.ajax({
+            type : "POST",
+            url : "/sys/menu/save",
+            data : $('#saveMenuFrom').serialize(),
+            success : function(data) {
+                layer.alert(data.msg, {skin: 'layui-layer-lan', closeBtn: 0});
+            }
+        });
+	}
 </script>
 </html>

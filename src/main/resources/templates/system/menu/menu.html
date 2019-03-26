@@ -22,10 +22,10 @@
                         <div class="box-header">
                             <h3 class="box-title"></h3>
                             <span>
-                                <button shiro:hasPermission="sys:menu:add" type="button"
-                                        class="btn btn-sm btn-success" title="在根节点下添加菜单" onclick="add('0')">
+                                <a shiro:hasPermission="sys:menu:add" th:href="@{/sys/menu/add/0}"
+                                        class="btn btn-sm btn-success" title="在根节点下添加菜单">
                                     <i class="fa fa-plus" aria-hidden="true"></i>添加
-                                </button>
+                                </a>
                                 <button shiro:hasPermission="sys:menu:batchRemove" type="button"
                                         class="btn btn-danger" onclick="batchRemove()">
                                     <i class="fa fa-trash" aria-hidden="true"></i>删除
@@ -154,14 +154,14 @@
                         formatter: function (item, index) {
                             var e = '<a class="btn btn-primary btn-sm '
                                 + s_edit_h
-                                + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                                + '" mce_href="#" title="编辑" href="/sys/menu/edit/'
                                 + item.id
-                                + '\')"><i class="fa fa-edit"></i></a> ';
+                                + '"><i class="fa fa-edit"></i></a> ';
                             var p = '<a class="btn btn-primary btn-sm '
                                 + s_add_h
-                                + '" href="#" mce_href="#" title="添加下级" onclick="add(\''
+                                + '" mce_href="#" title="添加下级" href="/sys/menu/add/'
                                 + item.id
-                                + '\')"><i class="fa fa-plus"></i></a> ';
+                                + '"><i class="fa fa-plus"></i></a> ';
                             var d = '<a class="btn btn-warning btn-sm '
                                 + s_remove_h
                                 + '" href="#" title="删除"  mce_href="#" onclick="remove(\''

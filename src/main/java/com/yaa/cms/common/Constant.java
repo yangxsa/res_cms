@@ -19,6 +19,8 @@ public class Constant {
     public static String CACHE_TYPE_REDIS ="redis";
 
     public static String LOG_ERROR = "error";
+    //enAes Key
+    public static String AES_KEY = "1d2h3e4o5t6y7u8i";
 
     
 }

@@ -1,5 +1,8 @@
 package com.yaa.cms.model;
 
+import com.yaa.cms.common.Constant;
+import com.yaa.cms.util.AlgorithmUtil;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -98,4 +101,10 @@ public class SysUser implements Serializable{
     public void setRoleIds(List<Integer> roleIds) {
         this.roleIds = roleIds;
     }
+
+    @Override
+    public String toString() {
+        return AlgorithmUtil.encryptAESToString(id.toString(), Constant.AES_KEY);
+    }
+
 }

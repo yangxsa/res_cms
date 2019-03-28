@@ -1,7 +1,7 @@
 package com.yaa.cms.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.yaa.cms.util.Md5Utils;
+import com.yaa.cms.util.AlgorithmUtil;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -149,8 +149,8 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName(Md5Utils.ALGORITHM_NAME); // 散列算法
-        hashedCredentialsMatcher.setHashIterations(Md5Utils.HASH_ITERATIONS); // 散列次数
+        hashedCredentialsMatcher.setHashAlgorithmName(AlgorithmUtil.ALGORITHM_NAME); // 散列算法
+        hashedCredentialsMatcher.setHashIterations(AlgorithmUtil.HASH_ITERATIONS); // 散列次数
         return hashedCredentialsMatcher;
     }
 

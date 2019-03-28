@@ -1,13 +1,13 @@
 package com.yaa.cms.service.impl;
 
-import com.yaa.cms.dao.SysRoleDao;
-import com.yaa.cms.dao.SysUserDao;
-import com.yaa.cms.dao.SysUserRoleDao;
+import com.yaa.cms.dao.RoleDao;
+import com.yaa.cms.dao.UserDao;
+import com.yaa.cms.dao.UserRoleDao;
 import com.yaa.cms.model.SysRole;
 import com.yaa.cms.model.SysUser;
 import com.yaa.cms.model.SysUserRole;
-import com.yaa.cms.service.SysUserService;
-import com.yaa.cms.util.Md5Utils;
+import com.yaa.cms.service.UserService;
+import com.yaa.cms.util.AlgorithmUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +20,14 @@ import java.util.Objects;
 
 
 @Service
-public class SysUserServiceImpl implements SysUserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SysUserDao userDao;
+    private UserDao userDao;
     @Autowired
-    private SysUserRoleDao userRoleDao;
+    private UserRoleDao userRoleDao;
     @Autowired
-    private SysRoleDao roleDao;
+    private RoleDao roleDao;
 
     @Override
     public SysUser selectUserByUsername(String username) {
@@ -139,8 +139,8 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public int resetPassword(SysUser user,SysUser loginUser) throws Exception {
         if (Objects.equals(user.getId(), loginUser.getId())) {
-            if (Objects.equals(Md5Utils.encrypt(user.getPassword(), loginUser.getSalt()), loginUser.getPassword())) {
-                user.setPassword(Md5Utils.encrypt(user.getPassword(), loginUser.getSalt()));
+            if (Objects.equals(AlgorithmUtil.encrypt(user.getPassword(), loginUser.getSalt()), loginUser.getPassword())) {
+                user.setPassword(AlgorithmUtil.encrypt(user.getPassword(), loginUser.getSalt()));
                 return userDao.updateUserBySelective(user);
             } else {
                 throw new Exception("输入的旧密码有误！");
@@ -156,7 +156,7 @@ public class SysUserServiceImpl implements SysUserService {
         if ("admin".equals(updateUser.getUsername())) {
             throw new Exception("超级管理员的账号不允许直接重置！");
         }
-        updateUser.setPassword(Md5Utils.encrypt(user.getPassword(), updateUser.getSalt()));
+        updateUser.setPassword(AlgorithmUtil.encrypt(user.getPassword(), updateUser.getSalt()));
         return userDao.updateUserBySelective(updateUser);
     }
 

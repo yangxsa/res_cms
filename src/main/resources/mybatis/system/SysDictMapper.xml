@@ -3,13 +3,13 @@
 
 <mapper namespace="com.yaa.cms.dao.DictDao">
 
-	<select id="get" resultType="com.yaa.cms.model.Dict">
+	<select id="get" resultType="com.yaa.cms.model.SysDict">
 		select
 		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_time`,`update_time`,`remarks`,`status`
 		from sys_dict where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.yaa.cms.model.Dict">
+	<select id="list" resultType="com.yaa.cms.model.SysDict">
 		select
 		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_time`,`update_time`,`remarks`,`status`
 		from sys_dict
@@ -56,7 +56,7 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.yaa.cms.model.Dict"
+	<insert id="save" parameterType="com.yaa.cms.model.SysDict"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into sys_dict
 		(
@@ -86,7 +86,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.yaa.cms.model.Dict">
+	<update id="update" parameterType="com.yaa.cms.model.SysDict">
 		update sys_dict
 		<set>
 			<if test="name != null">`name` = #{name}, </if>
@@ -115,7 +115,7 @@
 		</foreach>
 	</delete>
 
-	<select id="listType" resultType="com.yaa.cms.model.Dict">
+	<select id="listType" resultType="com.yaa.cms.model.SysDict">
 		select distinct `type` , description from sys_dict
 	</select>
 

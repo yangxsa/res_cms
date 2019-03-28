@@ -2,7 +2,7 @@ package com.yaa.cms.controller;
 
 import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysMenu;
-import com.yaa.cms.service.SysMenuService;
+import com.yaa.cms.service.MenuService;
 import com.yaa.cms.util.Result;
 import com.yaa.cms.vo.Tree;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ public class MenuController extends BaseController{
     String prefix = "system/menu";
 
     @Autowired
-    SysMenuService menuService;
+    MenuService menuService;
 
     @GetMapping
     @RequiresPermissions("sys:menu:menu")

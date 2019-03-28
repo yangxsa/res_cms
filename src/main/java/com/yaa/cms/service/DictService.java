@@ -1,27 +1,27 @@
 package com.yaa.cms.service;
 
-import com.yaa.cms.model.Dict;
+import com.yaa.cms.model.SysDict;
 
 import java.util.List;
 import java.util.Map;
 
 public interface DictService {
 
-    Dict get(Long id);
+    SysDict get(Long id);
 
-    List<Dict> list(Map<String, Object> map,int offset,int limit);
+    List<SysDict> list(Map<String, Object> map,int offset,int limit);
 
     int count(Map<String, Object> map);
 
-    int save(Dict dict);
+    int save(SysDict SysDict);
 
-    int update(Dict dict);
+    int update(SysDict SysDict);
 
     int remove(Long id);
 
     int batchRemove(Long[] ids);
 
-    List<Dict> listType();
+    List<SysDict> listType();
 
     String getName(String type, String value);
 
@@ -30,7 +30,7 @@ public interface DictService {
      * @param type
      * @return
      */
-    List<Dict> listByType(String type);
+    List<SysDict> listByType(String type);
 
 
 }

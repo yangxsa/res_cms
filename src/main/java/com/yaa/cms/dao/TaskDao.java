@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface SysTaskDao {
+public interface TaskDao {
 
     List<SysTask> list(Map<String, Object> map);
 

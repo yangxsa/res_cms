@@ -13,39 +13,22 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
-    //    /**
-//     * endPoint 注册协议节点,并映射指定的URl
-//     *
-//     * @param registry
-//     */
-//    @Override
-//    public void registerStompEndpoints(StompEndpointRegistry registry) {
-//        //注册一个Stomp 协议的endpoint,并指定 SockJS协议。
-//        registry.addEndpoint("/endpointWisely").withSockJS();
-//    }
-//
-//    /**
-//     * 配置消息代理(message broker)
-//     *
-//     * @param registry
-//     */
-//    @Override
-//    public void configureMessageBroker(MessageBrokerRegistry registry) {
-//        //广播式应配置一个/topic 消息代理
-//        registry.enableSimpleBroker("/topic");
-//    }
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) { //endPoint 注册协议节点,并映射指定的URl
 
-        //注册一个名字为"endpointChat" 的endpoint,并指定 SockJS协议。   点对点-用
-        registry.addEndpoint("/endpointChat").withSockJS();
+        //注册一个名字为"endpointChat" 的endpoint,允许跨域 并指定 SockJS协议 点对点-用
+        registry.addEndpoint("/endpointChat").setAllowedOrigins("*").withSockJS();
     }
 
 
+    //配置消息代理(message broker)
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry registry) {//配置消息代理(message broker)
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
         //点对点式增加一个/queue 消息代理
         registry.enableSimpleBroker("/queue", "/topic");
+        //注意:enableSimpleBroker方法里的某个参数路径必须和该方法的路径要一样，不然指定用户发送消息将会失败
+//        registry.setUserDestinationPrefix("/user/");
 
     }
 }

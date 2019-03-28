@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface SysMenuDao {
+public interface MenuDao {
 
     List<String> selectUsersPerms(Integer id);
 

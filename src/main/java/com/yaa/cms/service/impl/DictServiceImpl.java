@@ -1,7 +1,7 @@
 package com.yaa.cms.service.impl;
 
 import com.yaa.cms.dao.DictDao;
-import com.yaa.cms.model.Dict;
+import com.yaa.cms.model.SysDict;
 import com.yaa.cms.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +17,12 @@ public class DictServiceImpl implements DictService {
     private DictDao dictDao;
 
     @Override
-    public Dict get(Long id) {
+    public SysDict get(Long id) {
         return dictDao.get(id);
     }
 
     @Override
-    public List<Dict> list(Map<String, Object> map,int offset,int limit) {
+    public List<SysDict> list(Map<String, Object> map,int offset,int limit) {
         map.put("offset",offset);
         map.put("limit",limit);
         return dictDao.list(map);
@@ -34,13 +34,13 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public int save(Dict dict) {
-        return dictDao.save(dict);
+    public int save(SysDict SysDict) {
+        return dictDao.save(SysDict);
     }
 
     @Override
-    public int update(Dict dict) {
-        return dictDao.update(dict);
+    public int update(SysDict SysDict) {
+        return dictDao.update(SysDict);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DictServiceImpl implements DictService {
 
     @Override
 
-    public List<Dict> listType() {
+    public List<SysDict> listType() {
         return dictDao.listType();
     }
 
@@ -69,7 +69,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public List<Dict> listByType(String type) {
+    public List<SysDict> listByType(String type) {
         Map<String, Object> param = new HashMap<>(16);
         param.put("type", type);
         return dictDao.list(param);

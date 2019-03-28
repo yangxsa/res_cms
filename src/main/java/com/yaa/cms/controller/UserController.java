@@ -3,8 +3,8 @@ package com.yaa.cms.controller;
 import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysRole;
 import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.SysRoleService;
-import com.yaa.cms.service.SysUserService;
+import com.yaa.cms.service.RoleService;
+import com.yaa.cms.service.UserService;
 import com.yaa.cms.util.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.RandomNumberGenerator;
@@ -27,9 +27,9 @@ public class UserController extends BaseController {
     private String prefix="system/user"  ;
 
     @Autowired
-    private SysUserService userService;
+    private UserService userService;
     @Autowired
-    private SysRoleService roleService;
+    private RoleService roleService;
 
 
     @GetMapping("")
@@ -80,7 +80,7 @@ public class UserController extends BaseController {
     public Result save(SysUser user) {
         RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
         user.setSalt(randomNumberGenerator.nextBytes().toHex());
-        Md5Utils.encrypt(user);
+        AlgorithmUtil.encrypt(user);
         if (userService.saveUser(user) > 0) {
             return Result.ok();
         }

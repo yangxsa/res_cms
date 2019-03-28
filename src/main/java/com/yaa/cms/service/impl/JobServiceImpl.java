@@ -1,7 +1,7 @@
 package com.yaa.cms.service.impl;
 
 import com.yaa.cms.common.Constant;
-import com.yaa.cms.dao.SysTaskDao;
+import com.yaa.cms.dao.TaskDao;
 import com.yaa.cms.model.SysTask;
 import com.yaa.cms.quartz.utils.QuartzManager;
 import com.yaa.cms.service.JobService;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class JobServiceImpl implements JobService {
 
     @Autowired
-    private SysTaskDao taskDao;
+    private TaskDao taskDao;
     @Autowired
     private QuartzManager quartzManager;
 

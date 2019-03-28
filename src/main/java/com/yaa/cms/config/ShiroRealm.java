@@ -1,8 +1,8 @@
 package com.yaa.cms.config;
 
 import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.SysMenuService;
-import com.yaa.cms.service.SysUserService;
+import com.yaa.cms.service.MenuService;
+import com.yaa.cms.service.UserService;
 import com.yaa.cms.util.ShiroUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -17,7 +17,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        SysMenuService menuService = ContextUtil.getBean(SysMenuService.class);
+        MenuService menuService = ContextUtil.getBean(MenuService.class);
         Integer userId = ShiroUtils.getUserId();
         Set<String> perms = menuService.getUserPermsByID(userId);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -31,7 +31,7 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        SysUserService userService = ContextUtil.getBean(SysUserService.class);
+        UserService userService = ContextUtil.getBean(UserService.class);
         String username = (String) token.getPrincipal();
         SysUser user = userService.selectUserByUsername(username);
         if(user == null){

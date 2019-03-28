@@ -1,25 +1,25 @@
 package com.yaa.cms.service.impl;
 
-import com.yaa.cms.dao.SysRoleDao;
-import com.yaa.cms.dao.SysRoleMenuDao;
-import com.yaa.cms.dao.SysUserRoleDao;
+import com.yaa.cms.dao.RoleDao;
+import com.yaa.cms.dao.RoleMenuDao;
+import com.yaa.cms.dao.UserRoleDao;
 import com.yaa.cms.model.SysRole;
 import com.yaa.cms.model.SysRoleMenu;
-import com.yaa.cms.service.SysRoleService;
+import com.yaa.cms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class SysRoleServiceImpl implements SysRoleService {
+public class RoleServiceImpl implements RoleService {
 
     @Autowired
-    private SysRoleDao roleDao;
+    private RoleDao roleDao;
     @Autowired
-    private SysRoleMenuDao roleMenuDao;
+    private RoleMenuDao roleMenuDao;
     @Autowired
-    private SysUserRoleDao userRoleDao;
+    private UserRoleDao userRoleDao;
 
     @Override
     public List<SysRole> selectRoleList(Map<String,Object> params) {

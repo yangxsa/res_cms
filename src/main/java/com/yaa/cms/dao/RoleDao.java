@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface SysRoleDao {
+public interface RoleDao {
 
     List<SysRole> selectRoleList(Map<String, Object> map);
 

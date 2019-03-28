@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 @Mapper
-public interface SysUserDao {
+public interface UserDao {
 
     SysUser selectUserByUserName(String username);
 

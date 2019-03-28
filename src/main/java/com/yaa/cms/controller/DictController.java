@@ -1,11 +1,9 @@
 package com.yaa.cms.controller;
 
 import com.yaa.cms.controller.base.BaseController;
-import com.yaa.cms.model.Dict;
+import com.yaa.cms.model.SysDict;
 import com.yaa.cms.service.DictService;
 import com.yaa.cms.util.PageUtil;
-import com.yaa.cms.util.PageUtils;
-import com.yaa.cms.util.Query;
 import com.yaa.cms.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +31,7 @@ public class DictController extends BaseController {
 		Map<String,Object> param = buildParam();
 		int total = dictService.count(param);
 		int offset = PageUtil.getOffset(page);
-		List<Dict> dictList = dictService.list(param,offset,PageUtil.getLimit());
+		List<SysDict> dictList = dictService.list(param,offset,PageUtil.getLimit());
 		this.setPageNavigation(page,total);
 		request.setAttribute("dictList",dictList);
 		return prefix + "/dict";
@@ -49,7 +46,7 @@ public class DictController extends BaseController {
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("sys:dict:edit")
 	String edit(@PathVariable("id") Long id, Model model) {
-		Dict dict = dictService.get(id);
+		SysDict dict = dictService.get(id);
 		model.addAttribute("dict", dict);
 		return prefix + "/edit";
 	}
@@ -60,7 +57,7 @@ public class DictController extends BaseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("sys:dict:add")
-	public Result save(Dict dict) {
+	public Result save(SysDict dict) {
 		if (dictService.save(dict) > 0) {
 			return Result.ok();
 		}
@@ -73,7 +70,7 @@ public class DictController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("sys:dict:edit")
-	public Result update(Dict dict) {
+	public Result update(SysDict dict) {
 		dictService.update(dict);
 		return Result.ok();
 	}
@@ -104,7 +101,7 @@ public class DictController extends BaseController {
 
 	@GetMapping("/type")
 	@ResponseBody
-	public List<Dict> listType() {
+	public List<SysDict> listType() {
 		return dictService.listType();
 	};
 

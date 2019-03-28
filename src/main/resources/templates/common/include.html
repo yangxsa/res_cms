@@ -196,6 +196,7 @@
 </footer>
 
 <th:block th:fragment="js-fragment">
+    <input type="hidden" id="userid" th:value="${cmsUserId}">
     <!-- Javascripts -->
     <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
     <script th:src="@{/plugins/instantclick/instantclick.min.js}"></script>
@@ -210,6 +211,8 @@
     <script th:src="@{/plugins/layer/layer.js}"></script>
     <script th:src="@{/plugins/jqTreeGrid/jquery.treegrid.min.js}"></script>
     <script th:src="@{/plugins/jqTreeGrid/jquery.treegrid.extension.js}"></script>
+    <script th:src="@{/plugins/webSocket/sockjs.min.js}"></script>
+    <script th:src="@{/plugins/webSocket/stomp.min.js}"></script>
     <script data-no-instant>
         /*<![CDATA[*/
         InstantClick.on('change', function (isInitialLoad) {
@@ -217,6 +220,21 @@
         });
         InstantClick.init('mousedown');
         /*]]>*/
+    </script>
+    <script>
+        var sock = new SockJS("/endpointChat");
+        var stomp = Stomp.over(sock);
+        stomp.connect('guest', 'guest', function (frame) {
+            /**  订阅了/user/queue/notifications 发送的消息,这里雨在控制器的 convertAndSendToUser 定义的地址保持一致, 
+             *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
+             *  */
+            stomp.subscribe("/user/queue/notifications", function (data) {
+                console.log("s");
+            });
+            stomp.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
+                console.log(response);
+            });
+        });
     </script>
 </th:block>
 

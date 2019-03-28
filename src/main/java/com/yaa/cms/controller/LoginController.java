@@ -2,40 +2,33 @@ package com.yaa.cms.controller;
 
 
 import com.yaa.cms.controller.base.BaseController;
-import com.yaa.cms.model.SysMenu;
 import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.SysMenuService;
-import com.yaa.cms.service.SysUserService;
-import com.yaa.cms.util.Md5Utils;
+import com.yaa.cms.service.MenuService;
+import com.yaa.cms.service.UserService;
+import com.yaa.cms.util.AlgorithmUtil;
 import com.yaa.cms.util.Result;
 import com.yaa.cms.util.ShiroUtils;
-import com.yaa.cms.vo.Tree;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
-import static com.yaa.cms.util.ShiroUtils.getUser;
-import static com.yaa.cms.util.ShiroUtils.getUserId;
 
 
 @Controller
 public class LoginController extends BaseController {
 
     @Autowired
-    private SysMenuService menuService;
+    private MenuService menuService;
     @Autowired
-    private SysUserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/")
     public String loginPage(){
@@ -59,7 +52,7 @@ public class LoginController extends BaseController {
         if(user == null){
             return Result.error("用户或密码错误");
         }
-        password = Md5Utils.encrypt(password,user.getSalt());
+        password = AlgorithmUtil.encrypt(password,user.getSalt());
         UsernamePasswordToken token = new UsernamePasswordToken(username, password,user.getSalt());
         Subject subject = SecurityUtils.getSubject();
         try {

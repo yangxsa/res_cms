@@ -2,7 +2,7 @@ package com.yaa.cms.interceptor;
 
 import com.yaa.cms.model.SysMenu;
 import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.SysMenuService;
+import com.yaa.cms.service.MenuService;
 import com.yaa.cms.util.ShiroUtils;
 import com.yaa.cms.vo.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
 public class BaseInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private SysMenuService menuService;
+    private MenuService menuService;
 
 
     @Override
@@ -39,6 +39,7 @@ public class BaseInterceptor implements HandlerInterceptor {
                     request.setAttribute("picUrl", "/img/photo_s.jpg");
                 }
                 request.setAttribute("cmsUserName", ShiroUtils.getUser().getUsername());
+                request.setAttribute("cmsUserId", ShiroUtils.getUserId());
             }
         }
         return true;

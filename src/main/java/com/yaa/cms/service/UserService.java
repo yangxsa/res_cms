@@ -7,7 +7,7 @@ import com.yaa.cms.model.SysUser;
 import java.util.List;
 import java.util.Map;
 
-public interface SysUserService {
+public interface UserService {
 
     SysUser selectUserByUsername(String username);
 

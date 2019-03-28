@@ -1,9 +1,9 @@
 package com.yaa.cms.service.impl;
 
-import com.yaa.cms.dao.SysMenuDao;
-import com.yaa.cms.dao.SysRoleMenuDao;
+import com.yaa.cms.dao.MenuDao;
+import com.yaa.cms.dao.RoleMenuDao;
 import com.yaa.cms.model.SysMenu;
-import com.yaa.cms.service.SysMenuService;
+import com.yaa.cms.service.MenuService;
 import com.yaa.cms.util.BuildTree;
 import com.yaa.cms.vo.Tree;
 import org.apache.commons.lang3.StringUtils;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class SysMenuServiceImpl implements SysMenuService {
+public class MenuServiceImpl implements MenuService {
 
     @Autowired
-    private SysMenuDao menuDao;
+    private MenuDao menuDao;
     @Autowired
-    private SysRoleMenuDao roleMenuDao;
+    private RoleMenuDao roleMenuDao;
 
     @Override
     public Set<String> getUserPermsByID(Integer id) {

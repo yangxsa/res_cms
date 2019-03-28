@@ -11,16 +11,16 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ${className}Dao {
 
-	${className} select${classname}ByID(${pk.attrType} ${pk.attrname});
-	
-	List<${className}> select${classname}ByPage(Map<String,Object> map);
-	
-	int count${className}Record(Map<String,Object> map);
-	
-	int save${className}(${className} ${classname});
-	
-	int update${className}(${className} ${classname});
-	
-	int remove${className}(${pk.attrType} ${pk.columnName});
-	
+	${className} select${className}ByID(${pk.attrType} ${pk.attrname});
+
+    List<${className}> select${className}ByPage(Map<String, Object> map);
+
+    int count${className}Record(Map<String, Object> map);
+
+    int save${className}(${className} ${classname});
+
+    int update${className}(${className} ${classname});
+
+    int remove${className}(${pk.attrType} ${pk.columnName});
+
 }

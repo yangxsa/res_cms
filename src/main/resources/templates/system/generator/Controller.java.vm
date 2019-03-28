@@ -1,22 +1,19 @@
-package
+package ${package}.controller;
 
-import com.yaa.cms.controller.base.BaseController;${package}.controller;
-
+import ${package}.controller.base.BaseController;
 
 import java.util.List;
 import java.util.Map;
 
-import com.yaa.cms.util.Result;
+import ${package}.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import ${package}.controller.base.BaseController;
 import ${package}.model.${className};
 import ${package}.service.${className}Service;
-import ${package}.util.Result;
 
 
 @Controller
@@ -26,70 +23,71 @@ public class ${className}Controller extends BaseController {
     String prefix = "${pathName}/${classname}";
 
     @Autowired
-	private ${className}Service ${classname}Service;
+    private ${className}Service ${classname}Service;
 
 
     @GetMapping(value = "")
     @RequiresPermissions("${pathName}:${classname}:${classname}")
-	public PageUtils list(@RequestParam(value = "page",defaultValue = "1")int page){
-        Map<String,Object> param = buildPageParam(page);
+    public String list(@RequestParam(value = "page", defaultValue = "1") int page) {
+        Map<String, Object> param = buildPageParam(page);
         //查询列表数据
-        int total = ${classname}Service.count${classname}Record(param);
-        List<${className}> ${classname}List = ${classname}Service.select${classname}ByPage(param);
-        this.setPageNavigation(page,total);
-        request.setAttribute("${classname}List",${classname}List);
+        int total = ${classname}Service.count${className}Record(param);
+        List<${className}> ${classname}List = ${classname}Service.select${className}ByPage(param);
+        this.setPageNavigation(page, total);
+        request.setAttribute("${classname}List", ${classname}List);
         return prefix + "${classname}";
-	}
-	
-	@GetMapping("/add")
-	@RequiresPermissions("${pathName}:${classname}:add")
-	String add(){
-	    return "${pathName}/${classname}/add";
-	}
+    }
+
+    @GetMapping("/add")
+    @RequiresPermissions("${pathName}:${classname}:add")
+    public String add() {
+        return "${pathName}/${classname}/add";
+    }
 
 
-	@GetMapping("/edit/{${pk.attrname}}")
-	@RequiresPermissions("${pathName}:${classname}:edit")
-	String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname},Model model){
-		${className} ${classname} = ${classname}Service.get(${pk.attrname});
-		model.addAttribute("${classname}", ${classname});
-	    return "${pathName}/${classname}/edit";
-	}
-	
-	/**
-	 * 保存
-	 */
-	@ResponseBody
-	@PostMapping("/save")
-	@RequiresPermissions("${pathName}:${classname}:add")
-	public Result save( ${className} ${classname}){
-		if(${classname}Service.save${className}(${classname})>0){
-			return Result.ok();
-		}
-		return Result.error();
-	}
-	/**
-	 * 修改
-	 */
-	@ResponseBody
-	@RequestMapping("/update")
-	@RequiresPermissions("${pathName}:${classname}:edit")
-	public Result update( ${className} ${classname}){
-		${classname}Service.update${className}(${classname});
-		return Result.ok();
-	}
-	
-	/**
-	 * 删除
-	 */
-	@PostMapping( "/remove")
-	@ResponseBody
-	@RequiresPermissions("${pathName}:${classname}:remove")
-	public Result remove( ${pk.attrType} ${pk.attrname}){
-		if(${classname}Service.remove${className}(${pk.attrname})>0){
-		return Result.ok();
-		}
-		return Result.error();
-	}
-	
+    @GetMapping("/edit/{${pk.attrname}}")
+    @RequiresPermissions("${pathName}:${classname}:edit")
+    public String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}, Model model) {
+		${className} ${classname} =${classname}Service.select${className}ByID(${pk.attrname});
+        model.addAttribute("${classname}", ${classname});
+        return "${pathName}/${classname}/edit";
+    }
+
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @PostMapping("/save")
+    @RequiresPermissions("${pathName}:${classname}:add")
+    public Result save( ${className} ${classname}) {
+        if (${classname}Service.save${className}(${classname}) > 0) {
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
+    /**
+     * 修改
+     */
+    @ResponseBody
+    @RequestMapping("/update")
+    @RequiresPermissions("${pathName}:${classname}:edit")
+    public Result update( ${className} ${classname}) {
+			${classname}Service.update${className}(${classname});
+        return Result.ok();
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping("/remove")
+    @ResponseBody
+    @RequiresPermissions("${pathName}:${classname}:remove")
+    public Result remove( ${pk.attrType} ${pk.attrname}) {
+        if (${classname}Service.remove${className}(${pk.attrname}) > 0) {
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
 }

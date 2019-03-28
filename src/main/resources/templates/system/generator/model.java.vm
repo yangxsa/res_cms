@@ -10,9 +10,8 @@ import java.math.BigDecimal;
 /**
  * Generator code
  */
-public class ${className} implements Serializable {
+public class ${className} implements Serializable{
 
-        }
 	private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
@@ -29,5 +28,6 @@ public class ${className} implements Serializable {
 	public $column.attrType get${column.attrName}() {
 		return $column.attrname;
 	}
-#end
 
+#end
+}

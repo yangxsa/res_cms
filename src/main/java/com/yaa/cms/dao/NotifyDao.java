@@ -1,16 +1,26 @@
 package com.yaa.cms.dao;
 
-import com.yaa.cms.model.SysNotify;
-import org.apache.ibatis.annotations.Mapper;
+import com.yaa.cms.model.Notify;
 
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+
+
 @Mapper
 public interface NotifyDao {
 
-    List<SysNotify> list(Map<String, Object> map);
+	Notify selectNotifyByID(Integer id);
 
-    int count(Map<String, Object> map);
+    List<Notify> selectNotifyByPage(Map<String, Object> map);
+
+    int countNotifyRecord(Map<String, Object> map);
+
+    int saveNotify(Notify notify);
+
+    int updateNotify(Notify notify);
+
+    int removeNotify(Integer id);
 
 }

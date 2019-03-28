@@ -16,37 +16,38 @@ import ${package}.service.${className}Service;
  */
 @Service
 public class ${className}ServiceImpl implements ${className}Service {
-	@Autowired
-	private ${className}Dao ${classname}Dao;
-	
-	@Override
-	public ${className} select${classname}ByID(${pk.attrType} ${pk.attrname}){
-		return ${classname}Dao.select${classname}ByID(${pk.attrname});
-	}
-	
-	@Override
-	public List<${className}> select${classname}ByPage(Map<String, Object> map){
-		return ${classname}Dao.select${classname}ByPage(map);
-	}
-	
-	@Override
-	public int count(Map<String, Object> map){
-		return ${classname}Dao.count${classname}Record(map);
-	}
-	
-	@Override
-	public int save(${className} ${classname}){
-		return ${classname}Dao.save${classname}(${classname});
-	}
-	
-	@Override
-	public int update(${className} ${classname}){
-		return ${classname}Dao.update${classname}(${classname});
-	}
-	
-	@Override
-	public int remove(${pk.attrType} ${pk.attrname}){
-		return ${classname}Dao.remove${classname}(${pk.attrname});
-	}
-	
+
+    @Autowired
+    private ${className}Dao ${classname}Dao;
+
+    @Override
+    public ${className} select${className}ByID(${pk.attrType} ${pk.attrname}) {
+        return ${classname}Dao.select${className}ByID(${pk.attrname});
+    }
+
+    @Override
+    public List<${className}> select${className}ByPage(Map<String, Object> map) {
+        return ${classname}Dao.select${className}ByPage(map);
+    }
+
+    @Override
+    public int count${className}Record(Map<String, Object> map) {
+        return ${classname}Dao.count${className}Record(map);
+    }
+
+    @Override
+    public int save${className}(${className} ${classname}) {
+        return ${classname}Dao.save${className}(${classname});
+    }
+
+    @Override
+    public int update${className}(${className} ${classname}) {
+        return ${classname}Dao.update${className}(${classname});
+    }
+
+    @Override
+    public int remove${className}(${pk.attrType} ${pk.attrname}) {
+        return ${classname}Dao.remove${className}(${pk.attrname});
+    }
+
 }

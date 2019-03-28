@@ -9,7 +9,7 @@ public interface DictService {
 
     SysDict get(Long id);
 
-    List<SysDict> list(Map<String, Object> map,int offset,int limit);
+    List<SysDict> list(Map<String, Object> map);
 
     int count(Map<String, Object> map);
 

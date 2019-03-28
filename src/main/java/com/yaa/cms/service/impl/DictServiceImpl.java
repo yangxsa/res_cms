@@ -22,9 +22,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public List<SysDict> list(Map<String, Object> map,int offset,int limit) {
-        map.put("offset",offset);
-        map.put("limit",limit);
+    public List<SysDict> list(Map<String, Object> map) {
         return dictDao.list(map);
     }
 

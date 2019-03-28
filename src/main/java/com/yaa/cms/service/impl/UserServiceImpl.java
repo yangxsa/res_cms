@@ -43,9 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<SysUser> selectUserList(Map<String, Object> params,int offset,int limit) {
-        params.put("offset",offset);
-        params.put("limit",limit);
+    public List<SysUser> selectUserList(Map<String, Object> params) {
         List<SysUser> users = userDao.selectUserList(params);
         for (SysUser user : users) {
             List<Integer> roleIds = userRoleDao.selectRoleIdList(user.getId());

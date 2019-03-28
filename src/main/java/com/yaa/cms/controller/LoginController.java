@@ -3,7 +3,6 @@ package com.yaa.cms.controller;
 
 import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.MenuService;
 import com.yaa.cms.service.UserService;
 import com.yaa.cms.util.AlgorithmUtil;
 import com.yaa.cms.util.Result;
@@ -25,8 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LoginController extends BaseController {
 
-    @Autowired
-    private MenuService menuService;
     @Autowired
     private UserService userService;
 

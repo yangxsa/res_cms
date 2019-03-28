@@ -28,10 +28,9 @@ public class DictController extends BaseController {
 	@RequiresPermissions("sys:dict:dict")
 	public String list(@RequestParam(value = "page",defaultValue = "1")int page) {
 		// 查询列表数据
-		Map<String,Object> param = buildParam();
+		Map<String,Object> param = buildPageParam(page);
 		int total = dictService.count(param);
-		int offset = PageUtil.getOffset(page);
-		List<SysDict> dictList = dictService.list(param,offset,PageUtil.getLimit());
+		List<SysDict> dictList = dictService.list(param);
 		this.setPageNavigation(page,total);
 		request.setAttribute("dictList",dictList);
 		return prefix + "/dict";
@@ -103,7 +102,7 @@ public class DictController extends BaseController {
 	@ResponseBody
 	public List<SysDict> listType() {
 		return dictService.listType();
-	};
+	}
 
 	// 类别已经指定增加
 	@GetMapping("/add/{type}/{description}")

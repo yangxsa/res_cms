@@ -35,10 +35,9 @@ public class UserController extends BaseController {
     @GetMapping("")
     @RequiresPermissions("sys:user:user")
     public String user(@RequestParam(value = "page",defaultValue = "1")int page) {
-        Map<String,Object> param = buildParam();
+        Map<String,Object> param = buildPageParam(page);
         int totalRecord = userService.countTotalUserRecord(param);
-        int offset = PageUtil.getOffset(page);
-        List<SysUser> list = userService.selectUserList(param,offset,PageUtil.getLimit());
+        List<SysUser> list = userService.selectUserList(param);
         this.setPageNavigation(page,totalRecord);
         request.setAttribute("list",list);
         return prefix + "/user";

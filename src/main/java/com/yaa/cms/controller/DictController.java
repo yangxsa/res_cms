@@ -3,7 +3,6 @@ package com.yaa.cms.controller;
 import com.yaa.cms.controller.base.BaseController;
 import com.yaa.cms.model.SysDict;
 import com.yaa.cms.service.DictService;
-import com.yaa.cms.util.PageUtil;
 import com.yaa.cms.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -24,45 +24,9 @@
                         <h3 class="box-title"></h3>
                         <div class="pull-right">
                             <div class="btn-group pull-right" style="margin-right: 10px">
-                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filter-modal"><i class="fa fa-filter"></i>&nbsp;&nbsp;筛选</button>
                                 <a id="refresh" th:href="@{/sys/generator}" class="btn btn-sm btn-facebook">
                                     <i class="fa fa-undo"></i>&nbsp;&nbsp;刷新
                                 </a>
-                            </div>
-
-                            <div class="modal fade" id="filter-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                                <span class="sr-only">Close</span>
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">筛选</h4>
-                                        </div>
-                                        <form th:action="@{/sys/user}" method="get">
-                                            <div class="modal-body">
-                                                <div class="form">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label>姓名</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </div>
-                                                                <input type="text" class="form-control" placeholder="请输入姓名" name="name" th:value="${name}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary submit">提交</button>
-                                                <button type="reset" class="btn btn-warning pull-left">重置</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                             <div class="btn-group pull-right" style="margin-right: 10px">
                                 <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i>导出</a>
@@ -79,7 +43,7 @@
                             &nbsp;&nbsp;
                         </div>
                         <span shiro:hasPermission="sys:user:add">
-                           <a class="btn btn-sm btn-success" href="javascript:void(0);">
+                           <a class="btn btn-sm btn-success" th:href="@{/sys/generator/edit}">
                                <i class="fa fa-wrench" aria-hidden="true"></i>生成策略
                            </a>
                         </span>
@@ -102,7 +66,7 @@
                                     <td th:text="${code.tableComment}"></td>
                                     <td th:text="${code.createTime}"></td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" th:href="@{'/sys/user/edit/'+${code.tableName}}">
+                                        <a class="btn btn-primary btn-sm" th:href="@{'/sys/generator/code/'+${code.tableName}}">
                                             <i class="fa fa-code "></i>
                                         </a>
                                     </td>

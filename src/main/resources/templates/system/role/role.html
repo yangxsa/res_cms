@@ -103,12 +103,16 @@
 									<td th:text="${role.remark}"></td>
 									<td th:text="${role.sign}"></td>
 									<td>
+										<th:block shiro:hasPermission="sys:role:edit">
 										<a class="btn btn-primary btn-sm" th:href="@{'/sys/role/edit/'+${role.id}}" title="编辑">
 											<i class="fa fa-edit "></i>
 										</a>
+										</th:block>
+										<th:block shiro:hasPermission="sys:role:remove">
 										<a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${role.id}+'\')'" title="删除">
 											<i class="fa fa-remove"></i>
 										</a>
+										</th:block>
 									</td>
 								</tr>
 							</th:block>
@@ -119,23 +123,6 @@
 			</div>
 		</div>
 	</section>
-	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-	<div>
-		<script type="text/javascript">
-            var s_edit_h = 'hidden';
-            var s_remove_h = 'hidden';
-		</script>
-	</div>
-	<div shiro:hasPermission="sys:role:edit">
-		<script type="text/javascript">
-            s_edit_h = '';
-		</script>
-	</div>
-	<div shiro:hasPermission="sys:role:remove">
-		<script type="text/javascript">
-            var s_remove_h = '';
-		</script>
-	</div>
 </div>
 <footer th:replace="common/include::footer"></footer>
 </div>

@@ -10,17 +10,16 @@ import java.util.Map;
  */
 public interface ${className}Service {
 	
-	${className} get(${pk.attrType} ${pk.attrname});
+	${className} select${classname}ByID(${pk.attrType} ${pk.attrname});
 	
-	List<${className}> list(Map<String, Object> map);
+	List<${className}> select${classname}ByPage(Map<String, Object> map);
 	
-	int count(Map<String, Object> map);
+	int count${className}Record(Map<String, Object> map);
 	
-	int save(${className} ${classname});
+	int save${className}(${className} ${classname});
 	
-	int update(${className} ${classname});
+	int update${className}(${className} ${classname});
 	
-	int remove(${pk.attrType} ${pk.attrname});
+	int remove${className}(${pk.attrType} ${pk.attrname});
 	
-	int batchRemove(${pk.attrType}[] ${pk.attrname}s);
 }

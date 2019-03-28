@@ -1,50 +1,44 @@
 package
 
-import org.springframework.web.bind.annotation.*;${package}.controller;
+import com.yaa.cms.controller.base.BaseController;${package}.controller;
+
 
 import java.util.List;
 import java.util.Map;
 
+import com.yaa.cms.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import ${package}.controller.base.BaseController;
 import ${package}.model.${className};
 import ${package}.service.${className}Service;
-import com.yaa.util.PageUtils;
-import com.yaa.util.Query;
-import com.yaa.util.Result;
+import ${package}.util.Result;
 
-/**
- * Generator code
- */
+
 @Controller
 @RequestMapping("/${pathName}/${classname}")
-public class ${className}Controller {
+public class ${className}Controller extends BaseController {
 
     String prefix = "${pathName}/${classname}";
 
     @Autowired
 	private ${className}Service ${classname}Service;
 
-	@GetMapping()
-	@RequiresPermissions("${pathName}:${classname}:${classname}")
-	public String ${className}(){
-	    return prefix + "/${classname}";
-	}
 
-    @ResponseBody
-    @GetMapping(value = "/list")
+    @GetMapping(value = "")
     @RequiresPermissions("${pathName}:${classname}:${classname}")
-	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-        Query query = new Query(params);
-		List<${className}> ${classname}List = ${classname}Service.list(query);
-		int total = ${classname}Service.count(query);
-		PageUtils pageUtils = new PageUtils(${classname}List, total);
-		return pageUtils;
+	public PageUtils list(@RequestParam(value = "page",defaultValue = "1")int page){
+        Map<String,Object> param = buildPageParam(page);
+        //查询列表数据
+        int total = ${classname}Service.count${classname}Record(param);
+        List<${className}> ${classname}List = ${classname}Service.select${classname}ByPage(param);
+        this.setPageNavigation(page,total);
+        request.setAttribute("${classname}List",${classname}List);
+        return prefix + "${classname}";
 	}
 	
 	@GetMapping("/add")
@@ -68,11 +62,11 @@ public class ${className}Controller {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("${pathName}:${classname}:add")
-	public R save( ${className} ${classname}){
-		if(${classname}Service.save(${classname})>0){
-			return R.ok();
+	public Result save( ${className} ${classname}){
+		if(${classname}Service.save${className}(${classname})>0){
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 	/**
 	 * 修改
@@ -80,9 +74,9 @@ public class ${className}Controller {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("${pathName}:${classname}:edit")
-	public R update( ${className} ${classname}){
-		${classname}Service.update(${classname});
-		return R.ok();
+	public Result update( ${className} ${classname}){
+		${classname}Service.update${className}(${classname});
+		return Result.ok();
 	}
 	
 	/**
@@ -91,22 +85,11 @@ public class ${className}Controller {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:remove")
-	public R remove( ${pk.attrType} ${pk.attrname}){
-		if(${classname}Service.remove(${pk.attrname})>0){
-		return R.ok();
+	public Result remove( ${pk.attrType} ${pk.attrname}){
+		if(${classname}Service.remove${className}(${pk.attrname})>0){
+		return Result.ok();
 		}
-		return R.error();
-	}
-	
-	/**
-	 * 批量删除
-	 */
-	@PostMapping( "/batchRemove")
-	@ResponseBody
-	@RequiresPermissions("${pathName}:${classname}:batchRemove")
-	public R remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
-		${classname}Service.batchRemove(${pk.attrname}s);
-		return R.ok();
+		return Result.error();
 	}
 	
 }

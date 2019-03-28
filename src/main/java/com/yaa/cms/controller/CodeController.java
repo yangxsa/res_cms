@@ -25,10 +25,10 @@ import java.util.Map;
 @RequestMapping("/sys/generator")
 public class CodeController extends BaseController {
 
-    String prefix = "system/generator";
     @Autowired
     private CodeService codeService;
 
+    String prefix = "system/generator";
 
     /**
      * 数据表列表
@@ -80,7 +80,7 @@ public class CodeController extends BaseController {
         IOUtils.write(data, response.getOutputStream());
     }
 
-    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    @GetMapping(value = "/edit")
     public String edit(Model model) {
         Configuration conf = GenUtils.getConfig();
         Map<String, Object> property = new HashMap<>(16);

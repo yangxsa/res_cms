@@ -20,38 +20,33 @@ public class ${className}ServiceImpl implements ${className}Service {
 	private ${className}Dao ${classname}Dao;
 	
 	@Override
-	public ${className} get(${pk.attrType} ${pk.attrname}){
-		return ${classname}Dao.get(${pk.attrname});
+	public ${className} select${classname}ByID(${pk.attrType} ${pk.attrname}){
+		return ${classname}Dao.select${classname}ByID(${pk.attrname});
 	}
 	
 	@Override
-	public List<${className}> list(Map<String, Object> map){
-		return ${classname}Dao.list(map);
+	public List<${className}> select${classname}ByPage(Map<String, Object> map){
+		return ${classname}Dao.select${classname}ByPage(map);
 	}
 	
 	@Override
 	public int count(Map<String, Object> map){
-		return ${classname}Dao.count(map);
+		return ${classname}Dao.count${classname}Record(map);
 	}
 	
 	@Override
 	public int save(${className} ${classname}){
-		return ${classname}Dao.save(${classname});
+		return ${classname}Dao.save${classname}(${classname});
 	}
 	
 	@Override
 	public int update(${className} ${classname}){
-		return ${classname}Dao.update(${classname});
+		return ${classname}Dao.update${classname}(${classname});
 	}
 	
 	@Override
 	public int remove(${pk.attrType} ${pk.attrname}){
-		return ${classname}Dao.remove(${pk.attrname});
-	}
-	
-	@Override
-	public int batchRemove(${pk.attrType}[] ${pk.attrname}s){
-		return ${classname}Dao.batchRemove(${pk.attrname}s);
+		return ${classname}Dao.remove${classname}(${pk.attrname});
 	}
 	
 }

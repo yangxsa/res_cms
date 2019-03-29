@@ -17,17 +17,17 @@ import com.yaa.cms.service.NotifyService;
 
 
 @Controller
-@RequestMapping("/cms/notify")
+@RequestMapping("/system/notify")
 public class NotifyController extends BaseController {
 
-    String prefix = "cms/notify";
+    String prefix = "system/notify";
 
     @Autowired
     private NotifyService notifyService;
 
 
     @GetMapping(value = "")
-    @RequiresPermissions("cms:notify:notify")
+    @RequiresPermissions("system:notify:notify")
     public String list(@RequestParam(value = "page", defaultValue = "1") int page) {
         Map<String, Object> param = buildPageParam(page);
         //查询列表数据
@@ -39,18 +39,18 @@ public class NotifyController extends BaseController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("cms:notify:add")
+    @RequiresPermissions("system:notify:add")
     public String add() {
-        return "cms/notify/add";
+        return "system/notify/add";
     }
 
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("cms:notify:edit")
+    @RequiresPermissions("system:notify:edit")
     public String edit(@PathVariable("id") Integer id, Model model) {
 		Notify notify =notifyService.selectNotifyByID(id);
         model.addAttribute("notify", notify);
-        return "cms/notify/edit";
+        return "system/notify/edit";
     }
 
     /**
@@ -58,7 +58,7 @@ public class NotifyController extends BaseController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("cms:notify:add")
+    @RequiresPermissions("system:notify:add")
     public Result save( Notify notify) {
         if (notifyService.saveNotify(notify) > 0) {
             return Result.ok();
@@ -71,7 +71,7 @@ public class NotifyController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("cms:notify:edit")
+    @RequiresPermissions("system:notify:edit")
     public Result update( Notify notify) {
 			notifyService.updateNotify(notify);
         return Result.ok();
@@ -82,7 +82,7 @@ public class NotifyController extends BaseController {
      */
     @PostMapping("/remove")
     @ResponseBody
-    @RequiresPermissions("cms:notify:remove")
+    @RequiresPermissions("system:notify:remove")
     public Result remove( Integer id) {
         if (notifyService.removeNotify(id) > 0) {
             return Result.ok();

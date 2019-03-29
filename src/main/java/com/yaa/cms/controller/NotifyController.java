@@ -35,7 +35,7 @@ public class NotifyController extends BaseController {
         List<Notify> notifyList = notifyService.selectNotifyByPage(param);
         this.setPageNavigation(page, total);
         request.setAttribute("notifyList", notifyList);
-        return prefix + "notify";
+        return prefix + "/notify";
     }
 
     @GetMapping("/add")

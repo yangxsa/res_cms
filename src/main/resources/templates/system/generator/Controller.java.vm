@@ -35,7 +35,7 @@ public class ${className}Controller extends BaseController {
         List<${className}> ${classname}List = ${classname}Service.select${className}ByPage(param);
         this.setPageNavigation(page, total);
         request.setAttribute("${classname}List", ${classname}List);
-        return prefix + "${classname}";
+        return prefix + "/${classname}";
     }
 
     @GetMapping("/add")

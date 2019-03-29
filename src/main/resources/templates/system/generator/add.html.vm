@@ -34,18 +34,18 @@
                     <!-- form start -->
                     <form class="form-horizontal" id="${classname}SaveFrom">
                         <div class="box-body">
-                            #foreach($column in $columns)
-                                #if($column.columnName != $pk.columnName)
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">
-                                            <em class="text-danger">* </em>${column.comments}
-                                        </label>
-                                        <div class="col-sm-8">
-                                            <input name="${column.attrname}" class="form-control" type="text" placeholder="请输入${column.comments}">
-                                        </div>
-                                    </div>
-                                #end
-                            #end
+                        #foreach($column in $columns)
+                        #if($column.columnName != $pk.columnName)
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>${column.comments}
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="${column.attrname}" class="form-control" type="text" placeholder="请输入${column.comments}">
+                            </div>
+                        </div>
+                        #end
+                        #end
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">

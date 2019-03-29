@@ -102,7 +102,9 @@
                             <th:block th:each="${classname} : ${classname}List">
                                 <tr>
                                     #foreach($column in $columns)
+                                    #if($column.columnName != $pk.columnName)
                                         <td th:text="${${classname}.${column.attrname}}"></td>
+                                    #end
                                     #end
                                     <td>
                                         <th:block shiro:hasPermission="${pathName}:${classname}:edit">

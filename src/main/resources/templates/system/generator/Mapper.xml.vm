@@ -1,83 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${package}.dao.${className}Dao" >
+    <resultMap id="BaseResultMap" type="${package}.model.${className}">
+        <id column="${pk.attrname}" property="${pk.columnName}" jdbcType="INTEGER"/>
+    #foreach($column in $columns)#if($column.columnName != $pk.columnName)
+    <result column="$column.columnName" property="$column.attrname"/>
+    #end#end</resultMap>
 
-<mapper namespace="${package}.dao.${className}Dao">
+    <sql id="Base_Column_List">
+        #foreach($column in $columns)${column.columnName}#if($velocityCount != $columns.size()),#end#end
+    </sql>
 
-	<select id="get" resultType="${package}.model.${className}">
-		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName} where ${pk.columnName} = #{value}
-	</select>
+    <sql id="Base_Column_WHERE">
+        #foreach($column in $columns)
+            <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
+        #end
+    </sql>
 
-	<select id="list" resultType="${package}.model.${className}">
-		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName}
-        <where>  
-		  #foreach($column in $columns)
-		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
-		  #end
-		</where>
+    <select id="select${className}ByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where ${pk.columnName} = #{${pk.attrname},jdbcType=INTEGER}
+    </select>
+    <insert id="save${className}" parameterType="${package}.model.${className}" >
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.columnName != $pk.columnName)
+                    <if test="$column.attrname != null">
+                        ${column.columnName},
+                    </if>
+                #end
+            #end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #foreach($column in $columns)
+                #if($column.columnName != $pk.columnName)
+                    <if test="$column.attrname != null">
+                        #{$column.attrname},
+                    </if>
+                #end
+            #end
+        </trim>
+    </insert>
+    <update id="update${className}" parameterType="${package}.model.${className}" >
+        update ${tableName}
+        <set >
+            #foreach($column in $columns)
+                #if($column.columnName != $pk.columnName)
+                    <if test="$column.attrname != null">
+                        $column.columnName = #{$column.attrname},
+                    </if>
+                #end
+            #end
+        </set>
+        where ${pk.columnName} = #{${pk.attrname},jdbcType=INTEGER}
+    </update>
+    <select id="count${className}Record" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select count(*) from ${tableName}
+        where 1 = 1
+        <include refid="Base_Column_WHERE"/>
+        order by ${pk.columnName} desc
+    </select>
+    <select id="select${className}ByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where 1 = 1
+        <include refid="Base_Column_WHERE"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by ${pk.columnName} desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from ${tableName}
-		 <where>  
-		  #foreach($column in $columns)
-		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
-		  #end
-		</where>
-	</select>
-	 
-	<insert id="save" parameterType="${package}.model.${className}"#if($pk.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$pk.attrname"#end>
-		insert into ${tableName}
-		(
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			`$column.columnName`#if($velocityCount != $columns.size()), #end
-
-#end			
-#end
-		)
-		values
-		(
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			#{$column.attrname}#if($velocityCount != $columns.size()), #end
-
-#end			
-#end
-		)
-	</insert>
-	 
-	<update id="update" parameterType="${package}.model.${className}">
-		update ${tableName} 
-		<set>
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName)
-			<if test="$column.attrname != null">`$column.columnName` = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
-#end
-#end
-		</set>
-		where ${pk.columnName} = #{${pk.attrname}}
-	</update>
-	
-	<delete id="remove">
-		delete from ${tableName} where ${pk.columnName} = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from ${tableName} where ${pk.columnName} in 
-		<foreach item="${pk.attrname}" collection="array" open="(" separator="," close=")">
-			#{${pk.attrname}}
-		</foreach>
-	</delete>
-
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 </mapper>

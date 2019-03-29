@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaa.cms.dao.NotifyDao" >
+    <resultMap id="BaseResultMap" type="com.yaa.cms.model.Notify">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="status" property="status"/>
+        <result column="remarks" property="remarks"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, content, status, remarks, create_by, create_time
+    </sql>
+
+    <sql id="Base_Column_WHERE">
+        <if test="title != null">
+            and title = #{title}
+        </if>
+    <if test="content != null">
+            and content = #{content}
+        </if>
+    <if test="status != null">
+            and status = #{status}
+        </if>
+    <if test="remarks != null">
+            and remarks = #{remarks}
+        </if>
+    <if test="createBy != null">
+            and create_by = #{createBy}
+        </if>
+    <if test="createTime != null">
+            and create_time = #{createTime}
+        </if>
+    </sql>
+
+    <select id="selectNotifyByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notify
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="saveNotify" parameterType="com.yaa.cms.model.Notify" >
+        insert into sys_notify
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                                                                            <if test="title != null">
+                        title,
+                    </if>
+                                                                <if test="content != null">
+                        content,
+                    </if>
+                                                                <if test="status != null">
+                        status,
+                    </if>
+                                                                <if test="remarks != null">
+                        remarks,
+                    </if>
+                                                                <if test="createBy != null">
+                        create_by,
+                    </if>
+                                                                <if test="createTime != null">
+                        create_time,
+                    </if>
+                                    </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+                                                                            <if test="title != null">
+                        #{title},
+                    </if>
+                                                                <if test="content != null">
+                        #{content},
+                    </if>
+                                                                <if test="status != null">
+                        #{status},
+                    </if>
+                                                                <if test="remarks != null">
+                        #{remarks},
+                    </if>
+                                                                <if test="createBy != null">
+                        #{createBy},
+                    </if>
+                                                                <if test="createTime != null">
+                        #{createTime},
+                    </if>
+                                    </trim>
+    </insert>
+    <update id="updateNotify" parameterType="com.yaa.cms.model.Notify" >
+        update sys_notify
+        <set >
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+                                                                <if test="status != null">
+                        status = #{status},
+                    </if>
+                                                                <if test="remarks != null">
+                        remarks = #{remarks},
+                    </if>
+                                                                <if test="createBy != null">
+                        create_by = #{createBy},
+                    </if>
+                                                                <if test="createTime != null">
+                        create_time = #{createTime},
+                    </if>
+                                    </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="countNotifyRecord" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select count(*) from sys_notify
+        where 1 = 1
+        <include refid="Base_Column_WHERE"/>
+        order by id desc
+    </select>
+    <select id="selectNotifyByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notify
+        where 1 = 1
+        <include refid="Base_Column_WHERE"/>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+</mapper>

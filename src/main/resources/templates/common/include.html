@@ -23,6 +23,8 @@
 
     <link rel="stylesheet" th:href="@{/plugins/jqTreeGrid/jquery.treegrid.css}">
 
+    <link rel="stylesheet" th:href="@{/plugins/toastr/toastr.min.css}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -212,6 +214,7 @@
     <script th:src="@{/plugins/jqTreeGrid/jquery.treegrid.extension.js}"></script>
     <script th:src="@{/plugins/webSocket/sockjs.min.js}"></script>
     <script th:src="@{/plugins/webSocket/stomp.min.js}"></script>
+    <script th:src="@{/plugins/toastr/toastr.min.js}"></script>
     <script data-no-instant>
         /*<![CDATA[*/
         InstantClick.on('change', function (isInitialLoad) {
@@ -220,7 +223,7 @@
         InstantClick.init('mousedown');
         /*]]>*/
     </script>
-    <script>
+    <script data-no-instant>
         var sock = new SockJS("/endpointChat");
         var stomp = Stomp.over(sock);
         stomp.connect('guest', 'guest', function (frame) {
@@ -231,7 +234,22 @@
                 console.log("s");
             });
             stomp.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
-                console.log(response);
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "7000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr.info(JSON.parse(response.body).responseMessage);
             });
         });
     </script>

@@ -46,8 +46,8 @@ public class ${className}ServiceImpl implements ${className}Service {
     }
 
     @Override
-    public int remove${className}(${pk.attrType} ${pk.attrname}) {
-        return ${classname}Dao.remove${className}(${pk.attrname});
+    public int remove${className}ByID(${pk.attrType} ${pk.attrname}) {
+        return ${classname}Dao.remove${className}ByID(${pk.attrname});
     }
 
 }

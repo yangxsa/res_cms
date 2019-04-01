@@ -46,8 +46,8 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     @Override
-    public int removeNotify(Integer id) {
-        return notifyDao.removeNotify(id);
+    public int removeNotifyByID(Integer id) {
+        return notifyDao.removeNotifyByID(id);
     }
 
 }

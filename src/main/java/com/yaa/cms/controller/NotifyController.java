@@ -17,7 +17,7 @@ import com.yaa.cms.service.NotifyService;
 
 
 @Controller
-@RequestMapping("/system/notify")
+@RequestMapping("/sys/notify")
 public class NotifyController extends BaseController {
 
     String prefix = "system/notify";
@@ -27,7 +27,7 @@ public class NotifyController extends BaseController {
 
 
     @GetMapping(value = "")
-    @RequiresPermissions("system:notify:notify")
+    @RequiresPermissions("sys:notify:notify")
     public String list(@RequestParam(value = "page", defaultValue = "1") int page) {
         Map<String, Object> param = buildPageParam(page);
         //查询列表数据
@@ -39,18 +39,18 @@ public class NotifyController extends BaseController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("system:notify:add")
+    @RequiresPermissions("sys:notify:add")
     public String add() {
-        return "system/notify/add";
+        return "sys/notify/add";
     }
 
 
     @GetMapping("/edit/{id}")
-    @RequiresPermissions("system:notify:edit")
+    @RequiresPermissions("sys:notify:edit")
     public String edit(@PathVariable("id") Integer id, Model model) {
 		Notify notify =notifyService.selectNotifyByID(id);
         model.addAttribute("notify", notify);
-        return "system/notify/edit";
+        return "sys/notify/edit";
     }
 
     /**
@@ -58,7 +58,7 @@ public class NotifyController extends BaseController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("system:notify:add")
+    @RequiresPermissions("sys:notify:add")
     public Result save( Notify notify) {
         if (notifyService.saveNotify(notify) > 0) {
             return Result.ok();
@@ -71,7 +71,7 @@ public class NotifyController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("system:notify:edit")
+    @RequiresPermissions("sys:notify:edit")
     public Result update( Notify notify) {
 			notifyService.updateNotify(notify);
         return Result.ok();
@@ -82,9 +82,9 @@ public class NotifyController extends BaseController {
      */
     @PostMapping("/remove")
     @ResponseBody
-    @RequiresPermissions("system:notify:remove")
+    @RequiresPermissions("sys:notify:remove")
     public Result remove( Integer id) {
-        if (notifyService.removeNotify(id) > 0) {
+        if (notifyService.removeNotifyByID(id) > 0) {
             return Result.ok();
         }
         return Result.error();

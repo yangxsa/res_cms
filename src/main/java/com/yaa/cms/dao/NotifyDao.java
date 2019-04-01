@@ -1,10 +1,10 @@
 package com.yaa.cms.dao;
 
-import com.yaa.cms.model.Notify;
 
 import java.util.List;
 import java.util.Map;
 
+import com.yaa.cms.model.Notify;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -21,6 +21,6 @@ public interface NotifyDao {
 
     int updateNotify(Notify notify);
 
-    int removeNotify(Integer id);
+    int removeNotifyByID(Integer id);
 
 }

@@ -84,7 +84,7 @@ public class ${className}Controller extends BaseController {
     @ResponseBody
     @RequiresPermissions("${pathName}:${classname}:remove")
     public Result remove( ${pk.attrType} ${pk.attrname}) {
-        if (${classname}Service.remove${className}(${pk.attrname}) > 0) {
+        if (${classname}Service.remove${className}ByID(${pk.attrname}) > 0) {
             return Result.ok();
         }
         return Result.error();

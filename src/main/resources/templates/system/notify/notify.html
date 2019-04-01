@@ -27,7 +27,7 @@
                                 <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filter-modal">
                                     <i class="fa fa-filter"></i>&nbsp;&nbsp;筛选
                                 </button>
-                                <a id="refresh" th:href="@{/cms/notify}" class="btn btn-sm btn-facebook">
+                                <a id="refresh" th:href="@{/sys/notify}" class="btn btn-sm btn-facebook">
                                     <i class="fa fa-undo"></i>&nbsp;&nbsp;刷新
                                 </a>
                             </div>
@@ -42,74 +42,88 @@
                                             </button>
                                             <h4 class="modal-title" id="myModalLabel">筛选</h4>
                                         </div>
-                                        <form th:action="@{/cms/notify}" method="get">
+                                        <form th:action="@{/sys/notify}" method="get">
                                             <div class="modal-body">
                                                 <div class="form">
                                                     <div class="form-group">
-                                                                                                                    <div class="form-group">
-                                                                <label>主键</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${id}">
+                                                        <div class="form-group">
+                                                            <label>主键</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${id}">
                                                             </div>
-                                                                                                                    <div class="form-group">
-                                                                <label>标题</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${title}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>标题</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${title}">
                                                             </div>
-                                                                                                                    <div class="form-group">
-                                                                <label>内容</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${content}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>内容</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${content}">
                                                             </div>
-                                                                                                                    <div class="form-group">
-                                                                <label>状态</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${status}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>状态</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${status}">
                                                             </div>
-                                                                                                                    <div class="form-group">
-                                                                <label>备注</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${remarks}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>备注</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${remarks}">
                                                             </div>
-                                                                                                                    <div class="form-group">
-                                                                <label>创建者</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${createBy}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>创建者</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${createBy}">
                                                             </div>
-                                                                                                                    <div class="form-group">
-                                                                <label>创建时间</label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="fa fa-pencil"></i>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入notify" name="name" th:value="${createTime}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>创建时间</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
                                                                 </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入notify" name="name"
+                                                                       th:value="${createTime}">
                                                             </div>
-                                                                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -135,7 +149,7 @@
                             &nbsp;&nbsp;
                         </div>
                         <span>
-                        <a shiro:hasPermission="cms:notify:add" type="button" class="btn btn-sm btn-success" href="/cms/notify/add">
+                        <a shiro:hasPermission="system:notify:add" type="button" class="btn btn-sm btn-success" href="/system/notify/add">
 							<i class="fa fa-plus" aria-hidden="true"></i>添加
 						</a>
                     </span>
@@ -146,32 +160,33 @@
                         <table class="table table-hover text-center">
                             <tbody>
                             <tr>
-                                                                    <th>主键</th>
-                                                                    <th>标题</th>
-                                                                    <th>内容</th>
-                                                                    <th>状态</th>
-                                                                    <th>备注</th>
-                                                                    <th>创建者</th>
-                                                                    <th>创建时间</th>
-                                                                <th>操作</th>
+                                <th>主键</th>
+                                <th>标题</th>
+                                <th>内容</th>
+                                <th>状态</th>
+                                <th>备注</th>
+                                <th>创建者</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
                             </tr>
-                            <th:block th:each="notify : notifyList">
+                            <th:block th:each="notify : ${notifyList}">
                                 <tr>
-                                                                            <td th:text="${notify.id}"></td>
-                                                                            <td th:text="${notify.title}"></td>
-                                                                            <td th:text="${notify.content}"></td>
-                                                                            <td th:text="${notify.status}"></td>
-                                                                            <td th:text="${notify.remarks}"></td>
-                                                                            <td th:text="${notify.createBy}"></td>
-                                                                            <td th:text="${notify.createTime}"></td>
-                                                                        <td>
-                                        <th:block shiro:hasPermission="cms:notify:edit">
-                                            <a class="btn btn-primary btn-sm" th:href="@{'/cms/notify/edit/'+${notify.id}}" title="编辑">
+                                    <td th:text="${notify.title}"></td>
+                                    <td th:text="${notify.content}"></td>
+                                    <td th:text="${notify.status}"></td>
+                                    <td th:text="${notify.remarks}"></td>
+                                    <td th:text="${notify.createBy}"></td>
+                                    <td th:text="${notify.createTime}"></td>
+                                    <td>
+                                        <th:block shiro:hasPermission="sys:notify:edit">
+                                            <a class="btn btn-primary btn-sm"
+                                               th:href="@{'/sys/notify/edit/'+${notify.id}}" title="编辑">
                                                 <i class="fa fa-edit "></i>
                                             </a>
                                         </th:block>
-                                        <th:block shiro:hasPermission="cms:notify:remove">
-                                            <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${notify.id}+'\')'" title="删除">
+                                        <th:block shiro:hasPermission="sys:notify:remove">
+                                            <a class="btn btn-warning btn-sm"
+                                               th:onclick="'remove(\''+${notify.id}+'\')'" title="删除">
                                                 <i class="fa fa-remove"></i>
                                             </a>
                                         </th:block>
@@ -196,7 +211,7 @@
             btn : [ '确定', '取消' ]
         }, function() {
             $.ajax({
-                url:'/cms/notify/remove',
+                url:'/sys/notify/remove',
                 data:{
                     "id":id,
                 },

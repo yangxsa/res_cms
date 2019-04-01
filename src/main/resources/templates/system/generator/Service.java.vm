@@ -20,6 +20,6 @@ public interface ${className}Service {
 
     int update${className}(${className} ${classname});
 
-    int remove${className}(${pk.attrType} ${pk.attrname});
+    int remove${className}ByID(${pk.attrType} ${pk.attrname});
 
 }

@@ -66,7 +66,7 @@
                                     <td th:text="${code.tableComment}"></td>
                                     <td th:text="${code.createTime}"></td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" th:href="@{'/sys/generator/code/'+${code.tableName}}">
+                                        <a data-no-instant="" class="btn btn-primary btn-sm" th:href="@{'/sys/generator/code/'+${code.tableName}}">
                                             <i class="fa fa-code "></i>
                                         </a>
                                     </td>

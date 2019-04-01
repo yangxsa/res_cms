@@ -21,6 +21,6 @@ public interface ${className}Dao {
 
     int update${className}(${className} ${classname});
 
-    int remove${className}(${pk.attrType} ${pk.columnName});
+    int remove${className}ByID(${pk.attrType} ${pk.columnName});
 
 }

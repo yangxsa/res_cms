@@ -1,5 +1,6 @@
 package com.yaa.cms.service;
 
+
 import com.yaa.cms.model.Notify;
 
 import java.util.List;
@@ -20,6 +21,6 @@ public interface NotifyService {
 
     int updateNotify(Notify notify);
 
-    int removeNotify(Integer id);
+    int removeNotifyByID(Integer id);
 
 }

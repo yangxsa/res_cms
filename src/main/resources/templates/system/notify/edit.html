@@ -24,7 +24,7 @@
                         <h3 class="box-title">修改</h3>
                         <div class="box-tools">
                             <div class="btn-group pull-right" style="margin-right: 10px">
-                                <a href="/cms/notify" class="btn btn-sm btn-default">
+                                <a href="/sys/notify" class="btn btn-sm btn-default">
                                     <i class="fa fa-list"></i>&nbsp;列表
                                 </a>
                             </div>
@@ -104,7 +104,7 @@
 <script>
     function update() {
         $.ajax({
-            url:'/cms/notify/update',
+            url:'/sys/notify/update',
             data:$("#notifyEditForm").serializeArray(),
             method:'POST',
             success:function (data) {

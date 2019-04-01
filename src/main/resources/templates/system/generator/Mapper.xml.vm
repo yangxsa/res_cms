@@ -57,6 +57,9 @@
         </set>
         where ${pk.columnName} = #{${pk.attrname},jdbcType=INTEGER}
     </update>
+    <delete id="remove${className}ByID" parameterType="java.lang.Integer">
+        delete from ${tableName} where id = #{${pk.columnName}}
+    </delete>
     <select id="count${className}Record" parameterType="java.util.Map" resultType="java.lang.Integer">
         select count(*) from ${tableName}
         where 1 = 1

@@ -1,10 +1,10 @@
 package com.yaa.cms.interceptor;
 
-import com.yaa.cms.model.SysMenu;
-import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.MenuService;
+import com.yaa.cms.system.model.SysMenu;
+import com.yaa.cms.system.model.SysUser;
+import com.yaa.cms.system.service.MenuService;
 import com.yaa.cms.util.ShiroUtils;
-import com.yaa.cms.vo.Tree;
+import com.yaa.cms.system.model.vo.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

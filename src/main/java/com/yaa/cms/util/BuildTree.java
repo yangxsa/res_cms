@@ -2,7 +2,7 @@ package com.yaa.cms.util;
 
 
 
-import com.yaa.cms.vo.Tree;
+import com.yaa.cms.system.model.vo.Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;

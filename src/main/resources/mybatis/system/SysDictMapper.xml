@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yaa.cms.dao.DictDao">
+<mapper namespace="com.yaa.cms.system.dao.DictDao">
 
-	<select id="get" resultType="com.yaa.cms.model.SysDict">
+	<select id="get" resultType="com.yaa.cms.system.model.SysDict">
 		select
 		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_time`,`update_time`,`remarks`,`status`
 		from sys_dict where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.yaa.cms.model.SysDict">
+	<select id="list" resultType="com.yaa.cms.system.model.SysDict">
 		select
 		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_time`,`update_time`,`remarks`,`status`
 		from sys_dict
@@ -56,7 +56,7 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.yaa.cms.model.SysDict"
+	<insert id="save" parameterType="com.yaa.cms.system.model.SysDict"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into sys_dict
 		(
@@ -86,7 +86,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.yaa.cms.model.SysDict">
+	<update id="update" parameterType="com.yaa.cms.system.model.SysDict">
 		update sys_dict
 		<set>
 			<if test="name != null">`name` = #{name}, </if>
@@ -115,7 +115,7 @@
 		</foreach>
 	</delete>
 
-	<select id="listType" resultType="com.yaa.cms.model.SysDict">
+	<select id="listType" resultType="com.yaa.cms.system.model.SysDict">
 		select distinct `type` , description from sys_dict
 	</select>
 

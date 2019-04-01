@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan
-@MapperScan("com.yaa.cms.dao")
+@MapperScan("com.yaa.**.dao")
 public class ResCmsApplication {
 
 	public static void main(String[] args) {

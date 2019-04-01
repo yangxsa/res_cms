@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yaa.cms.dao.MenuDao" >
-  <resultMap id="BaseResultMap" type="com.yaa.cms.model.SysMenu" >
+<mapper namespace="com.yaa.cms.system.dao.MenuDao" >
+  <resultMap id="BaseResultMap" type="com.yaa.cms.system.model.SysMenu" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -21,7 +21,7 @@
     from sys_menu
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insertMenu" parameterType="com.yaa.cms.model.SysMenu" >
+  <insert id="insertMenu" parameterType="com.yaa.cms.system.model.SysMenu" >
     insert into sys_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -82,7 +82,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateMenuByID" parameterType="com.yaa.cms.model.SysMenu" >
+  <update id="updateMenuByID" parameterType="com.yaa.cms.system.model.SysMenu" >
     update sys_menu
     <set >
       <if test="parentId != null" >

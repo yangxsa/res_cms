@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaa.cms.dao.CertDao" >
+    <resultMap id="BaseResultMap" type="com.yaa.cms.model.Cert">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="navicert" property="navicert"/>
+        <result column="approval_time" property="approvalTime"/>
+        <result column="number" property="number"/>
+        <result column="owned" property="owned"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_address" property="projectAddress"/>
+        <result column="accommodation" property="accommodation"/>
+        <result column="accommodation_address" property="accommodationAddress"/>
+        <result column="permit" property="permit"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,navicert,approval_time,number,owned,project_name,project_address,accommodation,accommodation_address,permit    </sql>
+
+    <sql id="Base_Column_WHERE">
+        <if test="id != null and id != ''"> and id = #{id} </if>
+        <if test="navicert != null and navicert != ''"> and navicert = #{navicert} </if>
+        <if test="approvalTime != null and approvalTime != ''"> and approval_time = #{approvalTime} </if>
+        <if test="number != null and number != ''"> and number = #{number} </if>
+        <if test="owned != null and owned != ''"> and owned = #{owned} </if>
+        <if test="projectName != null and projectName != ''"> and project_name = #{projectName} </if>
+        <if test="projectAddress != null and projectAddress != ''"> and project_address = #{projectAddress} </if>
+        <if test="accommodation != null and accommodation != ''"> and accommodation = #{accommodation} </if>
+        <if test="accommodationAddress != null and accommodationAddress != ''"> and accommodation_address = #{accommodationAddress} </if>
+        <if test="permit != null and permit != ''"> and permit = #{permit} </if>
+    </sql>
+
+    <select id="selectCertByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List"/>
+        from bsy_cert
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="saveCert" parameterType="com.yaa.cms.model.Cert" >
+        insert into bsy_cert
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="navicert != null">
+                navicert,
+            </if>
+            <if test="approvalTime != null">
+                approval_time,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="owned != null">
+                owned,
+            </if>
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="projectAddress != null">
+                project_address,
+            </if>
+            <if test="accommodation != null">
+                accommodation,
+            </if>
+            <if test="accommodationAddress != null">
+                accommodation_address,
+            </if>
+            <if test="permit != null">
+                permit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="navicert != null">
+                #{navicert},
+            </if>
+            <if test="approvalTime != null">
+                #{approvalTime},
+                    </if>
+            <if test="number != null">
+                #{number},
+                    </if>
+            <if test="owned != null">
+                #{owned},
+                    </if>
+            <if test="projectName != null">
+                #{projectName},
+                    </if>
+            <if test="projectAddress != null">
+                #{projectAddress},
+                    </if>
+            <if test="accommodation != null">
+                        #{accommodation},
+                    </if>
+            <if test="accommodationAddress != null">
+                #{accommodationAddress},
+                    </if>
+            <if test="permit != null">
+                #{permit},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateCert" parameterType="com.yaa.cms.model.Cert" >
+        update bsy_cert
+        <set>
+            <if test="navicert != null">
+                navicert = #{navicert},
+            </if>
+            <if test="approvalTime != null">
+                approval_time = #{approvalTime},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="owned != null">
+                owned = #{owned},
+            </if>
+            <if test="projectName != null">
+                project_name = #{projectName},
+            </if>
+            <if test="projectAddress != null">
+                project_address = #{projectAddress},
+            </if>
+            <if test="accommodation != null">
+                accommodation = #{accommodation},
+            </if>
+            <if test="accommodationAddress != null">
+                accommodation_address = #{accommodationAddress},
+            </if>
+            <if test="permit != null">
+                permit = #{permit},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="removeCertByID" parameterType="java.lang.Integer">
+        delete from bsy_cert where id = #{id}
+    </delete>
+    <select id="countCertRecord" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*) from bsy_cert
+        where 1 = 1
+        <include refid="Base_Column_WHERE"/>
+        order by id desc
+    </select>
+    <select id="selectCertByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bsy_cert
+        where 1 = 1
+        <include refid="Base_Column_WHERE"/>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+</mapper>

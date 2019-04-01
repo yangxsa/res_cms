@@ -1,8 +1,8 @@
 package com.yaa.cms.config;
 
-import com.yaa.cms.model.SysUser;
-import com.yaa.cms.service.MenuService;
-import com.yaa.cms.service.UserService;
+import com.yaa.cms.system.model.SysUser;
+import com.yaa.cms.system.service.MenuService;
+import com.yaa.cms.system.service.UserService;
 import com.yaa.cms.util.ShiroUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

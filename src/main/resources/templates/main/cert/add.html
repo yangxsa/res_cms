@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/common/include::header-meta('cert-新增')"></head>
+<body class="skin-black-light sidebar-mini">
+<header th:replace="/common/include::header-body"></header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside th:replace="/common/include::sidebar"></aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="min-height: 835px;">
+    <!--页面导航-->
+    <section class="content-header"><h1>
+        cert
+        <small>新增</small>
+    </h1>
+        <!-- breadcrumb start -->
+        <!-- breadcrumb end -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">创建</h3>
+                        <div class="box-tools">
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <a href="/bsy/cert" class="btn btn-sm btn-default">
+                                    <i class="fa fa-list"></i>&nbsp;列表
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" id="certSaveFrom">
+                        <div class="box-body">
+                                                                                                                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>车辆准运证号
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="navicert" class="form-control" type="text" placeholder="请输入车辆准运证号">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="approvalTime" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="number" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="owned" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="projectName" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="projectAddress" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="accommodation" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="accommodationAddress" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                                                <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                <em class="text-danger">* </em>
+                            </label>
+                            <div class="col-sm-8">
+                                <input name="permit" class="form-control" type="text" placeholder="请输入">
+                            </div>
+                        </div>
+                                                                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="col-sm-10">
+                                <input type="button" class="btn btn-info pull-right" onclick="save()" value="保存"/>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<footer th:replace="common/include::footer"></footer>
+</div>
+</body>
+<th:block th:replace="common/include::js-fragment" ></th:block>
+<script>
+    function save() {
+        $.ajax({
+            url:'/bsy/cert/save',
+            type : "POST",
+            data : $('#certSaveFrom').serialize(),
+            success:function (data) {
+                layer.alert(data.msg, {skin: 'layui-layer-lan', closeBtn: 0});
+            }
+        });
+    }
+</script>
+</html>

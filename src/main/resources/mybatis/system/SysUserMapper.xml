@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yaa.cms.dao.UserDao" >
-  <resultMap id="BaseResultMap" type="com.yaa.cms.model.SysUser" >
+<mapper namespace="com.yaa.cms.system.dao.UserDao" >
+  <resultMap id="BaseResultMap" type="com.yaa.cms.system.model.SysUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -59,7 +59,7 @@
       <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
     </where>
   </select>
-  <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.yaa.cms.model.SysUser" >
+  <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.yaa.cms.system.model.SysUser" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -114,7 +114,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateUserBySelective" parameterType="com.yaa.cms.model.SysUser" >
+  <update id="updateUserBySelective" parameterType="com.yaa.cms.system.model.SysUser" >
     update sys_user
     <set >
       <if test="name != null" >

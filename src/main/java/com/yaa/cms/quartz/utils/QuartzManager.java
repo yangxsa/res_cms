@@ -1,6 +1,6 @@
 package com.yaa.cms.quartz.utils;
 
-import com.yaa.cms.vo.ScheduleJob;
+import com.yaa.cms.system.model.vo.ScheduleJob;
 import org.quartz.*;
 import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.impl.matchers.GroupMatcher;

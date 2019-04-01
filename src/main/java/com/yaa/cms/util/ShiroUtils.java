@@ -1,6 +1,6 @@
 package com.yaa.cms.util;
 
-import com.yaa.cms.model.SysUser;
+import com.yaa.cms.system.model.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;

@@ -37,12 +37,7 @@ CREATE TABLE `sys_dict`  (
   INDEX `sys_dict_value`(`value`) USING BTREE,
   INDEX `sys_dict_label`(`name`) USING BTREE,
   INDEX `sys_dict_del_flag`(`status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '字典表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_dict
--- ----------------------------
-INSERT INTO `sys_dict` VALUES (123, 'Integer', 'Integer', 'gen_java_type', 'Java类型', 1, 0, '', '1', NULL, NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '字典表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -100,7 +95,7 @@ CREATE TABLE `sys_role`  (
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -116,46 +111,46 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` int(11) NULL DEFAULT NULL,
   `menu_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 301 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES (199, 2, 25);
-INSERT INTO `sys_role_menu` VALUES (200, 2, 15);
-INSERT INTO `sys_role_menu` VALUES (201, 2, 17);
-INSERT INTO `sys_role_menu` VALUES (202, 2, 24);
-INSERT INTO `sys_role_menu` VALUES (203, 2, 23);
-INSERT INTO `sys_role_menu` VALUES (204, 2, 14);
-INSERT INTO `sys_role_menu` VALUES (205, 2, 5);
-INSERT INTO `sys_role_menu` VALUES (206, 2, -1);
-INSERT INTO `sys_role_menu` VALUES (207, 2, 1);
-INSERT INTO `sys_role_menu` VALUES (208, 2, 2);
-INSERT INTO `sys_role_menu` VALUES (276, 1, -1);
-INSERT INTO `sys_role_menu` VALUES (277, 1, 30);
-INSERT INTO `sys_role_menu` VALUES (278, 1, 29);
-INSERT INTO `sys_role_menu` VALUES (279, 1, 28);
-INSERT INTO `sys_role_menu` VALUES (280, 1, 27);
-INSERT INTO `sys_role_menu` VALUES (281, 1, 24);
-INSERT INTO `sys_role_menu` VALUES (282, 1, 23);
-INSERT INTO `sys_role_menu` VALUES (283, 1, 25);
-INSERT INTO `sys_role_menu` VALUES (284, 1, 17);
-INSERT INTO `sys_role_menu` VALUES (285, 1, 15);
-INSERT INTO `sys_role_menu` VALUES (286, 1, 13);
-INSERT INTO `sys_role_menu` VALUES (287, 1, 12);
-INSERT INTO `sys_role_menu` VALUES (288, 1, 11);
-INSERT INTO `sys_role_menu` VALUES (289, 1, 10);
-INSERT INTO `sys_role_menu` VALUES (290, 1, 9);
-INSERT INTO `sys_role_menu` VALUES (291, 1, 8);
-INSERT INTO `sys_role_menu` VALUES (292, 1, 7);
-INSERT INTO `sys_role_menu` VALUES (293, 1, 6);
-INSERT INTO `sys_role_menu` VALUES (294, 1, 5);
-INSERT INTO `sys_role_menu` VALUES (295, 1, 4);
-INSERT INTO `sys_role_menu` VALUES (296, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (297, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (298, 1, 26);
-INSERT INTO `sys_role_menu` VALUES (299, 1, 14);
-INSERT INTO `sys_role_menu` VALUES (300, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (1, 2, 25);
+INSERT INTO `sys_role_menu` VALUES (2, 2, 15);
+INSERT INTO `sys_role_menu` VALUES (3, 2, 17);
+INSERT INTO `sys_role_menu` VALUES (4, 2, 24);
+INSERT INTO `sys_role_menu` VALUES (5, 2, 23);
+INSERT INTO `sys_role_menu` VALUES (6, 2, 14);
+INSERT INTO `sys_role_menu` VALUES (7, 2, 5);
+INSERT INTO `sys_role_menu` VALUES (8, 2, -1);
+INSERT INTO `sys_role_menu` VALUES (9, 2, 1);
+INSERT INTO `sys_role_menu` VALUES (10, 2, 2);
+INSERT INTO `sys_role_menu` VALUES (11, 1, -1);
+INSERT INTO `sys_role_menu` VALUES (12, 1, 30);
+INSERT INTO `sys_role_menu` VALUES (13, 1, 29);
+INSERT INTO `sys_role_menu` VALUES (14, 1, 28);
+INSERT INTO `sys_role_menu` VALUES (15, 1, 27);
+INSERT INTO `sys_role_menu` VALUES (16, 1, 24);
+INSERT INTO `sys_role_menu` VALUES (17, 1, 23);
+INSERT INTO `sys_role_menu` VALUES (18, 1, 25);
+INSERT INTO `sys_role_menu` VALUES (19, 1, 17);
+INSERT INTO `sys_role_menu` VALUES (20, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (21, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (22, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (23, 1, 11);
+INSERT INTO `sys_role_menu` VALUES (24, 1, 10);
+INSERT INTO `sys_role_menu` VALUES (25, 1, 9);
+INSERT INTO `sys_role_menu` VALUES (26, 1, 8);
+INSERT INTO `sys_role_menu` VALUES (27, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (28, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (29, 1, 5);
+INSERT INTO `sys_role_menu` VALUES (30, 1, 4);
+INSERT INTO `sys_role_menu` VALUES (31, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (32, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (33, 1, 26);
+INSERT INTO `sys_role_menu` VALUES (34, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (35, 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -201,7 +196,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, '张三', 'zhangsan', '982d3b4564f2cf1f3c27c3dcafe5e705', 'zhangsan@qq.com', 1, '238618edccb4395e7a2bcd852ad06b95', '2018-12-03 17:52:09');
+INSERT INTO `sys_user` VALUES (1, 'yang', 'admin', '982d3b4564f2cf1f3c27c3dcafe5e705', 'yanghbwork@163.com', 1, '238618edccb4395e7a2bcd852ad06b95', '2018-12-03 17:52:09');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -212,21 +207,18 @@ CREATE TABLE `sys_user_role`  (
   `user_id` int(11) NULL DEFAULT NULL,
   `role_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES (5, 1, 1);
-INSERT INTO `sys_user_role` VALUES (6, NULL, 2);
-INSERT INTO `sys_user_role` VALUES (7, NULL, 2);
-INSERT INTO `sys_user_role` VALUES (10, NULL, 2);
+INSERT INTO `sys_user_role` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for wk_car_info
 -- ----------------------------
-DROP TABLE IF EXISTS `wk_car_info`;
-CREATE TABLE `wk_car_info`  (
+DROP TABLE IF EXISTS `bsy_cert`;
+CREATE TABLE `bsy_cert`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `navicert` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车辆准运证号',
   `approval_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -243,6 +235,6 @@ CREATE TABLE `wk_car_info`  (
 -- ----------------------------
 -- Records of wk_car_info
 -- ----------------------------
-INSERT INTO `wk_car_info` VALUES (1, 'TZ201809111020', '', '京AFH329', '北京鑫驰通达货物运输有限公司', '北京地铁7号线东延工程土建施工04合同段', '北京市', '通州区漷县建筑垃圾消纳场(延期2016126)(延期2017119)(延期2018116)(延期2019121)', '工地北门-九德路-万盛南街-张采路-103国道-漷县消纳场', '2018-09-11至2019-06-30');
+INSERT INTO `bsy_cert` VALUES (1, 'TZ201809111020', '', '京AFH329', '北京鑫驰通达货物运输有限公司', '北京地铁7号线东延工程土建施工04合同段', '北京市', '通州区漷县建筑垃圾消纳场(延期2016126)(延期2017119)(延期2018116)(延期2019121)', '工地北门-九德路-万盛南街-张采路-103国道-漷县消纳场', '2018-09-11至2019-06-30');
 
 SET FOREIGN_KEY_CHECKS = 1;

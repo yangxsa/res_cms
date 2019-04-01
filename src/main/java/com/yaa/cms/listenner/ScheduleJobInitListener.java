@@ -1,7 +1,7 @@
 package com.yaa.cms.listenner;
 
 import com.yaa.cms.quartz.utils.QuartzManager;
-import com.yaa.cms.service.JobService;
+import com.yaa.cms.system.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;

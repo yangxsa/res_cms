@@ -2,8 +2,8 @@ package com.yaa.cms.util;
 
 
 import com.yaa.cms.common.Constant;
-import com.yaa.cms.vo.ColumnDO;
-import com.yaa.cms.vo.TableDO;
+import com.yaa.cms.system.model.vo.ColumnDO;
+import com.yaa.cms.system.model.vo.TableDO;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -106,7 +106,7 @@ public class GenUtils {
         map.put("classname", tableDO.getClassname());
         map.put("pathName", config.getString("package").substring(config.getString("package").lastIndexOf(".") + 1));
         map.put("columns", tableDO.getColumns());
-        map.put("package", config.getString("package"));
+        map.put("package", config.getString("package").substring(0,config.getString("package").lastIndexOf(".")));
         map.put("author", config.getString("author"));
         map.put("email", config.getString("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));

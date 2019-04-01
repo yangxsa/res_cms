@@ -1,6 +1,6 @@
 package com.yaa.cms.task;
 
-import com.yaa.cms.vo.Response;
+import com.yaa.cms.system.model.vo.Response;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

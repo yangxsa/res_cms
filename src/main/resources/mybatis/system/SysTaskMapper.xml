@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yaa.cms.dao.TaskDao" >
-  <resultMap id="BaseResultMap" type="com.yaa.cms.model.SysTask" >
+<mapper namespace="com.yaa.cms.system.dao.TaskDao" >
+  <resultMap id="BaseResultMap" type="com.yaa.cms.system.model.SysTask" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="cron_expression" property="cronExpression" jdbcType="VARCHAR" />
     <result column="method_name" property="methodName" jdbcType="VARCHAR" />
@@ -30,7 +30,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="saveSysTask" parameterType="com.yaa.cms.model.SysTask" >
+  <insert id="saveSysTask" parameterType="com.yaa.cms.system.model.SysTask" >
     insert into sys_task
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -110,7 +110,7 @@
     </trim>
   </insert>
 
-  <update id="updateTaskById" parameterType="com.yaa.cms.model.SysTask" >
+  <update id="updateTaskById" parameterType="com.yaa.cms.system.model.SysTask" >
     update sys_task
     <set >
       <if test="cronExpression != null" >
@@ -150,7 +150,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="list" resultType="com.yaa.cms.model.SysTask">
+  <select id="list" resultType="com.yaa.cms.system.model.SysTask">
     select * from sys_task
     <where>
       <if test="id != null and id != ''"> and id = #{id} </if>

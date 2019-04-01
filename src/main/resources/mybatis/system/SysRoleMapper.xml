@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yaa.cms.dao.RoleDao" >
-  <resultMap id="BaseResultMap" type="com.yaa.cms.model.SysRole" >
+<mapper namespace="com.yaa.cms.system.dao.RoleDao" >
+  <resultMap id="BaseResultMap" type="com.yaa.cms.system.model.SysRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sign" property="sign" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
     from sys_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="saveRole" parameterType="com.yaa.cms.model.SysRole" useGeneratedKeys="true" keyProperty="id">
+  <insert id="saveRole" parameterType="com.yaa.cms.system.model.SysRole" useGeneratedKeys="true" keyProperty="id">
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -54,7 +54,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateRole" parameterType="com.yaa.cms.model.SysRole" >
+  <update id="updateRole" parameterType="com.yaa.cms.system.model.SysRole" >
     update sys_role
     <set >
       <if test="name != null" >

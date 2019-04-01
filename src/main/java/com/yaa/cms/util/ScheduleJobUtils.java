@@ -1,8 +1,8 @@
 package com.yaa.cms.util;
 
 
-import com.yaa.cms.model.SysTask;
-import com.yaa.cms.vo.ScheduleJob;
+import com.yaa.cms.system.model.SysTask;
+import com.yaa.cms.system.model.vo.ScheduleJob;
 
 public class ScheduleJobUtils {
 	public static ScheduleJob entityToData(SysTask scheduleJobEntity) {

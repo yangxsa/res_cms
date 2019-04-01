@@ -20,7 +20,7 @@ import ${package}.service.${className}Service;
 @RequestMapping("/${pathName}/${classname}")
 public class ${className}Controller extends BaseController {
 
-    String prefix = "${pathName}/${classname}";
+    String prefix = "main/${classname}";
 
     @Autowired
     private ${className}Service ${classname}Service;
@@ -35,13 +35,13 @@ public class ${className}Controller extends BaseController {
         List<${className}> ${classname}List = ${classname}Service.select${className}ByPage(param);
         this.setPageNavigation(page, total);
         request.setAttribute("${classname}List", ${classname}List);
-        return prefix + "/${classname}";
+        return "main/${classname}/${classname}";
     }
 
     @GetMapping("/add")
     @RequiresPermissions("${pathName}:${classname}:add")
     public String add() {
-        return "${pathName}/${classname}/add";
+        return "main/${classname}/add";
     }
 
 
@@ -50,7 +50,7 @@ public class ${className}Controller extends BaseController {
     public String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}, Model model) {
 		${className} ${classname} =${classname}Service.select${className}ByID(${pk.attrname});
         model.addAttribute("${classname}", ${classname});
-        return "${pathName}/${classname}/edit";
+        return "main/${classname}/edit";
     }
 
     /**

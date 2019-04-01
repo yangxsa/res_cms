@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head th:replace="/common/include::header-meta('cert')"></head>
+<body class="skin-black-light sidebar-mini">
+<header th:replace="/common/include::header-body"></header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside th:replace="/common/include::sidebar"></aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="min-height: 835px;">
+    <!--页面导航-->
+    <section class="content-header"><h1>
+        cert
+        <small>列表</small>
+    </h1>
+        <!-- breadcrumb start -->
+        <!-- breadcrumb end -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"></h3>
+                        <div class="pull-right">
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filter-modal">
+                                    <i class="fa fa-filter"></i>&nbsp;&nbsp;筛选
+                                </button>
+                                <a id="refresh" th:href="@{/bsy/cert}" class="btn btn-sm btn-facebook">
+                                    <i class="fa fa-undo"></i>&nbsp;&nbsp;刷新
+                                </a>
+                            </div>
+
+                            <div class="modal fade" id="filter-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">筛选</h4>
+                                        </div>
+                                        <form th:action="@{/bsy/cert}" method="get">
+                                            <div class="modal-body">
+                                                <div class="form">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label></label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入cert" name="name"
+                                                                       th:value="${id}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>车辆准运证号</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control"
+                                                                       placeholder="请输入车辆准运证号" name="navicert"
+                                                                       th:value="${navicert}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary submit">提交</button>
+                                                <button type="reset" class="btn btn-warning pull-left">重置</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group pull-right" style="margin-right: 10px">
+                                <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i>导出</a>
+                                <button type="button" class="btn btn-sm btn-twitter dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="" target="_blank">全部</a></li>
+                                    <li><a href="" target="_blank">当前页</a></li>
+                                    <li><a href="" target="_blank" class="export-selected">选择的行</a></li>
+                                </ul>
+                            </div>
+                            &nbsp;&nbsp;
+                        </div>
+                        <span>
+                        <a shiro:hasPermission="bsy:cert:add" type="button" class="btn btn-sm btn-success" href="/bsy/cert/add">
+							<i class="fa fa-plus" aria-hidden="true"></i>添加
+						</a>
+                    </span>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover text-center">
+                            <tbody>
+                            <tr>
+                                <th>编号</th>
+                                <th>车辆准运证号</th>
+                                <th>车牌号</th>
+                                <th>车辆所属企业</th>
+                                <th>消纳地点</th>
+                                <th>准运证有效期</th>
+                                <th>操作</th>
+                            </tr>
+                            <th:block th:each="cert : ${certList}">
+                                <tr>
+                                    <td th:text="${cert.id}"></td>
+                                    <td th:text="${cert.navicert}"></td>
+                                    <td th:text="${cert.number}"></td>
+                                    <td th:text="${cert.owned}"></td>
+                                    <td th:text="${cert.accommodationAddress}"></td>
+                                    <td th:text="${cert.permit}"></td>
+                                    <td>
+                                        <th:block shiro:hasPermission="bsy:cert:edit">
+                                            <a class="btn btn-primary btn-sm" th:href="@{'/bsy/cert/edit/'+${cert.id}}"
+                                               title="编辑">
+                                                <i class="fa fa-edit "></i>
+                                            </a>
+                                        </th:block>
+                                        <th:block shiro:hasPermission="bsy:cert:remove">
+                                            <a class="btn btn-warning btn-sm" th:onclick="'remove(\''+${cert.id}+'\')'"
+                                               title="删除">
+                                                <i class="fa fa-remove"></i>
+                                            </a>
+                                        </th:block>
+                                        <a class="btn  btn-warning btn-sm" th:href="" title="查看">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<footer th:replace="common/include::footer"></footer>
+</div>
+</body>
+<th:block th:replace="common/include::js-fragment" ></th:block>
+<script>
+    function remove(id) {
+        layer.confirm('确定要删除选中的记录？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                url:'/bsy/cert/remove',
+                data:{
+                    "id":id,
+                },
+                method:'POST',
+                success:function (data) {
+                    if(0 == data.code) {
+                        document.getElementById("refresh").click();
+                    }else{
+                        layer.alert(data.msg, {skin: 'layui-layer-lan', closeBtn: 0});
+                    }
+                }
+            })
+        });
+    }
+</script>
+</html>

@@ -42,7 +42,7 @@
                                             </button>
                                             <h4 class="modal-title" id="myModalLabel">筛选</h4>
                                         </div>
-                                        <form th:action="@{/${pathName}/${${classname}}}" method="get">
+                                        <form th:action="@{/${pathName}/${classname}}" method="get">
                                             <div class="modal-body">
                                                 <div class="form">
                                                     <div class="form-group">
@@ -53,7 +53,7 @@
                                                                     <div class="input-group-addon">
                                                                         <i class="fa fa-pencil"></i>
                                                                     </div>
-                                                                    <input type="text" class="form-control" placeholder="请输入${classname}" name="name" th:value="${${column.attrname}}">
+                                                                    <input type="text" class="form-control" placeholder="请输入${column.comments}" name="${column.attrname}" th:value="${${column.attrname}}">
                                                                 </div>
                                                             </div>
                                                         #end
@@ -99,7 +99,7 @@
                                 #end
                                 <th>操作</th>
                             </tr>
-                            <th:block th:each="${classname} : ${classname}List">
+                            <th:block th:each="${classname} : ${${classname}List}">
                                 <tr>
                                     #foreach($column in $columns)
                                     #if($column.columnName != $pk.columnName)

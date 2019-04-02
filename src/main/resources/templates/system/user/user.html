@@ -123,7 +123,7 @@
                                             <i class="fa fa-remove"></i>
                                         </a>
                                     </th:block>
-                                    <th:block th:hasPermission="sys:user:resetPwd">
+                                    <th:block shiro:hasPermission="sys:user:resetPwd">
                                         <a class="btn btn-success btn-sm" th:href="@{'/sys/user/resetPwd/'+${user.id}}" title="重置密码">
                                             <i class="fa fa-key"></i>
                                         </a>

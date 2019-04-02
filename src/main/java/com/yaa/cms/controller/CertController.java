@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
-@RequestMapping("/bsy/cert")
 public class CertController extends BaseController {
 
     String prefix = "main/cert";
@@ -27,7 +26,7 @@ public class CertController extends BaseController {
     private CertService certService;
 
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/bsy/cert")
     @RequiresPermissions("bsy:cert:cert")
     public String list(@RequestParam(value = "page", defaultValue = "1") int page) {
         Map<String, Object> param = buildPageParam(page);
@@ -39,14 +38,14 @@ public class CertController extends BaseController {
         return prefix + "/cert";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/bsy/cert/add")
     @RequiresPermissions("bsy:cert:add")
     public String add() {
         return "main/cert/add";
     }
 
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/bsy/cert/edit/{id}")
     @RequiresPermissions("bsy:cert:edit")
     public String edit(@PathVariable("id") Integer id, Model model) {
 		Cert cert =certService.selectCertByID(id);
@@ -58,7 +57,7 @@ public class CertController extends BaseController {
      * 保存
      */
     @ResponseBody
-    @PostMapping("/save")
+    @PostMapping("/bsy/cert/save")
     @RequiresPermissions("bsy:cert:add")
     public Result save( Cert cert) {
         if (certService.saveCert(cert) > 0) {
@@ -71,7 +70,7 @@ public class CertController extends BaseController {
      * 修改
      */
     @ResponseBody
-    @RequestMapping("/update")
+    @RequestMapping("/bsy/cert/update")
     @RequiresPermissions("bsy:cert:edit")
     public Result update( Cert cert) {
         certService.updateCert(cert);
@@ -81,7 +80,7 @@ public class CertController extends BaseController {
     /**
      * 删除
      */
-    @PostMapping("/remove")
+    @PostMapping("/bsy/cert/remove")
     @ResponseBody
     @RequiresPermissions("bsy:cert:remove")
     public Result remove( Integer id) {
@@ -92,10 +91,21 @@ public class CertController extends BaseController {
     }
 
     @ResponseBody
-    @PostMapping("/importExcel")
+    @PostMapping("/bsy/cert/importExcel")
     @RequiresPermissions("bsy:cert:import")
     public Result importExcel(@RequestParam("file") MultipartFile file){
         return certService.importExcel(file);
+    }
+
+    @GetMapping("/cert/{id}")
+    public String cert(@PathVariable("id") Integer id, Model model){
+        if(id > 0) {
+            Cert cert = certService.selectCertByID(id);
+            model.addAttribute("cert", cert);
+        }else{
+            return "error/404.html";
+        }
+        return "main/cert/certpaper";
     }
 
 }

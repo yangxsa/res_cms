@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
-<head th:replace="/common/include::header-meta('cert')"></head>
+<head th:replace="/common/include::header-meta('二维码')"></head>
 <body class="skin-black-light sidebar-mini">
 <header th:replace="/common/include::header-body"></header>
 <!-- Left side column. contains the logo and sidebar -->
@@ -9,7 +9,7 @@
 <div class="content-wrapper" style="min-height: 835px;">
     <!--页面导航-->
     <section class="content-header"><h1>
-        cert
+        二维码
         <small>列表</small>
     </h1>
         <!-- breadcrumb start -->
@@ -46,17 +46,6 @@
                                             <div class="modal-body">
                                                 <div class="form">
                                                     <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label></label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </div>
-                                                                <input type="text" class="form-control"
-                                                                       placeholder="请输入cert" name="name"
-                                                                       th:value="${id}">
-                                                            </div>
-                                                        </div>
                                                         <div class="form-group">
                                                             <label>车辆准运证号</label>
                                                             <div class="input-group">
@@ -134,7 +123,7 @@
                                                 <i class="fa fa-remove"></i>
                                             </a>
                                         </th:block>
-                                        <a class="btn  btn-warning btn-sm" th:href="" title="查看">
+                                        <a class="btn  btn-warning btn-sm" target="_blank" th:href="'http://qr.liantu.com/api.php?text=http://www.yfwsb.top/cert/'+${cert.id}" title="查看">
                                             <i class="fa fa-search"></i>
                                         </a>
                                     </td>
@@ -143,6 +132,8 @@
                             </tbody>
                         </table>
                     </div>
+                    <!--page box footer-->
+                    <div th:replace="/common/macros::pageNav(${pageInfo})"></div>
                 </div>
             </div>
         </div>

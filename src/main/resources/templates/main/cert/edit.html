@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
-<head th:replace="/common/include::header-meta('cert-修改')"></head>
+<head th:replace="/common/include::header-meta('二维码-修改')"></head>
 <body class="skin-black-light sidebar-mini">
 <header th:replace="/common/include::header-body"></header>
 <!-- Left side column. contains the logo and sidebar -->
@@ -9,7 +9,7 @@
 <div class="content-wrapper" style="min-height: 835px;">
     <!--页面导航-->
     <section class="content-header"><h1>
-        cert
+        二维码
         <small>修改</small>
     </h1>
         <!-- breadcrumb start -->
@@ -34,8 +34,8 @@
                     <!-- form start -->
                     <form class="form-horizontal" id="certEditForm">
                         <div class="box-body">
-                            <input name="id" th:value="${cert.id}"  type="hidden"/>
-                                                                                                                                            <div class="form-group">
+                            <input name="id" th:value="${cert.id}" type="hidden"/>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
                                     <em class="text-danger">* </em>车辆准运证号
                                 </label>
@@ -43,71 +43,72 @@
                                     <input name="navicert" th:value="${cert.navicert}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>车辆审批时间
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="approvalTime" th:value="${cert.approvalTime}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>车牌号
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="number" th:value="${cert.number}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>车辆所属企业
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="owned" th:value="${cert.owned}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>工程名称
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="projectName" th:value="${cert.projectName}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>工程地址
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="projectAddress" th:value="${cert.projectAddress}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>消纳场名称
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="accommodation" th:value="${cert.accommodation}" class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>消纳地点
                                 </label>
                                 <div class="col-sm-8">
-                                    <input name="accommodationAddress" th:value="${cert.accommodationAddress}" class="form-control">
+                                    <input name="accommodationAddress" th:value="${cert.accommodationAddress}"
+                                           class="form-control">
                                 </div>
                             </div>
-                                                                                                                <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">
-                                    <em class="text-danger">* </em>
+                                    <em class="text-danger">* </em>准运证有效期
                                 </label>
                                 <div class="col-sm-8">
                                     <input name="permit" th:value="${cert.permit}" class="form-control">
                                 </div>
                             </div>
-                                                                                </div>
+                        </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <div class="col-sm-10">

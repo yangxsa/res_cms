@@ -123,6 +123,8 @@
                             </tbody>
                         </table>
                     </div>
+                    <!--page box footer-->
+                    <div th:replace="/common/macros::pageNav(${pageInfo})"></div>
                 </div>
             </div>
         </div>

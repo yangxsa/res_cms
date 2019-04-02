@@ -93,7 +93,7 @@ public class CertController extends BaseController {
 
     @ResponseBody
     @PostMapping("/importExcel")
-//    @RequestMapping("bsy:cert:import")
+    @RequiresPermissions("bsy:cert:import")
     public Result importExcel(@RequestParam("file") MultipartFile file){
         return certService.importExcel(file);
     }

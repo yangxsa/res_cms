@@ -69,9 +69,11 @@
                                 </div>
                             </div>
                             <div class="btn-group pull-right" style="margin-right: 10px">
-                                <button id="import" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-upload"></i>导入
-                                </button>
+                                <th:block shior:hasPermission="bsy:cert:import">
+                                    <button id="import" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-upload"></i>导入
+                                    </button>
+                                </th:block>
                                 <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="file" style="display: none">
                                 <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i>导出</a>
                                 <button type="button" class="btn btn-sm btn-twitter dropdown-toggle" data-toggle="dropdown">

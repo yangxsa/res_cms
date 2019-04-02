@@ -1,5 +1,7 @@
 package com.yaa.cms.service.impl;
 
+import com.yaa.cms.util.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import java.util.Map;
 import com.yaa.cms.dao.CertDao;
 import com.yaa.cms.model.Cert;
 import com.yaa.cms.service.CertService;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -48,6 +51,23 @@ public class CertServiceImpl implements CertService {
     @Override
     public int removeCertByID(Integer id) {
         return certDao.removeCertByID(id);
+    }
+
+    @Override
+    public Result importExcel(MultipartFile file) {
+        Long size = file.getSize();
+        String fileType = file.getContentType();
+        if(file == null){
+            return Result.error("文件不能为空");
+        }
+        // 文件大小超过2M
+        if (size > 2097152) {
+            return Result.error("资源解析失败,导入文件超过2M！");
+        }
+        if(!fileType.contains("xls")){
+            return Result.error("仅支持xls文件");
+        }
+        return Result.ok();
     }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.yaa.cms.model.Cert;
 import com.yaa.cms.service.CertService;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -73,7 +74,7 @@ public class CertController extends BaseController {
     @RequestMapping("/update")
     @RequiresPermissions("bsy:cert:edit")
     public Result update( Cert cert) {
-			certService.updateCert(cert);
+        certService.updateCert(cert);
         return Result.ok();
     }
 
@@ -88,6 +89,13 @@ public class CertController extends BaseController {
             return Result.ok();
         }
         return Result.error();
+    }
+
+    @ResponseBody
+    @PostMapping("/importExcel")
+//    @RequestMapping("bsy:cert:import")
+    public Result importExcel(@RequestParam("file") MultipartFile file){
+        return certService.importExcel(file);
     }
 
 }

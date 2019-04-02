@@ -1,6 +1,8 @@
 package com.yaa.cms.service;
 
 import com.yaa.cms.model.Cert;
+import com.yaa.cms.util.Result;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -21,5 +23,7 @@ public interface CertService {
     int updateCert(Cert cert);
 
     int removeCertByID(Integer id);
+
+    Result importExcel(MultipartFile file);
 
 }

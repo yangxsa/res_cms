@@ -6,7 +6,7 @@
 <!-- Left side column. contains the logo and sidebar -->
 <aside th:replace="/common/include::sidebar"></aside>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="min-height: 835px;">
+<div class="content-wrapper" style="min-height: 0px;">
     <!--页面导航-->
     <section class="content-header"><h1>
         二维码
@@ -69,6 +69,10 @@
                                 </div>
                             </div>
                             <div class="btn-group pull-right" style="margin-right: 10px">
+                                <button id="import" class="btn btn-sm btn-default">
+                                    <i class="fa fa-upload"></i>导入
+                                </button>
+                                <input type="file" id="file" style="display: none">
                                 <a class="btn btn-sm btn-twitter"><i class="fa fa-download"></i>导出</a>
                                 <button type="button" class="btn btn-sm btn-twitter dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
@@ -144,6 +148,29 @@
 </body>
 <th:block th:replace="common/include::js-fragment" ></th:block>
 <script>
+    $("#import").on("click",function () {
+       $("#file").click();
+    });
+
+    $("#file").on("change",function () {
+        var formData = new FormData();
+        var files = $("#file")[0].files[0];
+        formData.append("file",files);
+        $.ajax({
+            url : '/bsy/cert/importExcel',
+            type:'POST',
+            data: formData,
+            processData:false,
+            contentType:false,
+            success:function(data){
+                if(0==data.code){
+                    document.getElementById("refresh").click();
+                }else{
+                    layer.msg(data.msg, {icon:"2"});
+                }
+            },
+        })
+    });
     function remove(id) {
         layer.confirm('确定要删除选中的记录？', {
             btn : [ '确定', '取消' ]

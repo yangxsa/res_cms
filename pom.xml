@@ -159,7 +159,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>../lib/</classpathPrefix>
-							<mainClass>com.yaa.ShiroApplication</mainClass>
+							<mainClass>com.yaa.cms.ResCmsApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

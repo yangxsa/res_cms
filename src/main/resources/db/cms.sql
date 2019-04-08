@@ -1,21 +1,44 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : blog
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 50716
  Source Host           : localhost:3306
- Source Schema         : spring-shiro
+ Source Schema         : cms
 
  Target Server Type    : MySQL
  Target Server Version : 50716
  File Encoding         : 65001
 
- Date: 22/03/2019 17:41:22
+ Date: 08/04/2019 09:53:13
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for bsy_cert
+-- ----------------------------
+DROP TABLE IF EXISTS `bsy_cert`;
+CREATE TABLE `bsy_cert`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `navicert` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车辆准运证号',
+  `approval_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车辆审批时间',
+  `number` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车牌号',
+  `owned` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车辆所属企业',
+  `project_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程名称',
+  `project_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程地址',
+  `accommodation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '消纳场名称',
+  `accommodation_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '\r\n消纳地点',
+  `permit` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '准运证有效期',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of bsy_cert
+-- ----------------------------
+INSERT INTO `bsy_cert` VALUES (1, 'TZ201809111020', '', '京AFH329', '北京鑫驰通达货物运输有限公司', '北京地铁7号线东延工程土建施工04合同段', '北京市', '通州区漷县建筑垃圾消纳场(延期2016126)(延期2017119)(延期2018116)(延期2019121)', '工地北门-九德路-万盛南街-张采路-103国道-漷县消纳场', '2018-09-11至2019-06-30');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -54,7 +77,7 @@ CREATE TABLE `sys_menu`  (
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序值',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -79,10 +102,32 @@ INSERT INTO `sys_menu` VALUES (23, 17, '新增', '', 'sys:dict:add', 2, '', NULL
 INSERT INTO `sys_menu` VALUES (24, 17, '删除', '', 'sys:dict:remove', 2, '', NULL, NULL);
 INSERT INTO `sys_menu` VALUES (25, 14, '任务计划', '/sys/job', '', 1, 'fa fa-calendar-o', 3, NULL);
 INSERT INTO `sys_menu` VALUES (26, 0, '外联业务', '', '', 0, 'fa fa-briefcase', 2, NULL);
-INSERT INTO `sys_menu` VALUES (27, 26, '二维码管理', '/system/carInfo', 'sys:carInfo:carInfo', 1, 'fa fa-file-photo-o', 1, NULL);
-INSERT INTO `sys_menu` VALUES (28, 27, '新增', '', 'sys:carInfo:add', 2, '', NULL, NULL);
-INSERT INTO `sys_menu` VALUES (29, 27, '删除', '', 'sys:carInfo:remove', 2, '', NULL, NULL);
-INSERT INTO `sys_menu` VALUES (30, 27, '编辑', '', 'sys:carInfo:edit', 2, '', NULL, NULL);
+INSERT INTO `sys_menu` VALUES (27, 26, '二维码管理', '/bsy/cert', 'bsy:cert:cert', 1, 'fa fa-file-photo-o', 1, NULL);
+INSERT INTO `sys_menu` VALUES (28, 27, '新增', '', 'bsy:cert:add', 2, '', NULL, NULL);
+INSERT INTO `sys_menu` VALUES (29, 27, '删除', '', 'bsy:cert:remove', 2, '', NULL, NULL);
+INSERT INTO `sys_menu` VALUES (30, 27, '编辑', '', 'bsy:cert:edit', 2, '', NULL, NULL);
+INSERT INTO `sys_menu` VALUES (31, 27, '导入', '', 'bsy:cert:import', 2, '', NULL, NULL);
+INSERT INTO `sys_menu` VALUES (32, 3, '重置密码', '', 'sys:user:resetPwd', 2, '', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_notify
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notify`;
+CREATE TABLE `sys_notify`  (
+  `id` int(11) NOT NULL COMMENT '主键',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '内容',
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_notify
+-- ----------------------------
+INSERT INTO `sys_notify` VALUES (1, 'dsa', 'sad', '0', 'asdsa', NULL, '2019-04-01 16:16:56');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -111,7 +156,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` int(11) NULL DEFAULT NULL,
   `menu_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 158 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -126,31 +171,33 @@ INSERT INTO `sys_role_menu` VALUES (7, 2, 5);
 INSERT INTO `sys_role_menu` VALUES (8, 2, -1);
 INSERT INTO `sys_role_menu` VALUES (9, 2, 1);
 INSERT INTO `sys_role_menu` VALUES (10, 2, 2);
-INSERT INTO `sys_role_menu` VALUES (11, 1, -1);
-INSERT INTO `sys_role_menu` VALUES (12, 1, 30);
-INSERT INTO `sys_role_menu` VALUES (13, 1, 29);
-INSERT INTO `sys_role_menu` VALUES (14, 1, 28);
-INSERT INTO `sys_role_menu` VALUES (15, 1, 27);
-INSERT INTO `sys_role_menu` VALUES (16, 1, 24);
-INSERT INTO `sys_role_menu` VALUES (17, 1, 23);
-INSERT INTO `sys_role_menu` VALUES (18, 1, 25);
-INSERT INTO `sys_role_menu` VALUES (19, 1, 17);
-INSERT INTO `sys_role_menu` VALUES (20, 1, 15);
-INSERT INTO `sys_role_menu` VALUES (21, 1, 13);
-INSERT INTO `sys_role_menu` VALUES (22, 1, 12);
-INSERT INTO `sys_role_menu` VALUES (23, 1, 11);
-INSERT INTO `sys_role_menu` VALUES (24, 1, 10);
-INSERT INTO `sys_role_menu` VALUES (25, 1, 9);
-INSERT INTO `sys_role_menu` VALUES (26, 1, 8);
-INSERT INTO `sys_role_menu` VALUES (27, 1, 7);
-INSERT INTO `sys_role_menu` VALUES (28, 1, 6);
-INSERT INTO `sys_role_menu` VALUES (29, 1, 5);
-INSERT INTO `sys_role_menu` VALUES (30, 1, 4);
-INSERT INTO `sys_role_menu` VALUES (31, 1, 3);
-INSERT INTO `sys_role_menu` VALUES (32, 1, 2);
-INSERT INTO `sys_role_menu` VALUES (33, 1, 26);
-INSERT INTO `sys_role_menu` VALUES (34, 1, 14);
-INSERT INTO `sys_role_menu` VALUES (35, 1, 1);
+INSERT INTO `sys_role_menu` VALUES (131, 1, 31);
+INSERT INTO `sys_role_menu` VALUES (132, 1, 30);
+INSERT INTO `sys_role_menu` VALUES (133, 1, 29);
+INSERT INTO `sys_role_menu` VALUES (134, 1, 28);
+INSERT INTO `sys_role_menu` VALUES (135, 1, 25);
+INSERT INTO `sys_role_menu` VALUES (136, 1, 24);
+INSERT INTO `sys_role_menu` VALUES (137, 1, 23);
+INSERT INTO `sys_role_menu` VALUES (138, 1, 15);
+INSERT INTO `sys_role_menu` VALUES (139, 1, 13);
+INSERT INTO `sys_role_menu` VALUES (140, 1, 12);
+INSERT INTO `sys_role_menu` VALUES (141, 1, 11);
+INSERT INTO `sys_role_menu` VALUES (142, 1, 10);
+INSERT INTO `sys_role_menu` VALUES (143, 1, 9);
+INSERT INTO `sys_role_menu` VALUES (144, 1, 8);
+INSERT INTO `sys_role_menu` VALUES (145, 1, 7);
+INSERT INTO `sys_role_menu` VALUES (146, 1, 6);
+INSERT INTO `sys_role_menu` VALUES (147, 1, 5);
+INSERT INTO `sys_role_menu` VALUES (148, 1, 27);
+INSERT INTO `sys_role_menu` VALUES (149, 1, 26);
+INSERT INTO `sys_role_menu` VALUES (150, 1, 17);
+INSERT INTO `sys_role_menu` VALUES (151, 1, 14);
+INSERT INTO `sys_role_menu` VALUES (152, 1, 4);
+INSERT INTO `sys_role_menu` VALUES (153, 1, 2);
+INSERT INTO `sys_role_menu` VALUES (154, 1, -1);
+INSERT INTO `sys_role_menu` VALUES (155, 1, 32);
+INSERT INTO `sys_role_menu` VALUES (156, 1, 3);
+INSERT INTO `sys_role_menu` VALUES (157, 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -175,7 +222,7 @@ CREATE TABLE `sys_task`  (
 -- ----------------------------
 -- Records of sys_task
 -- ----------------------------
-INSERT INTO `sys_task` VALUES (1, '0/10 * * * * ?', 'run1', '1', '111', 'com.yaa.task.WelcomeJob', '0', 'group1', NULL, 'welcomJob', '2019-01-03 17:12:31', '2019-01-03 17:12:28');
+INSERT INTO `sys_task` VALUES (1, '0/10 * * * * ?', 'run1', '1', '111', 'com.yaa.cms.task.WelcomeJob', '1', 'group1', NULL, 'welcomJob', '2019-01-03 17:12:31', '2019-01-03 17:12:28');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -199,6 +246,19 @@ CREATE TABLE `sys_user`  (
 INSERT INTO `sys_user` VALUES (1, 'yang', 'admin', '982d3b4564f2cf1f3c27c3dcafe5e705', 'yanghbwork@163.com', 1, '238618edccb4395e7a2bcd852ad06b95', '2018-12-03 17:52:09');
 
 -- ----------------------------
+-- Table structure for sys_user_notify
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_notify`;
+CREATE TABLE `sys_user_notify`  (
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `notify_id` int(255) NULL DEFAULT NULL COMMENT '消息ID',
+  `is_read` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '0未读 1已读',
+  `read_time` datetime(0) NULL DEFAULT NULL COMMENT '阅读时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
@@ -213,28 +273,5 @@ CREATE TABLE `sys_user_role`  (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1, 1);
-
--- ----------------------------
--- Table structure for wk_car_info
--- ----------------------------
-DROP TABLE IF EXISTS `bsy_cert`;
-CREATE TABLE `bsy_cert`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `navicert` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '车辆准运证号',
-  `approval_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `number` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `owned` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `project_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `project_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `accommodation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `accommodation_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `permit` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of wk_car_info
--- ----------------------------
-INSERT INTO `bsy_cert` VALUES (1, 'TZ201809111020', '', '京AFH329', '北京鑫驰通达货物运输有限公司', '北京地铁7号线东延工程土建施工04合同段', '北京市', '通州区漷县建筑垃圾消纳场(延期2016126)(延期2017119)(延期2018116)(延期2019121)', '工地北门-九德路-万盛南街-张采路-103国道-漷县消纳场', '2018-09-11至2019-06-30');
 
 SET FOREIGN_KEY_CHECKS = 1;

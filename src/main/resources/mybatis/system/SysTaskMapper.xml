@@ -150,7 +150,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="list" resultType="com.yaa.cms.system.model.SysTask">
+  <select id="list" resultMap="BaseResultMap">
     select * from sys_task
     <where>
       <if test="id != null and id != ''"> and id = #{id} </if>

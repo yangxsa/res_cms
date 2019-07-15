@@ -26,21 +26,19 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        if(!request.getRequestURI().contains("error")) {
-            SysUser user = ShiroUtils.getUser();
-            if (user != null) {
-                List<Tree<SysMenu>> menus = menuService.selectMenuTreeByID(ShiroUtils.getUserId(), request.getRequestURI());
-                request.setAttribute("menus", menus);
-                request.setAttribute("cmsName", ShiroUtils.getUser().getName());
-                if (false) {
-                    //TODO 用户头像显示
-                    request.setAttribute("picUrl", "");
-                } else {
-                    request.setAttribute("picUrl", "/img/photo_s.jpg");
-                }
-                request.setAttribute("cmsUserName", ShiroUtils.getUser().getUsername());
-                request.setAttribute("cmsUserId", ShiroUtils.getUserId());
+        SysUser user = ShiroUtils.getUser();
+        if (user != null) {
+            List<Tree<SysMenu>> menus = menuService.selectMenuTreeByID(ShiroUtils.getUserId(), request.getRequestURI());
+            request.setAttribute("menus", menus);
+            request.setAttribute("cmsName", ShiroUtils.getUser().getName());
+            if (false) {
+                //TODO 用户头像显示
+                request.setAttribute("picUrl", "");
+            } else {
+                request.setAttribute("picUrl", "/img/photo_s.jpg");
             }
+            request.setAttribute("cmsUserName", ShiroUtils.getUser().getUsername());
+            request.setAttribute("cmsUserId", ShiroUtils.getUserId());
         }
         return true;
     }

@@ -150,7 +150,42 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.25</version>
+		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<!-- 环境标识，需要与配置文件的名称相对应 -->
+				<activatedProperties>dev</activatedProperties>
+				<!-- redis 内存服务器 -->
+				<cache.enable>1</cache.enable>
+				<cache.redis.host>192.168.0.116</cache.redis.host>
+				<cache.redis.port>6379</cache.redis.port>
+				<cache.redis.enableCluster>0</cache.redis.enableCluster>
+			</properties>
+			<activation>
+				<!-- 默认环境 -->
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<activatedProperties>pro</activatedProperties>
+				<!-- redis 内存服务器 -->
+				<cache.enable>1</cache.enable>
+				<cache.redis.host>192.168.0.116</cache.redis.host>
+				<cache.redis.port>6379</cache.redis.port>
+				<cache.redis.enableCluster>0</cache.redis.enableCluster>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<finalName>site-work</finalName>

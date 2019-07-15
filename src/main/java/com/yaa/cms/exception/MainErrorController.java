@@ -21,13 +21,13 @@ public class MainErrorController implements ErrorController {
     public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
         int code = response.getStatus();
         if (404 == code) {
-            return new ModelAndView("error/404");
+            return new ModelAndView("common/404");
         } else if (403 == code) {
-            return new ModelAndView("error/403");
+            return new ModelAndView("common/403");
         } else if (401 == code) {
             return new ModelAndView("login");
         } else {
-            return new ModelAndView("error/500");
+            return new ModelAndView("common/500");
         }
 
     }

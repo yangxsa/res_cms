@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<head th:fragment="header-meta(title)">
+<head th:fragment="header-meta(title)" xmlns:th="http://www.w3.org/1999/xhtml">
     <title th:text="${title}"></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -156,7 +156,7 @@
         <ul class="sidebar-menu tree" data-widget="tree">
             <li class="header">菜单</li>
             <li>
-                <a href="https://adminlte.io/docs">
+                <a href="/index">
                     <i class="fa fa-home"></i><span>首页</span>
                 </a>
             </li>

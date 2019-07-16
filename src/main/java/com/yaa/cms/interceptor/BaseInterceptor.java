@@ -3,8 +3,10 @@ package com.yaa.cms.interceptor;
 import com.yaa.cms.system.model.SysMenu;
 import com.yaa.cms.system.model.SysUser;
 import com.yaa.cms.system.service.MenuService;
+import com.yaa.cms.util.HeadUtils;
 import com.yaa.cms.util.ShiroUtils;
 import com.yaa.cms.system.model.vo.Tree;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,11 +32,10 @@ public class BaseInterceptor implements HandlerInterceptor {
             List<Tree<SysMenu>> menus = menuService.selectMenuTreeByID(ShiroUtils.getUserId(), request.getRequestURI());
             request.setAttribute("menus", menus);
             request.setAttribute("cmsName", ShiroUtils.getUser().getName());
-            if (false) {
-                //TODO 用户头像显示
-                request.setAttribute("picUrl", "");
-            } else {
-                request.setAttribute("picUrl", "/img/photo_s.jpg");
+            if(StringUtils.isNotBlank(user.getEmail())){
+                request.setAttribute("picUrl", HeadUtils.gravatar(user.getEmail()));
+            }else{
+                request.setAttribute("picUrl", HeadUtils.gravatar("123@163.com"));
             }
             request.setAttribute("cmsName",user.getName());
             request.setAttribute("cmsUserId",user.getId());

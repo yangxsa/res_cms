@@ -23,7 +23,6 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Autowired
     private MenuService menuService;
 
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         SysUser user = ShiroUtils.getUser();
@@ -37,8 +36,8 @@ public class BaseInterceptor implements HandlerInterceptor {
             } else {
                 request.setAttribute("picUrl", "/img/photo_s.jpg");
             }
-            request.setAttribute("cmsUserName", ShiroUtils.getUser().getUsername());
-            request.setAttribute("cmsUserId", ShiroUtils.getUserId());
+            request.setAttribute("cmsName",user.getName());
+            request.setAttribute("cmsUserId",user.getId());
         }
         return true;
     }

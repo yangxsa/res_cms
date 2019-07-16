@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Mapper
 public interface CodeDao {
-	@Select("select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables"
+	@Select("select table_name tableName, `engine` engine, table_comment tableComment, create_time createTime from information_schema.tables"
 			+ " where table_schema = (select database())")
 	List<Map<String, Object>> list();
 

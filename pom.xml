@@ -175,9 +175,9 @@
 			</activation>
 		</profile>
 		<profile>
-			<id>pro</id>
+			<id>prod</id>
 			<properties>
-				<activatedProperties>pro</activatedProperties>
+				<activatedProperties>prod</activatedProperties>
 				<!-- redis 内存服务器 -->
 				<cache.enable>1</cache.enable>
 				<cache.redis.host>192.168.0.116</cache.redis.host>

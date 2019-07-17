@@ -163,13 +163,13 @@ body.signin {
     color: #333;
 }
 .oschina em{
-	background-color: #4ec34d;
+	background-color: #56abe4;
 }
 .git em{
-	background-color: #211b1b;
+	background-color: #eb4f38;
 }
 .my em{
-	background-color: #ff4700
+	background-color: #3bae56;
 }
 @media screen and (max-width: 768px) {
     .signinpanel,

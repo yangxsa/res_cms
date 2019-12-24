@@ -1,7 +1,7 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/work?serverTimezone=GMT%2B8&useSSL=true&useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://47.75.166.206:3306/work?serverTimezone=GMT%2B8&useSSL=true&useUnicode=true&characterEncoding=UTF8
     driver-class-name: com.mysql.cj.jdbc.Driver
     #      url: jdbc:oracle:thin:@192.168.0.241:1521:ora11g
     username: root

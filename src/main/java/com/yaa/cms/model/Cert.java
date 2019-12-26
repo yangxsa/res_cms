@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Generator code
+ * @author
  */
 public class Cert implements Serializable{
 

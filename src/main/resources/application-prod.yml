@@ -30,10 +30,7 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
-  cache:
-    type: ehcache
-    ehcache:
-      config: config/ehcache.xml
+
   redis:
     host: @cache.redis.host@
     port: @cache.redis.port@

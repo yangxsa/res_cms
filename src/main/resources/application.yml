@@ -3,5 +3,12 @@ spring:
   profiles:
     active: @activatedProperties@
 
+#日志处理
+logging:
+  config: classpath:config/logback-spring.xml
+  level:
+    root:
+      info
+
 server:
   port: 7000
